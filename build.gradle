@@ -1,0 +1,43 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.1'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+}
+
+group = 'com.travel.record'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
+
+dependencies {
+	implementation 'junit:junit:4.12'
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.projectlombok:lombok')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-mustache')
+	//implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	compile('com.h2database:h2')
+
+	compile('org.springframework.session:spring-session-jdbc')
+
+	compile("org.mariadb.jdbc:mariadb-java-client")
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+
+	//compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+}
+
+test {
+	useJUnitPlatform()
+}
