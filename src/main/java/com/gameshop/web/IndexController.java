@@ -11,4 +11,10 @@ public class IndexController {
 
         return "index";
     }
+
+    @GetMapping("elements")
+    public String elements(){
+
+        return "elements";
+    }
 }
