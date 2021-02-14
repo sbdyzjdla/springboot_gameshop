@@ -25,4 +25,13 @@ public class IndexControllerTest {
         //then
         assertThat(body).contains("Gameshop");
     }
+
+    @Test
+    public void 게시글쓰기페이지_로딩(){
+        //when
+        String body = this.restTemplate.getForObject("/board/write_board", String.class);
+
+        //then
+        assertThat(body).contains("문의사항");
+    }
 }

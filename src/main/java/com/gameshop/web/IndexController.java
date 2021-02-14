@@ -12,9 +12,15 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("elements")
-    public String elements(){
+    @GetMapping("/board")
+    public String board(){
 
-        return "elements";
+        return "board";
+    }
+
+    @GetMapping("/board/write_board")
+    public String write_board(){
+
+        return "write_board";
     }
 }
