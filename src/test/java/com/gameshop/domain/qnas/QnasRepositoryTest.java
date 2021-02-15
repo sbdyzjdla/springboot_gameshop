@@ -31,7 +31,6 @@ public class QnasRepositoryTest {
         String author = "테스트 작성자";
         String content = "테스트 작성내용";
         String reply_state = "답변완료";
-        String createdDate = "2021.02.15";
 
         qnasRepository.save(Qnas.builder()
                 .title(title)
