@@ -35,4 +35,9 @@ public class Qnas extends BaseTimeEntity {
         this.content = content;
         this.reply_state = reply_state;
     }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }

@@ -3,6 +3,7 @@ package com.gameshop.web;
 import com.gameshop.domain.qnas.Qnas;
 import com.gameshop.domain.qnas.QnasRepository;
 import com.gameshop.web.dto.QnasSaveRequestDto;
+import com.gameshop.web.dto.QnasUpdateRequestDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,10 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -64,5 +68,40 @@ public class QnasApiControllerTest {
         assertThat(all.get(0).getAuthor()).isEqualTo(author);
         assertThat(all.get(0).getContent()).isEqualTo(content);
         assertThat(all.get(0).getReply_state()).isEqualTo(reply_state);
+    }
+
+    @Test
+    public void Qnas_update() throws Exception {
+        //given
+        Qnas saveQnas = qnasRepository.save(Qnas.builder()
+                .title("title")
+                .content("content")
+                .author("author")
+                .reply_state("reply_state")
+                .build());
+
+        Long updateId = saveQnas.getId();
+        String expectedTitle = "title2";
+        String expectedContent = "content2";
+
+        QnasUpdateRequestDto requestDto = QnasUpdateRequestDto.builder()
+                .title(expectedTitle)
+                .content(expectedContent)
+                .build();
+
+        String url = "http://localhost:" + port + "/api/v1/qnas/" + updateId;
+        HttpEntity<QnasUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
+
+        //when
+        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT,
+                requestEntity, Long.class);
+
+        //then
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+
+        List<Qnas> all = qnasRepository.findAll();
+        assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
+        assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
     }
 }
