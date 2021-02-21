@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,5 +49,27 @@ public class QnasRepositoryTest {
         assertThat(qnas.getAuthor()).isEqualTo(author);
         assertThat(qnas.getContent()).isEqualTo(content);
         assertThat(qnas.getReply_state()).isEqualTo(reply_state);
+    }
+
+    @Test
+    public void BaseTimeEntity () {
+        //given
+        LocalDateTime now = LocalDateTime.of(2019,6,4,0,0,0);
+        qnasRepository.save(Qnas.builder()
+                .title("title")
+                .content("content")
+                .author("author")
+                .build());
+
+        //when
+        List<Qnas> qnasList = qnasRepository.findAll();
+
+        //then
+        Qnas qnas = qnasList.get(0);
+
+        System.out.println(">>>>>>>>>>> createDate = " + qnas.getCreatedDate()+"," +
+                "modifiedDate = " + qnas.getModifiedDate());
+        assertThat(qnas.getCreatedDate()).isAfter(now);
+        assertThat(qnas.getModifiedDate()).isAfter(now);
     }
 }

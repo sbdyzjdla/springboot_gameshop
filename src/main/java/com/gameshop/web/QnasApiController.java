@@ -1,6 +1,7 @@
 package com.gameshop.web;
 
 import com.gameshop.service.QnasService;
+import com.gameshop.web.dto.QnasResponseDto;
 import com.gameshop.web.dto.QnasSaveRequestDto;
 import com.gameshop.web.dto.QnasUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +21,9 @@ public class QnasApiController {
     @PutMapping("/api/v1/qnas/{id}")
     public Long update(@PathVariable Long id, @RequestBody QnasUpdateRequestDto requestDto) {
         return qnasService.update(id, requestDto);
+    }
+    @GetMapping("/api/v1/qnas/{id}")
+    public QnasResponseDto findById (@PathVariable Long id) {
+        return qnasService.findById(id);
     }
 }
