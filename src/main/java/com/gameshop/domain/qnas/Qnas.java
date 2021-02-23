@@ -40,4 +40,6 @@ public class Qnas extends BaseTimeEntity {
         this.title = title;
         this.content = content;
     }
+
+
 }

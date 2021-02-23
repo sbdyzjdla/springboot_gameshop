@@ -5,6 +5,7 @@ var qnas = {
         $('#qna-save').on('click', function() {
             _this.save();
         })
+
     },
 
     save : function() {
@@ -27,7 +28,20 @@ var qnas = {
         }).fail(function(error) {
             alert(JSON.stringify(error));
         });
-    }
+    },
+
+    list : function() {
+
+            $.ajax({
+                type : 'GET',
+                url : '/api/v1/qnas/qnaslist',
+                dataType : 'json',
+            }).done(function() {
+                alert('게시글 성공');
+            }).fail(function(error) {
+                alert('게시글을 불러올수 없습니다');
+            });
+        },
 }
 
 
