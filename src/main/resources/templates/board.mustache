@@ -26,7 +26,7 @@
             <th style="width: 10%; color: #795376 !important;" scope="col">작성일</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="qnasTable">
         <tr>
             <th scope="row">1</th>
             <td>Mark</td>
@@ -92,3 +92,8 @@
 </div>
 
 {{>layout/footer}}
+<script>
+ $(document).ready(function() {
+    	qnas.list();
+    });
+</script>

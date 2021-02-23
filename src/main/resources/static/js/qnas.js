@@ -5,7 +5,6 @@ var qnas = {
         $('#qna-save').on('click', function() {
             _this.save();
         })
-
     },
 
     save : function() {
@@ -30,14 +29,29 @@ var qnas = {
         });
     },
 
+    listInit : function() {
+        location.href = '/board';
+        list();
+    },
+
     list : function() {
 
             $.ajax({
                 type : 'GET',
                 url : '/api/v1/qnas/qnaslist',
                 dataType : 'json',
-            }).done(function() {
-                alert('게시글 성공');
+            }).done(function(success) {
+            $('#qnasTable').children().remove();
+            var qnaslist = success;
+                for(var i in qnaslist) {
+                    $('#qnasTable').append('<tr>'
+                    + '<th scope=\"row\">'+ qnaslist[i].id +'</th>'
+                    + '<td>'+ qnaslist[i].reply_state +'</td>'
+                    + '<td>'+ qnaslist[i].title +'</td>'
+                    + '<td>'+ qnaslist[i].author +'</td>'
+                    + '<td>'+ qnaslist[i].createdDate +'</td>'
+                  + '</tr>');
+              }
             }).fail(function(error) {
                 alert('게시글을 불러올수 없습니다');
             });
