@@ -14,33 +14,34 @@
 </section>
 <!-- breadcrumb part end-->
 <div class="container box_1170">
-<div class="section-top-border">
-    <h3 class="mb-30">문의사항</h3>
-    <form class="form-contact comment_form" action="#" id="commentForm">
-        <div class="row">
-            <div class="col-12">
-                <div class="form-group">
-                    <input class="form-control" name="title" id="title" type="text" placeholder="제목">
+    <div class="section-top-border">
+        <h3 class="mb-30">문의사항</h3>
+        <form class="form-contact comment_form" action="#" id="commentForm">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <input class="form-control" name="title" id="title" type="text" placeholder="제목">
+                    </div>
                 </div>
-            </div>
-            <div class="col-12">
-                <div class="form-group">
-                    <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="내용"></textarea>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" name="name" id="name" type="text" placeholder="이름">
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <input class="form-control" name="name" id="name" type="text" placeholder="이름">
+                <div class="col-12">
+                    <div class="form-group">
+                        <textarea class="form-control w-100" name="comment" id="content" cols="30" rows="9" placeholder="내용"></textarea>
+                    </div>
                 </div>
-            </div>
 
-        </div>
-        <div class="form-group mt-3">
-            <a href="#" class="genric-btn success radius">등록</a>
-            <a href="#" class="genric-btn danger radius">취소</a>
-        </div>
-    </form>
-</div>
+
+            </div>
+            <div class="form-group mt-3">
+                <a href="#" class="genric-btn success radius" id="qna-save">등록</a>
+                <a href="#" class="genric-btn danger radius" id="qna-cancel">취소</a>
+            </div>
+        </form>
+    </div>
 </div>
 
 {{>layout/footer}}
