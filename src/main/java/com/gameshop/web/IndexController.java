@@ -1,10 +1,12 @@
 package com.gameshop.web;
 
 import com.gameshop.service.QnasService;
+import com.gameshop.web.dto.QnasResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RequiredArgsConstructor
 @Controller
@@ -27,5 +29,12 @@ public class IndexController {
     public String write_board(){
 
         return "write_board";
+    }
+
+    @GetMapping("/board/view_board/{id}")
+    public String view_board(@PathVariable Long id, Model model) {
+        QnasResponseDto dto = qnasService.findById(id);
+        model.addAttribute("qnas", dto);
+        return "view_board";
     }
 }

@@ -1,0 +1,109 @@
+{{>layout/header}}
+
+<!-- breadcrumb part start-->
+<section class="breadcrumb_part">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <h2>묻고 답하기</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb part end-->
+<section class="blog_area single-post-area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                <div class="single-post">
+                    <h2 id="qnasViewTitle">{{qnas.title}}</h2>
+                    <h4>{{qnas.reply_state}} 상태</h4>
+
+                    <div class="blog_details">
+
+                        <ul class="blog-info-link mt-3 mb-4">
+                            <li><a href="#"><i class="far fa-user"></i> {{qnas.author}} </a></li>
+                            <li><a href="#"><i class="far fa-comments"></i> 1 Comments</a></li>
+                        </ul>
+                        <div class="feature-img">
+                            <img class="img-fluid" src="/img/blog/" alt="">
+                        </div>
+                        <p class="excert">
+                            {{qnas.content}}
+                        </p>
+                    </div>
+                    <!-- comments -->
+                    <div class="comments-area">
+                        <h4>1 Comments</h4>
+                        <div class="comment-list">
+                            <div class="single-comment justify-content-between d-flex">
+                                <div class="user justify-content-between d-flex">
+                                    <div class="thumb">
+                                        <img src="/img/comment/comment_1.png" alt="">
+                                    </div>
+                                    <div class="desc">
+                                        <p class="comment">
+                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                            Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <h5>
+                                                    <a href="#">Emilly Blunt</a>
+                                                </h5>
+                                                <p class="date">December 4, 2017 at 3:12 pm </p>
+                                            </div>
+                                            <div class="reply-btn">
+                                                <a href="#" class="btn-reply text-uppercase">reply</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- //comments -->
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- reply comments -->
+            <div class="comment-form" id="qnasReply">
+                <h4>Leave a Reply</h4>
+                <form class="form-contact comment_form" action="#" id="commentForm">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input class="form-control" name="name" id="name" type="text" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input class="form-control" name="email" id="email" type="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input class="form-control" name="website" id="website" type="text" placeholder="Website">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <a href="#" class="btn_3 button-contactForm">Send Message</a>
+                    </div>
+                </form>
+            </div>
+            <!-- //reply comments -->
+        </div>
+    </div>
+</section>
+
+{{>layout/footer}}

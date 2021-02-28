@@ -34,4 +34,5 @@ public class QnasApiController {
     public List<QnasListResponseDto> findAll() {
         return qnasService.findAllDesc();
     }
+
 }
