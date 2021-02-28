@@ -37,4 +37,11 @@ public class IndexController {
         model.addAttribute("qnas", dto);
         return "view_board";
     }
+
+    @GetMapping("/board/update_board/{id}")
+    public String update_board(@PathVariable Long id, Model model) {
+        QnasResponseDto dto = qnasService.findById(id);
+        model.addAttribute("qnas", dto);
+        return "update_board";
+    }
 }
