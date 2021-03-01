@@ -9,6 +9,10 @@ var qnas = {
         $('#qna-update').on('click', function() {
             _this.update();
         })
+
+        $('#qna-delete').on('click', function() {
+            _this.delete();
+        })
     },
 
     save : function() {
@@ -50,6 +54,22 @@ var qnas = {
             qnas.listInit();
         }).fail(function(error) {
             alert('게시글 수정에 실패하였습니다');
+            alert(JSON.stringify(error));
+        });
+    },
+
+    delete : function() {
+        var id = $('#id').val();
+        $.ajax({
+            type: 'DELETE',
+            url : '/api/v1/qnas/'+id,
+            dataType : 'json',
+            contentType:'application/json; charset=utf-8',
+        }).done(function() {
+            alert('글이 삭제되었습니다');
+            qnas.listInit();
+        }).fail(function(error) {
+            alert('게시글 삭제에 실패하였습니다');
             alert(JSON.stringify(error));
         });
     },

@@ -35,4 +35,11 @@ public class QnasApiController {
         return qnasService.findAllDesc();
     }
 
+    @DeleteMapping("/api/v1/qnas/{id}")
+    public Long delete(@PathVariable Long id) {
+
+        qnasService.delete(id);
+        return id;
+    }
+
 }

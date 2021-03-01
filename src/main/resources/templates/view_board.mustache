@@ -33,6 +33,7 @@
                         <p class="excert">
                             {{qnas.content}}
                         </p>
+                        <input type="hidden" id="id" value="{{qnas.id}}"></input>
                     </div>
 
                 </div>
@@ -44,6 +45,7 @@
 <div class="container box_1170">
 <div class="button-group-area mt-40">
     <a href="/board/update_board/{{qnas.id}}" class="genric-btn info radius" >수정</a>
+    <a href="#" class="genric-btn danger radius" id="qna-delete">삭제</a>
     <a href="#" class="genric-btn primary radius" onclick="qnas.listInit();">목록</a>
 </div>
 <!-- comments -->
