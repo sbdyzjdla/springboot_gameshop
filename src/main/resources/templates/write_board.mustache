@@ -32,6 +32,10 @@
                     <div class="form-group">
                         <textarea class="form-control w-100" name="comment" id="content" cols="30" rows="9" placeholder="내용"></textarea>
                     </div>
+                   <input type = "file" name = "fileupload"
+                        accept = "image/*" onchange="setThumbnail(event);" />
+                        <div id="image_container" class="col-md-3"></div>
+
                 </div>
 
 
@@ -43,5 +47,16 @@
         </form>
     </div>
 </div>
+
+<script>
+function setThumbnail(event) {
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var img = document.createElement("img");
+        img.setAttribute("src", event.target.result);
+        document.querySelector("div#image_container").appendChild(img); };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
 
 {{>layout/footer}}
