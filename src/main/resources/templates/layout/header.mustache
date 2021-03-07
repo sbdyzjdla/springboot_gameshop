@@ -101,6 +101,13 @@
                         <a href="/cart.html">
                             <i class="flaticon-shopping-cart-black-shape"></i>
                         </a>
+                        {{#userName}}
+                            {{userName}}님
+                            <a href="logout" class="genric-btn link">로그아웃</a>
+                        {{/userName}}
+                        {{^userName}}
+                            <a href="/oauth2/authorization/google"><i class="fab fa-google-plus-g"></i></a>
+                        {{/userName}}
                     </div>
                 </nav>
             </div>
