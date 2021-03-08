@@ -1,6 +1,7 @@
 package com.gameshop.web;
 
 import com.gameshop.config.auth.dto.SessionUser;
+import com.gameshop.domain.user.User;
 import com.gameshop.service.QnasService;
 import com.gameshop.web.dto.QnasResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -25,7 +28,10 @@ public class IndexController {
                 .getAttribute("user");
 
         if(user != null) {
-            model.addAttribute("userName" , user.getName());
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+
+            model.addAttribute("userInfo" , userInfo);
         }
         return "index";
     }

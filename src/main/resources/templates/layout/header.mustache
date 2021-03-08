@@ -89,10 +89,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" onclick="qnas.listInit();">묻고 답하기</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/contact.html">Contact</a>
+                                <a class="nav-link" href="#" onclick="qnas.listInit();">Q&A</a>
                             </li>
                         </ul>
                     </div>
@@ -101,13 +98,18 @@
                         <a href="/cart.html">
                             <i class="flaticon-shopping-cart-black-shape"></i>
                         </a>
-                        {{#userName}}
-                            {{userName}}님
-                            <a href="logout" class="genric-btn link">로그아웃</a>
-                        {{/userName}}
-                        {{^userName}}
+                        {{#userInfo}}
+                        <a href="#" id="social_login">
+                            <i>
+                                <img class="login_picture" src="{{picture}}" />
+                            </i>
+                        </a>
+
+                            <!-- a href="logout" class="genric-btn link">로그아웃</a-->
+                        {{/userInfo}}
+                        {{^userInfo}}
                             <a href="/oauth2/authorization/google"><i class="fab fa-google-plus-g"></i></a>
-                        {{/userName}}
+                        {{/userInfo}}
                     </div>
                 </nav>
             </div>
@@ -121,6 +123,17 @@
                 <span class="ti-close" id="close_search" title="Close Search"></span>
             </form>
         </div>
+    </div>
+    <div id="login_modal">
+        {{#userInfo}}
+           {{name}}
+            <a href="#" id="social_login">
+                <i>
+                    <img class="login_picture" src="{{picture}}" />
+                </i>
+            </a>
+            <a href="logout" class="genric-btn link">로그아웃</a>
+        {{/userInfo}}
     </div>
 </header>
 <!-- Header part end-->
