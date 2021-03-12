@@ -1,5 +1,6 @@
 package com.gameshop.web;
 
+import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
 import com.gameshop.domain.user.User;
 import com.gameshop.service.QnasService;
@@ -19,13 +20,9 @@ import java.util.List;
 public class IndexController {
 
     private final QnasService qnasService;
-    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
-
-        SessionUser user = (SessionUser) httpSession
-                .getAttribute("user");
+    public String index(Model model, @LoginUser SessionUser user) {
 
         if(user != null) {
             List<SessionUser> userInfo = new ArrayList<>();
