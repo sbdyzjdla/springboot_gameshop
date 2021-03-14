@@ -38,6 +38,12 @@
         width: 28%;
 }
 
+
+img.oauth_button {
+    width: 80%;
+    margin: 0px 9.6%;
+}
+
 #login_modal {
 
     background: #fff;

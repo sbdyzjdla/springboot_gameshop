@@ -101,14 +101,17 @@
                         {{#userInfo}}
                         <a href="#" id="social_login">
                             <i>
-                                <img class="login_picture" src="{{picture}}" />
+                                <img class="login_picture" src="{{picture}}" data-container="body" data-toggle="popover" data-placement="bottom"
+                                     data-content="{{name}} <img class'=login_picture' src='{{picture}}' "/>
                             </i>
                         </a>
-
                             <!-- a href="logout" class="genric-btn link">로그아웃</a-->
                         {{/userInfo}}
                         {{^userInfo}}
-                            <a href="/oauth2/authorization/google"><i class="fab fa-google-plus-g"></i></a>
+                            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">
+                                로그인
+                            </button>
+                            <!-- a href="/oauth2/authorization/google"><i class="fab fa-google-plus-g"></i></a-->
                         {{/userInfo}}
                     </div>
                 </nav>
@@ -134,6 +137,31 @@
             </a>
             <a href="logout" class="genric-btn link">로그아웃</a>
         {{/userInfo}}
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">소셜로그인</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                </div>
+                <div class="modal-body">
+                    <a href="#" id="social_login">
+                        <a href="/oauth2/authorization/google">
+                        <img src="img/oauth/google_login.png" class="oauth_button" alt="#" >
+                        </a>
+                        <img src="img/oauth/naver_login.png" class="oauth_button" alt="#" >
+                        <img src="img/oauth/kakao_login.png" class="oauth_button" alt="#" >
+                        <br>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </header>
 <!-- Header part end-->
