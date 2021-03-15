@@ -7,7 +7,9 @@ import com.gameshop.web.dto.QnasSaveRequestDto;
 import com.gameshop.web.dto.QnasUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.Multipart;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,7 +19,8 @@ public class QnasApiController {
     private final QnasService qnasService;
 
     @PostMapping("/api/v1/qnas")
-    public Long save(@RequestBody QnasSaveRequestDto requestDto) {
+    public Long save(@ModelAttribute QnasSaveRequestDto requestDto) {
+
         return qnasService.save(requestDto);
     }
 

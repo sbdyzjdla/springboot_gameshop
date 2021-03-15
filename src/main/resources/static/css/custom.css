@@ -38,6 +38,19 @@
         width: 28%;
 }
 
+#social_login .logout_picture {
+        border-radius: 60%;
+        width: 23%;
+        margin-left: 40%;
+        margin-top: 8%;
+}
+
+.logout_name {
+    margin-left: 26%;
+    margin-top: 7%;
+    font-size: small;
+    color: black;
+}
 
 img.oauth_button {
     width: 80%;

@@ -15,27 +15,57 @@ var qnas = {
         })
     },
 
-    save : function() {
-        var data = {
-            title : $('#title').val(),
-            author : $('#name').val(),
-            content : $('#content').val(),
-            reply_state : '미답변',
-        };
+     save : function() {
+            var data = {
+                title : $('#title').val(),
+                author : $('#name').val(),
+                content : $('#content').val(),
+                reply_state : '미답변',
+            };
 
-        $.ajax({
-            type: 'POST',
-            url : '/api/v1/qnas',
-            dataType : 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data),
-        }).done(function() {
-            alert('글이 등록되었습니다');
-            qnas.listInit();
-        }).fail(function(error) {
-            alert(JSON.stringify(error));
-        });
-    },
+            var formData = new FormData();
+            formData.append("title", data.title);
+            formData.append("author", data.author);
+            formData.append("content", data.content);
+            formData.append("reply_state", data.reply_state);
+            //formData.append("qnas_img", data.qnas_img);
+
+            $.ajax({
+                type: 'POST',
+                url : '/api/v1/qnas',
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+            }).done(function() {
+                alert('글이 등록되었습니다');
+                qnas.listInit();
+            }).fail(function(error) {
+                alert(JSON.stringify(error));
+            });
+        },
+
+//    save : function() {
+//        var data = {
+//            title : $('#title').val(),
+//            author : $('#name').val(),
+//            content : $('#content').val(),
+//            reply_state : '미답변',
+//        };
+//
+//        $.ajax({
+//            type: 'POST',
+//            url : '/api/v1/qnas',
+//            dataType : 'json',
+//            contentType:'application/json; charset=utf-8',
+//            data: JSON.stringify(data),
+//        }).done(function() {
+//            alert('글이 등록되었습니다');
+//            qnas.listInit();
+//        }).fail(function(error) {
+//            alert(JSON.stringify(error));
+//        });
+//    },
 
     update : function() {
         var data = {

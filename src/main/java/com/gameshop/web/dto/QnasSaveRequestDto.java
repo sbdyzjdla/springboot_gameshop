@@ -4,10 +4,13 @@ import com.gameshop.domain.qnas.Qnas;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class QnasSaveRequestDto {
 
@@ -15,6 +18,7 @@ public class QnasSaveRequestDto {
     private String author;
     private String content;
     private String reply_state;
+    private MultipartFile qnas_img;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 

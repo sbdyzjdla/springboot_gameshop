@@ -27,15 +27,23 @@ public class IndexController {
         if(user != null) {
             List<SessionUser> userInfo = new ArrayList<>();
             userInfo.add(user);
-
             model.addAttribute("userInfo" , userInfo);
+            System.out.println("ROLE!!" + user.getRole());
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                return "admin";
+            }
         }
         return "index";
     }
 
     @GetMapping("/board")
-    public String board(){
+    public String board(Model model, @LoginUser SessionUser user){
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
 
+            model.addAttribute("userInfo" , userInfo);
+        }
         return "board";
     }
 
@@ -57,5 +65,16 @@ public class IndexController {
         QnasResponseDto dto = qnasService.findById(id);
         model.addAttribute("qnas", dto);
         return "update_board";
+    }
+
+    @GetMapping("/software-switch")
+    public String software_switch(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+
+            model.addAttribute("userInfo" , userInfo);
+        }
+        return "software-switch";
     }
 }
