@@ -17,18 +17,18 @@ var qnas = {
 
      save : function() {
             var data = {
-                title : $('#title').val(),
-                author : $('#name').val(),
-                content : $('#content').val(),
+//                title : $('#title').val(),
+//                author : $('#name').val(),
+//                content : $('#content').val(),
                 reply_state : '미답변',
             };
-
-            var formData = new FormData();
-            formData.append("title", data.title);
-            formData.append("author", data.author);
-            formData.append("content", data.content);
-            formData.append("reply_state", data.reply_state);
-            //formData.append("qnas_img", data.qnas_img);
+            //var qnas_img = $('input[name=fileupload]')[0];
+            var form = $('#commentForm');
+            var formData = new FormData(form[0]);
+//            formData.append("title", data.title);
+//            formData.append("author", data.author);
+//            formData.append("content", data.content);
+              formData.append("reply_state", data.reply_state);
 
             $.ajax({
                 type: 'POST',

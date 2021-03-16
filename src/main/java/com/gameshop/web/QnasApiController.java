@@ -20,7 +20,8 @@ public class QnasApiController {
 
     @PostMapping("/api/v1/qnas")
     public Long save(@ModelAttribute QnasSaveRequestDto requestDto) {
-
+        System.out.println("이미지!!!" + requestDto.getQnas_img());
+        System.out.println("이미지!!!" + requestDto.getQnas_img().getOriginalFilename());
         return qnasService.save(requestDto);
     }
 
