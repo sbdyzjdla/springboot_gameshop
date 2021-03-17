@@ -1,5 +1,6 @@
 package com.gameshop.web;
 
+import com.gameshop.service.FilesService;
 import com.gameshop.service.QnasService;
 import com.gameshop.web.dto.QnasListResponseDto;
 import com.gameshop.web.dto.QnasResponseDto;
@@ -17,11 +18,12 @@ import java.util.List;
 public class QnasApiController {
 
     private final QnasService qnasService;
+    private final FilesService filesService;
 
     @PostMapping("/api/v1/qnas")
     public Long save(@ModelAttribute QnasSaveRequestDto requestDto) {
-        System.out.println("이미지!!!" + requestDto.getQnas_img());
         System.out.println("이미지!!!" + requestDto.getQnas_img().getOriginalFilename());
+        filesService.save(requestDto.getQnas_img(), requestDto.getAuthor());
         return qnasService.save(requestDto);
     }
 

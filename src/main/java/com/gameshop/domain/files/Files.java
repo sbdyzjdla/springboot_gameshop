@@ -1,5 +1,6 @@
 package com.gameshop.domain.files;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +24,11 @@ public class Files {
     @Column
     private String owner;
 
-    
+    @Builder
+    public Files(String origin_filename, String save_filename, String owner) {
+        this.origin_filename = origin_filename;
+        this.save_filename = save_filename;
+        this.owner = owner;
+    }
 
 }
