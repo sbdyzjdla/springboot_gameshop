@@ -8,6 +8,8 @@ import com.gameshop.service.QnasService;
 import com.gameshop.web.dto.FilesResponseDto;
 import com.gameshop.web.dto.QnasResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,7 +61,6 @@ public class IndexController {
     @GetMapping("/board/view_board/{id}")
     public String view_board(@PathVariable Long id, Model model) {
         QnasResponseDto dto = qnasService.findById(id);
-        System.out.println(dto.getImg_num());
         model.addAttribute("qnas", dto);
         return "view_board";
     }
@@ -67,7 +68,6 @@ public class IndexController {
     @GetMapping("/board/update_board/{id}")
     public String update_board(@PathVariable Long id, Model model) {
         QnasResponseDto dto = qnasService.findById(id);
-        FilesResponseDto fdto = filesService.findById(id);
         model.addAttribute("qnas", dto);
         return "update_board";
     }
