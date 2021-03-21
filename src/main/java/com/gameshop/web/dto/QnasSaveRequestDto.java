@@ -19,15 +19,17 @@ public class QnasSaveRequestDto {
     private String content;
     private String reply_state;
     private MultipartFile qnas_img;
+    private Long img_num;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
     @Builder
-    public QnasSaveRequestDto(String title, String author, String content, String reply_state) {
+    public QnasSaveRequestDto(String title, String author, String content, String reply_state, Long img_num) {
         this.title = title;
         this.author = author;
         this.content = content;
         this.reply_state = reply_state;
+        this.img_num = img_num;
     }
 
     public Qnas toEntity() {
@@ -36,6 +38,7 @@ public class QnasSaveRequestDto {
                 .author(author)
                 .content(content)
                 .reply_state(reply_state)
+                .img_num(img_num)
                 .build();
     }
 }

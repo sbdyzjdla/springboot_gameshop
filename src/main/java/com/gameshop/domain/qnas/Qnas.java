@@ -29,14 +29,18 @@ public class Qnas extends BaseTimeEntity {
     private String reply_state;
 
     @Column
+    private Long img_num;
+
+    @Column
     private String qnas_img;
 
     @Builder
-    public Qnas(String title, String author, String content, String reply_state, String qnas_img) {
+    public Qnas(String title, String author, String content, String reply_state, Long img_num, String qnas_img) {
         this.title = title;
         this.author = author;
         this.content = content;
         this.reply_state = reply_state;
+        this.img_num = img_num;
         this.qnas_img = qnas_img;
     }
 

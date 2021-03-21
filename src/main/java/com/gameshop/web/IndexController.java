@@ -3,7 +3,9 @@ package com.gameshop.web;
 import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
 import com.gameshop.domain.user.User;
+import com.gameshop.service.FilesService;
 import com.gameshop.service.QnasService;
+import com.gameshop.web.dto.FilesResponseDto;
 import com.gameshop.web.dto.QnasResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import java.util.List;
 public class IndexController {
 
     private final QnasService qnasService;
+    private final FilesService filesService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
@@ -56,6 +59,7 @@ public class IndexController {
     @GetMapping("/board/view_board/{id}")
     public String view_board(@PathVariable Long id, Model model) {
         QnasResponseDto dto = qnasService.findById(id);
+        System.out.println(dto.getImg_num());
         model.addAttribute("qnas", dto);
         return "view_board";
     }
@@ -63,6 +67,7 @@ public class IndexController {
     @GetMapping("/board/update_board/{id}")
     public String update_board(@PathVariable Long id, Model model) {
         QnasResponseDto dto = qnasService.findById(id);
+        FilesResponseDto fdto = filesService.findById(id);
         model.addAttribute("qnas", dto);
         return "update_board";
     }

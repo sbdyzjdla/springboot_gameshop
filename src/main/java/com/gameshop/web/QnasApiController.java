@@ -22,8 +22,8 @@ public class QnasApiController {
 
     @PostMapping("/api/v1/qnas")
     public Long save(@ModelAttribute QnasSaveRequestDto requestDto) {
-        System.out.println("이미지!!!" + requestDto.getQnas_img().getOriginalFilename());
-        filesService.save(requestDto.getQnas_img(), requestDto.getAuthor());
+        Long file_id = filesService.save(requestDto.getQnas_img(), requestDto.getAuthor());
+        requestDto.setImg_num(file_id);
         return qnasService.save(requestDto);
     }
 
@@ -33,7 +33,7 @@ public class QnasApiController {
     }
     @GetMapping("/api/v1/qnas/{id}")
     public QnasResponseDto findById (@PathVariable Long id) {
-        return qnasService.findById(id);
+        return  qnasService.findById(id);
     }
 
     @GetMapping("/api/v1/qnas/qnaslist")
