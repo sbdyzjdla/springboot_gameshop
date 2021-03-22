@@ -31,4 +31,9 @@ public class Files {
         this.owner = owner;
     }
 
+    public void update(String origin_filename, String save_filename) {
+        this.origin_filename = origin_filename;
+        this.save_filename = save_filename;
+    }
+
 }

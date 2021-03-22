@@ -59,4 +59,11 @@ public class QnasService {
 
         qnasRepository.delete(qnas);
     }
+
+    public Long findByImgNum(Long id) {
+        Qnas entity = qnasRepository.findById(id)
+                .orElseThrow(() -> new
+                        IllegalArgumentException("해당 게시글이 없습니다. id" + id));
+        return entity.getImg_num();
+    }
 }

@@ -29,6 +29,9 @@ public class FilesService {
 
     private final FilesRepository filesRepository;
 
+    //로컬
+    private String baseDir = "C:\\쇼핑몰이미지\\";
+
 
     @Transactional
     public Long save(MultipartFile file, String owner) {
@@ -36,10 +39,9 @@ public class FilesService {
         UUID savename = UUID.randomUUID();
 
         String origin_filename = file.getOriginalFilename();
-        String save_filename = savename.toString() + ".jpg";
+        String save_filename = savename.toString() + origin_filename.substring(origin_filename.lastIndexOf("."));
 
-        String baseDir = "C:\\쇼핑몰이미지";
-        String filePath = baseDir + "\\" + save_filename;
+        String filePath = baseDir + save_filename;
         try {
             file.transferTo(new File(filePath));
             FilesSaveRequestDto requestDto = new FilesSaveRequestDto(origin_filename, save_filename, owner);
@@ -50,13 +52,39 @@ public class FilesService {
         return null;
     }
 
+    @Transactional
+    public Long update(MultipartFile file, Long id) {
+
+        UUID savename = UUID.randomUUID();
+
+        String origin_filename = file.getOriginalFilename();
+        String save_filename = savename.toString() + origin_filename.substring(origin_filename.lastIndexOf("."));
+
+        String filePath = baseDir + save_filename;
+        try {
+            file.transferTo(new File(filePath));
+            Files files = filesRepository.findById(id)
+                    .orElseThrow(() -> new
+                            IllegalArgumentException("해당 수정할 이미지가 없습니다 id " + id));
+
+            files.update(origin_filename, save_filename);
+
+            return id;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+
+    }
+
     public ResponseEntity<Resource> findById(Long id) {
         Files files = filesRepository.findById(id)
                 .orElseThrow(() -> new
                         IllegalArgumentException("이미지가 없습니다" + id));
 
         files.getOrigin_filename();
-        String savePath = "C:\\쇼핑몰이미지\\" + files.getSave_filename();
+        String savePath = baseDir + files.getSave_filename();
 
         Resource resource = new FileSystemResource(savePath);
         HttpHeaders header = new HttpHeaders();
@@ -71,5 +99,15 @@ public class FilesService {
 
 
         return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+
+        Files files = filesRepository.findById(id)
+                .orElseThrow(() -> new
+                        IllegalArgumentException("이미지가 없습니다" + id));
+
+        filesRepository.delete(files);
     }
 }

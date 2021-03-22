@@ -15,7 +15,6 @@ public class QnasResponseDto {
     private String reply_state;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-    private Long img_num;
 
     public QnasResponseDto(Qnas entity) {
         this.id = entity.getId();
@@ -25,6 +24,5 @@ public class QnasResponseDto {
         this.reply_state = entity.getReply_state();
         this.createdDate = entity.getCreatedDate();
         this.modifiedDate = entity.getModifiedDate();
-        this.img_num = entity.getImg_num();
     }
 }

@@ -22,13 +22,19 @@ public class QnasApiController {
 
     @PostMapping("/api/v1/qnas")
     public Long save(@ModelAttribute QnasSaveRequestDto requestDto) {
-        Long file_id = filesService.save(requestDto.getQnas_img(), requestDto.getAuthor());
-        requestDto.setImg_num(file_id);
+        if(!requestDto.getQnas_img().isEmpty()) {
+            Long file_id = filesService.save(requestDto.getQnas_img(), requestDto.getAuthor());
+            requestDto.setImg_num(file_id);
+        }
         return qnasService.save(requestDto);
     }
 
     @PutMapping("/api/v1/qnas/{id}")
-    public Long update(@PathVariable Long id, @RequestBody QnasUpdateRequestDto requestDto) {
+    public Long update(@PathVariable Long id, @ModelAttribute QnasUpdateRequestDto requestDto) {
+        if(!requestDto.getQnas_img().isEmpty()) {
+            filesService.update(requestDto.getQnas_img(), id);
+        }
+
         return qnasService.update(id, requestDto);
     }
     @GetMapping("/api/v1/qnas/{id}")
@@ -43,8 +49,9 @@ public class QnasApiController {
 
     @DeleteMapping("/api/v1/qnas/{id}")
     public Long delete(@PathVariable Long id) {
-
+        Long img_num = qnasService.findByImgNum(id);
         qnasService.delete(id);
+        filesService.delete(img_num);
         return id;
     }
 
