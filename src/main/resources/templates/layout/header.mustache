@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="/css/themify-icons.css">
     <!-- font awesome CSS -->
     <link rel="stylesheet" href="/css/magnific-popup.css">
+    <!-- nice select CSS -->
+    <link rel="stylesheet" href="css/nice-select.css">
     <!-- swiper CSS -->
     <link rel="stylesheet" href="/css/slick.css">
     <!-- style CSS -->
@@ -92,6 +94,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#" onclick="qnas.listInit();">Q&A</a>
                             </li>
+                            {{#admin}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin" onclick="">관리자페이지</a>
+                            </li>
+                            {{/admin}}
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex align-items-center">

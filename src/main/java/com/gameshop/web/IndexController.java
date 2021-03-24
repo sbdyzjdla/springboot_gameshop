@@ -35,7 +35,8 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
             System.out.println("ROLE!!" + user.getRole());
             if(user.getRole().equals("ROLE_ADMIN")) {
-                return "admin";
+                model.addAttribute("admin", "admin");
+                //return "admin";
             }
         }
         return "index";
@@ -81,5 +82,11 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
         }
         return "software-switch";
+    }
+
+    @GetMapping("/admin")
+    public String admin_page() {
+
+        return "admin";
     }
 }
