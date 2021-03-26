@@ -67,26 +67,64 @@
                         <h4 class="widget_title">메뉴</h4>
                         <ul class="list cat-list">
                             <li>
-                                <a href="#" class="d-flex">
-                                    <p>상품등록</p>
+                                <a href="#" class="d-flex" id="console_manage_bt">
+                                    <p>콘솔기종</p>
                                 </a>
                             </li>
                             <li>
                                 <a href="#" class="d-flex">
-                                    <p>상품수정</p>
+                                    <p>카테고리관리</p>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="d-flex">
-                                    <p>상품삭제</p>
+                                <a href="#" class="d-flex" id="product_manage_bt">
+                                    <p>상품관리</p>
                                 </a>
                             </li>
                         </ul>
                     </aside>
                 </div>
             </div>
-            <div class="col-lg-8 mb-5 mb-lg-0">
-                <p class="col-lg-4">제조사</p>
+            <!-- side menu -->
+
+
+            <!-- 콘솔기종 등록 start -->
+            <div class="col-lg-8 mb-5 mb-lg-0" id="console_insert" style="display: none;">
+                <div class="section-top-border">
+                    <h3 class="mb-30">콘솔기종 등록</h3>
+                    <form class="form-contact comment_form" action="#" id="commentForm" method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input class="form-control" name="title" id="title" type="text" placeholder="제목">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control" name="author" id="author" type="text" placeholder="이름">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <textarea class="form-control w-100" name="content" id="content" cols="30" rows="9" placeholder="내용"></textarea>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="form-group mt-3">
+                            <a href="#" class="genric-btn info radius" id="qna-save">등록</a>
+                            <a href="#" class="genric-btn danger radius" id="qna-cancel" onclick="qnas.listInit();">취소</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- 콘솔기종 등록 end -->
+
+            <!-- 상품등록 start -->
+            <div class="col-lg-8 mb-5 mb-lg-0" id="product_insert" style="display: none;">
+                <p class="col-lg-4">콘솔기종</p>
                 <div class="blog_left_sidebar">
                     <div class="single-element-widget mt-30">
                         <div class="default-select" id="default-select_2">
@@ -101,6 +139,9 @@
                     </div>
                 </div>
             </div>
+            <!-- 상품등록 end -->
+
+
 
         </div>
     </div>
@@ -148,6 +189,7 @@
 
 <!-- 기능 -->
 <script src="/js/qnas.js"></script>
+<script src="/js/admin.js"></script>
 <script>
 
 $('#social_login').on('click', function() {
