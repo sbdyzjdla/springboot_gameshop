@@ -14,6 +14,7 @@ public class ConsolesService {
 
     @Transactional
     public Long save(ConsolesSaveRequestDto requestDto) {
+        System.out.println("NULL????");
         return consolesRepository.save(requestDto.toEntity()).getId();
     }
 

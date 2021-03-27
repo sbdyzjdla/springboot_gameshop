@@ -18,8 +18,10 @@ public class ConsolesSaveRequestDto {
     private String manufact;
     private String edition;
     private Long c_price;
-    private MultipartFile qnas_img;
+    private MultipartFile consoles_img;
     private Long img_num;
+    private LocalDateTime createdDate;
+    private LocalDateTime modifiedDate;
 
     @Builder
     public ConsolesSaveRequestDto(String manufact, String edition, Long c_price, Long img_num) {

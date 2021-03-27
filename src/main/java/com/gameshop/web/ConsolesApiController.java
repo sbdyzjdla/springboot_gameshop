@@ -17,8 +17,11 @@ public class ConsolesApiController {
 
     @PostMapping("/admin/consoles/save")
     public Long save(@ModelAttribute ConsolesSaveRequestDto requestDto) {
-        if(!requestDto.getQnas_img().isEmpty()) {
-            Long file_id = filesService.save(requestDto.getQnas_img(), "admin");
+        System.out.println("TEST!!!" + requestDto.getManufact());
+        System.out.println("TEST!!!" + requestDto.getEdition());
+        System.out.println("TEST!!!" + requestDto.getC_price());
+        if(!requestDto.getConsoles_img().isEmpty()) {
+            Long file_id = filesService.save(requestDto.getConsoles_img(), "admin");
             requestDto.setImg_num(file_id);
         }
         return consolesService.save(requestDto);
