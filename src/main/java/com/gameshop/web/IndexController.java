@@ -54,20 +54,25 @@ public class IndexController {
     }
 
     @GetMapping("/board/write_board")
-    public String write_board(){
+    public String write_board(Model model, @LoginUser SessionUser user){
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
 
+            model.addAttribute("userInfo" , userInfo);
+        }
         return "write_board";
     }
 
     @GetMapping("/board/view_board/{id}")
-    public String view_board(@PathVariable Long id, Model model) {
+    public String view_board(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         QnasResponseDto dto = qnasService.findById(id);
         model.addAttribute("qnas", dto);
         return "view_board";
     }
 
     @GetMapping("/board/update_board/{id}")
-    public String update_board(@PathVariable Long id, Model model) {
+    public String update_board(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         QnasResponseDto dto = qnasService.findById(id);
         model.addAttribute("qnas", dto);
         return "update_board";
@@ -85,8 +90,13 @@ public class IndexController {
     }
 
     @GetMapping("/admin")
-    public String admin_page() {
+    public String admin_page(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
 
+            model.addAttribute("userInfo" , userInfo);
+        }
         return "admin";
     }
 }

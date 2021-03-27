@@ -88,8 +88,17 @@
             <!-- side menu -->
 
 
+            <div class="col-lg-8 mb-5 mb-lg-0" id="console_manage" >
+                <div class="section-top-border">
+                    <h3 class="mb-30">콘솔기종 관리</h3>
+                    <div class="mr-5 float-right">
+                        <a href="#" class="genric-btn primary radius" data-toggle="modal" data-target="#console_insert_modal">등록</a>
+                    </div>
+                </div>
+            </div>
+
             <!-- 콘솔기종 등록 start -->
-            <div class="col-lg-8 mb-5 mb-lg-0" id="console_insert" style="display: none;">
+            <div class="col-lg-8 mb-5 mb-lg-0" id="console" style="display: none;">
                 <div class="section-top-border">
                     <h3 class="mb-30">콘솔기종 등록</h3>
                     <form class="form-contact comment_form" action="#" id="commentForm" method="POST" enctype="multipart/form-data">
@@ -123,7 +132,7 @@
             <!-- 콘솔기종 등록 end -->
 
             <!-- 상품등록 start -->
-            <div class="col-lg-8 mb-5 mb-lg-0" id="product_insert" style="display: none;">
+            <div class="col-lg-8 mb-5 mb-lg-0" id="product_manage" style="display: none;">
                 <p class="col-lg-4">콘솔기종</p>
                 <div class="blog_left_sidebar">
                     <div class="single-element-widget mt-30">
@@ -141,8 +150,6 @@
             </div>
             <!-- 상품등록 end -->
 
-
-
         </div>
     </div>
 </section>
@@ -159,6 +166,38 @@
     </div>
 </footer>
 
+<!-- Modal -->
+<div class="modal fade" id="console_insert_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">콘솔기종 등록</h4>
+            </div>
+            <div class="modal-body">
+                <form method = "POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">제조사</label>
+                        <input type="text" class="form-control" id="recipient-name" name="manufact">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">에디션</label>
+                        <input type="text" class="form-control" name="edition">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">가격</label>
+                        <input type="text" class="form-control" name="c_price">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group mt-3">
+                    <a href="#" class="genric-btn info radius" id="console_insert">등록</a>
+                    <a href="#" class="genric-btn danger radius" data-dismiss="modal">취소</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- jquery plugins here-->
 <script src="/js/jquery-1.12.1.min.js"></script>
