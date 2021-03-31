@@ -29,7 +29,5 @@ public class ConsolesApiController {
     }
 
     @GetMapping("/admin/consoles/consoleList")
-    public List<ConsolesListResponseDto> findAll() {
-        return consolesService.findAllDesc();
-    }
+    public List<ConsolesListResponseDto> findAll() { return consolesService.findAllDesc(); }
 }

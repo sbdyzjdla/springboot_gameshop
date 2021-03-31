@@ -92,63 +92,8 @@
                 <div class="section-top-border">
                     <h3 class="mb-30">콘솔기종 관리</h3>
                     <div class="product_list">
-                        <div class="row">
-                            <div class="col-lg-4 col-sm-4">
-                                <div class="single_product_item text-center">
-                                    <img src="img/product/product_list_1.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">스위치 젤다의전설 야생의 숨결</a> </h3>
-                                    <p>64,000원</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-4">
-                                <div class="single_product_item">
-                                    <img src="img/product/product_list_2.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Geometric striped flower home classy decor</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-4">
-                                <div class="single_product_item">
-                                    <img src="img/product/product_list_3.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Foam filling cotton slow rebound pillows</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-3">
-                                <div class="single_product_item">
-                                    <img src="img/product/product_list_4.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Memory foam filling cotton Slow rebound pillows</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-3">
-                                <div class="single_product_item">
-                                    <img src="img/product/product_list_5.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Memory foam filling cotton Slow rebound pillows</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-3">
-                                <div class="single_product_item">
-                                    <img src="img/product/product_list_6.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Sleeping orthopedic sciatica Back Hip Joint Pain relief</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-3">
-                                <div class="single_product_item">
-                                    <img src="img/product/product_list_7.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Memory foam filling cotton Slow rebound pillows</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-3">
-                                <div class="single_product_item">
-                                    <img src="img/product/product_list_8.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Sleeping orthopedic sciatica Back Hip Joint Pain relief</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
+                        <div class="row" id="conList">
+
                         </div>
                     </div>
                     <div class="mr-5 float-left">
@@ -292,7 +237,6 @@
 <script src="js/mixitup.min.js"></script>
 
 <!-- 기능 -->
-<script src="/js/qnas.js"></script>
 <script src="/js/admin.js"></script>
 <script>
 
@@ -311,6 +255,10 @@ function setThumbnail(event) {
         document.querySelector("div#consoles_image_container").appendChild(img); };
         reader.readAsDataURL(event.target.files[0]);
     }
+
+    $(document).ready(function() {
+    	admin.list();
+    });
 </script>
 </body>
 

@@ -21,5 +21,6 @@ public class ConsolesListResponseDto {
         this.manufact = entity.getManufact();
         this.edition = entity.getEdition();
         this.c_price = entity.getC_price();
+        this.img_num = entity.getImg_num();
     }
 }
