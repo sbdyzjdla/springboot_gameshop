@@ -4,11 +4,9 @@ import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
 import com.gameshop.domain.consoles.dto.ConsolesSaveRequestDto;
 import com.gameshop.service.ConsolesService;
 import com.gameshop.service.FilesService;
+import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,4 +28,9 @@ public class ConsolesApiController {
 
     @GetMapping("/admin/consoles/consoleList")
     public List<ConsolesListResponseDto> findAll() { return consolesService.findAllDesc(); }
+
+    @GetMapping("/admin/consoles/view/{id}")
+    public ConsolesResponseDto findById(@PathVariable Long id) {
+        return consolesService.findById(id);
+    }
 }
