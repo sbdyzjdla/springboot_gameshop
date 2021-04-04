@@ -5,6 +5,7 @@ import com.gameshop.domain.consoles.ConsolesRepository;
 import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
 import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
 import com.gameshop.domain.consoles.dto.ConsolesSaveRequestDto;
+import com.gameshop.domain.consoles.dto.ConsolesUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +39,15 @@ public class ConsolesService {
                         IllegalArgumentException("해당 게시물이 없습니다"));
 
         return new ConsolesResponseDto(entity);
+    }
+
+    @Transactional
+    public Long update(Long id, ConsolesUpdateRequestDto requestDto) {
+        Consoles consoles = consolesRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다. id=" + id));
+
+        consoles.update(requestDto.getManufact(), requestDto.getEdition(), requestDto.getC_price());
+        return id;
     }
 
 }

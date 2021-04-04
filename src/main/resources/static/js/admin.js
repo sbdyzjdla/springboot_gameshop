@@ -13,6 +13,10 @@ var admin = {
         $('#console_insert').on('click', function() {
             _this.console_insert();
         })
+
+        $('#console_update').on('click', function() {
+            _this.console_update();
+        })
     },
 
      console_manage : function() {
@@ -52,6 +56,27 @@ var admin = {
                  });
              },
 
+     console_update : function() {
+
+                      var form = $('#console_update_form');
+                      var formData = new FormData(form[0]);
+                      var id = $('#admin_id').val();
+                      $.ajax({
+                          type: 'PUT',
+                          url : '/admin/consoles/update/' + id,
+                          data: formData,
+                          dataType: 'json',
+                          processData: false,
+                          contentType: false,
+                      }).done(function() {
+                          alert('콘솔기종이 등록되었습니다');
+                          document.querySelector('#console_update_cancel').click();
+                          admin.list();
+                      }).fail(function(error) {
+                          alert(JSON.stringify(error));
+                      });
+                  },
+
      list : function() {
 
              $.ajax({
@@ -89,6 +114,7 @@ var admin = {
                         $('#up_manufact_nm').val(consoleData.manufact);
                         $('#_up_edition_nm').val(consoleData.edition);
                         $('#up_c_price').val(consoleData.c_price);
+                        $('#admin_id').val(consoleData.id);
                         $("#console_update_modal").modal();
                      }).fail(function(error) {
                          alert('게시글을 불러올수 없습니다');

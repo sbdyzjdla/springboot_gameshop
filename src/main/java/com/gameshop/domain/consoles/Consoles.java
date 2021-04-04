@@ -36,5 +36,11 @@ public class Consoles extends BaseTimeEntity {
         this.img_num = img_num;
     }
 
+    public void update(String manufact, String edition, Long c_price) {
+        this.manufact = manufact;
+        this.edition = edition;
+        this.c_price = c_price;
+    }
+
 
 }

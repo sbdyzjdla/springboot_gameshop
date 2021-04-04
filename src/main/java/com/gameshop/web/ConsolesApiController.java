@@ -2,6 +2,7 @@ package com.gameshop.web;
 
 import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
 import com.gameshop.domain.consoles.dto.ConsolesSaveRequestDto;
+import com.gameshop.domain.consoles.dto.ConsolesUpdateRequestDto;
 import com.gameshop.service.ConsolesService;
 import com.gameshop.service.FilesService;
 import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
@@ -32,5 +33,18 @@ public class ConsolesApiController {
     @GetMapping("/admin/consoles/view/{id}")
     public ConsolesResponseDto findById(@PathVariable Long id) {
         return consolesService.findById(id);
+    }
+
+    @PutMapping("/admin/consoles/update/{id}")
+    public Long update(@PathVariable Long id, @ModelAttribute ConsolesUpdateRequestDto requestDto) {
+        System.out.println("콘솔업데이트"+ requestDto.getManufact());
+        System.out.println("콘솔업데이트"+ requestDto.getConsoles_img());
+        if(!requestDto.getConsoles_img().isEmpty()) {
+            filesService.update(requestDto.getConsoles_img(), id);
+        }
+        System.out.println("콘솔업데이트"+ requestDto.getManufact());
+        System.out.println("콘솔업데이트"+ requestDto.getConsoles_img());
+
+        return consolesService.update(id, requestDto);
     }
 }
