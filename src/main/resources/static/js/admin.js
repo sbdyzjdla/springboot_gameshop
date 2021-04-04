@@ -63,9 +63,9 @@ var admin = {
                 var consoleData = success;
                 for(var i in consoleData) {
                      $('#conList').append('<div class=\"col-lg-4 col-sm-4\">'
-                        + '<div class=\"single_product_item text-center\">'
+                        + '<div class=\"single_product_item text-center\" onclick=\"admin.view(' + consoleData[i].id + ');\">'
                         +       '<img src=\"/display/'+consoleData[i].img_num+'\" alt=\"#\" class=\"img-fluid\">'
-                        +       '<h3> <a href=\"single-product.html\">' + consoleData[i].edition + '</a> </h3>'
+                        +       '<h3> ' + consoleData[i].edition + ' </h3>'
                         +       '<p>' + admin.numberWithCommas(consoleData[i].c_price) + '원</p>'
                         +       '</div>'
                         +  '</div>');
@@ -74,6 +74,26 @@ var admin = {
                  alert('게시글을 불러올수 없습니다');
              });
          },
+
+//     view_modal : function() {
+//        data-toggle="modal" data-target="#console_insert_modal"
+//     },
+//
+     view : function(id) {
+         $.ajax({
+                         type : 'GET',
+                         url : '/admin/consoles/view/' + id,
+                         dataType : 'json',
+                     }).done(function(success) {
+                        var consoleData = success;
+                        $('#up_manufact_nm').val(consoleData.manufact);
+                        $('#_up_edition_nm').val(consoleData.edition);
+                        $('#up_c_price').val(consoleData.c_price);
+                        $("#console_update_modal").modal();
+                     }).fail(function(error) {
+                         alert('게시글을 불러올수 없습니다');
+                     });
+     },
 
      numberWithCommas : function (x) {
       	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
