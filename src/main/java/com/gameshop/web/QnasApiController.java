@@ -32,7 +32,8 @@ public class QnasApiController {
     @PutMapping("/api/v1/qnas/{id}")
     public Long update(@PathVariable Long id, @ModelAttribute QnasUpdateRequestDto requestDto) {
         if(!requestDto.getQnas_img().isEmpty()) {
-            filesService.update(requestDto.getQnas_img(), id);
+            Long img_num = qnasService.findByImgNum(id);
+            filesService.update(requestDto.getQnas_img(), img_num);
         }
 
         return qnasService.update(id, requestDto);

@@ -6,6 +6,7 @@ import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
 import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
 import com.gameshop.domain.consoles.dto.ConsolesSaveRequestDto;
 import com.gameshop.domain.consoles.dto.ConsolesUpdateRequestDto;
+import com.gameshop.domain.qnas.Qnas;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +49,13 @@ public class ConsolesService {
 
         consoles.update(requestDto.getManufact(), requestDto.getEdition(), requestDto.getC_price());
         return id;
+    }
+
+    public Long findByImgNum(Long id) {
+        Consoles entity = consolesRepository.findById(id)
+                .orElseThrow(() -> new
+                        IllegalArgumentException("해당 게시글이 없습니다. id" + id));
+        return entity.getImg_num();
     }
 
 }

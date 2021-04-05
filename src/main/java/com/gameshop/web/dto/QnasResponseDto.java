@@ -13,6 +13,7 @@ public class QnasResponseDto {
     private String author;
     private String content;
     private String reply_state;
+    private Long img_num;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -22,6 +23,7 @@ public class QnasResponseDto {
         this.author = entity.getAuthor();
         this.content = entity.getContent();
         this.reply_state = entity.getReply_state();
+        this.img_num = entity.getImg_num();
         this.createdDate = entity.getCreatedDate();
         this.modifiedDate = entity.getModifiedDate();
     }

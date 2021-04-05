@@ -37,13 +37,10 @@ public class ConsolesApiController {
 
     @PutMapping("/admin/consoles/update/{id}")
     public Long update(@PathVariable Long id, @ModelAttribute ConsolesUpdateRequestDto requestDto) {
-        System.out.println("콘솔업데이트"+ requestDto.getManufact());
-        System.out.println("콘솔업데이트"+ requestDto.getConsoles_img());
         if(!requestDto.getConsoles_img().isEmpty()) {
-            filesService.update(requestDto.getConsoles_img(), id);
+            Long img_num = consolesService.findByImgNum(id);
+            filesService.update(requestDto.getConsoles_img(), img_num);
         }
-        System.out.println("콘솔업데이트"+ requestDto.getManufact());
-        System.out.println("콘솔업데이트"+ requestDto.getConsoles_img());
 
         return consolesService.update(id, requestDto);
     }
