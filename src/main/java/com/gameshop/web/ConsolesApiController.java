@@ -28,7 +28,7 @@ public class ConsolesApiController {
     }
 
     @GetMapping("/admin/consoles/consoleList")
-    public List<ConsolesListResponseDto> findAll() { return consolesService.findAllDesc(); }
+    public List<ConsolesListResponseDto> findAllDesc() { return consolesService.findAllDesc(); }
 
     @GetMapping("/admin/consoles/view/{id}")
     public ConsolesResponseDto findById(@PathVariable Long id) {
@@ -43,5 +43,10 @@ public class ConsolesApiController {
         }
 
         return consolesService.update(id, requestDto);
+    }
+
+    @GetMapping("/api/v1/consoles/nintendoCList")
+    public List<ConsolesListResponseDto> findAllNint() {
+        return consolesService.findAllNint();
     }
 }

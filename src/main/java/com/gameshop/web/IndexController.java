@@ -2,7 +2,9 @@ package com.gameshop.web;
 
 import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
+import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
 import com.gameshop.domain.user.User;
+import com.gameshop.service.ConsolesService;
 import com.gameshop.service.FilesService;
 import com.gameshop.service.QnasService;
 import com.gameshop.web.dto.FilesResponseDto;
@@ -25,6 +27,7 @@ public class IndexController {
 
     private final QnasService qnasService;
     private final FilesService filesService;
+    private final ConsolesService consolesService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
@@ -76,6 +79,19 @@ public class IndexController {
         QnasResponseDto dto = qnasService.findById(id);
         model.addAttribute("qnas", dto);
         return "update_board";
+    }
+
+    @GetMapping("/hardware-nintendo")
+    public String hardware_nintendo(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+
+            model.addAttribute("userInfo" , userInfo);
+//            List<ConsolesListResponseDto> dto = consolesService.findAllNint();
+//            model.addAttribute("ninList", dto);
+        }
+        return "hardware-nintendo";
     }
 
     @GetMapping("/software-switch")

@@ -28,7 +28,7 @@ public class ConsolesService {
 
     @Transactional
     public List<ConsolesListResponseDto> findAllDesc() {
-        return consolesRepository.findAll().stream()
+        return consolesRepository.findAllDesc().stream()
                 .map(ConsolesListResponseDto::new)
                 .collect(Collectors.toList());
     }
@@ -57,5 +57,13 @@ public class ConsolesService {
                         IllegalArgumentException("해당 게시글이 없습니다. id" + id));
         return entity.getImg_num();
     }
+
+    @Transactional
+    public List<ConsolesListResponseDto> findAllNint() {
+        return consolesRepository.findAllNint().stream()
+                .map(ConsolesListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
 
 }
