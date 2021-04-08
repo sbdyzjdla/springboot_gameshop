@@ -1,0 +1,112 @@
+{{>layout/header}}
+
+<!-- breadcrumb part start-->
+<section class="breadcrumb_part">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <h2>장바구니</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb part end-->
+
+<!--================Cart Area =================-->
+<section class="cart_area section_padding">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">상품명</th>
+                        <th scope="col">가격</th>
+                        <th scope="col">수량</th>
+                        <th scope="col">합계</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img src="img/arrivel/arrivel_1.png" alt="" />
+                                </div>
+                                <div class="media-body">
+                                    <p>모자</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <h5>12,000원</h5>
+                        </td>
+                        <td>
+                            <div class="product_count">
+                                <!-- <input type="text" value="1" min="0" max="10" title="Quantity:"
+                                  class="input-text qty input-number" />
+                                <button
+                                  class="increase input-number-increment items-count" type="button">
+                                  <i class="ti-angle-up"></i>
+                                </button>
+                                <button
+                                  class="reduced input-number-decrement items-count" type="button">
+                                  <i class="ti-angle-down"></i>
+                                </button> -->
+                                <span class="input-number-decrement"> <i class="ti-minus"></i></span>
+                                <input class="input-number" type="text" value="1" min="0" max="10">
+                                <span class="input-number-increment"> <i class="ti-plus"></i></span>
+                            </div>
+                        </td>
+                        <td>
+                            <h5>12,000원</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img src="img/arrivel/arrivel_2.png" alt="" />
+                                </div>
+                                <div class="media-body">
+                                    <p>셔츠</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <h5>5,6000원</h5>
+                        </td>
+                        <td>
+                            <div class="product_count">
+                                <span class="input-number-decrement"> <i class="ti-minus"></i></span>
+                                <input class="input-number" type="text" value="1" min="0" max="10">
+                                <span class="input-number-increment"> <i class="ti-plus"></i></span>
+                            </div>
+                        </td>
+                        <td>
+                            <h5>5,6000원</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <h5>상품합계금액</h5>
+                        </td>
+                        <td>
+                            <h5>6,8000원</h5>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="checkout_btn_inner float-right">
+                    <a class="btn_1" href="/">쇼핑계속하기</a>
+                    <a class="btn_1 checkout_btn_1" href="#">구매하기</a>
+                </div>
+            </div>
+        </div>
+</section>
+<!--================End Cart Area =================-->
+{{>layout/footer}}

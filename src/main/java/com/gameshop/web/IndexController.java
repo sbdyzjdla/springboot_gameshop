@@ -105,6 +105,17 @@ public class IndexController {
         return "software-switch";
     }
 
+    @GetMapping("/cart")
+    public String cart(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+
+            model.addAttribute("userInfo" , userInfo);
+        }
+        return "cart";
+    }
+
     @GetMapping("/admin")
     public String admin_page(Model model, @LoginUser SessionUser user) {
         if(user != null) {
