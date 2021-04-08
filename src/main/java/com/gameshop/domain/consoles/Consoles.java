@@ -23,23 +23,28 @@ public class Consoles extends BaseTimeEntity {
     private String edition;
 
     @Column
-    private Long c_price;
+    private int c_price;
+
+    @Column
+    private int quantity;
 
     @Column
     private Long img_num;
 
     @Builder
-    public Consoles(String manufact, String edition, Long c_price, Long img_num ) {
+    public Consoles(String manufact, String edition, int c_price, Long img_num, int quantity ) {
         this.manufact = manufact;
         this.edition = edition;
         this.c_price = c_price;
         this.img_num = img_num;
+        this.quantity = quantity;
     }
 
-    public void update(String manufact, String edition, Long c_price) {
+    public void update(String manufact, String edition, int c_price, int quantity) {
         this.manufact = manufact;
         this.edition = edition;
         this.c_price = c_price;
+        this.quantity = quantity;
     }
 
 

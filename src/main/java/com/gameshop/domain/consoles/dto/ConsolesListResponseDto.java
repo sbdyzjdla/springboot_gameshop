@@ -13,7 +13,8 @@ public class ConsolesListResponseDto {
     private Long id;
     private String manufact;
     private String edition;
-    private Long c_price;
+    private int c_price;
+    private int quantity;
     private Long img_num;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
@@ -23,6 +24,7 @@ public class ConsolesListResponseDto {
         this.manufact = entity.getManufact();
         this.edition = entity.getEdition();
         this.c_price = entity.getC_price();
+        this.quantity = entity.getQuantity();
         this.img_num = entity.getImg_num();
     }
 }

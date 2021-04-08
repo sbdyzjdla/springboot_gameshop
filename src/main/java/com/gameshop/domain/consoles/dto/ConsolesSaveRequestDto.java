@@ -17,17 +17,19 @@ public class ConsolesSaveRequestDto {
 
     private String manufact;
     private String edition;
-    private Long c_price;
+    private int c_price;
+    private int quantity;
     private MultipartFile consoles_img;
     private Long img_num;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
     @Builder
-    public ConsolesSaveRequestDto(String manufact, String edition, Long c_price, Long img_num) {
+    public ConsolesSaveRequestDto(String manufact, String edition, int c_price, int quantity, Long img_num) {
         this.manufact = manufact;
         this.edition = edition;
         this.c_price = c_price;
+        this.quantity = quantity;
         this.img_num = img_num;
 
     }
@@ -37,6 +39,7 @@ public class ConsolesSaveRequestDto {
                 .manufact(manufact)
                 .edition(edition)
                 .c_price(c_price)
+                .quantity(quantity)
                 .img_num(img_num)
                 .build();
     }

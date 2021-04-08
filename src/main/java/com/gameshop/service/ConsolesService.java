@@ -47,7 +47,7 @@ public class ConsolesService {
         Consoles consoles = consolesRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다. id=" + id));
 
-        consoles.update(requestDto.getManufact(), requestDto.getEdition(), requestDto.getC_price());
+        consoles.update(requestDto.getManufact(), requestDto.getEdition(), requestDto.getC_price(), requestDto.getQuantity());
         return id;
     }
 
