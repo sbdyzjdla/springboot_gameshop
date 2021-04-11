@@ -3,6 +3,7 @@ package com.gameshop.web;
 import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
 import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
+import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
 import com.gameshop.domain.user.User;
 import com.gameshop.service.ConsolesService;
 import com.gameshop.service.FilesService;
@@ -69,6 +70,12 @@ public class IndexController {
 
     @GetMapping("/board/view_board/{id}")
     public String view_board(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+
+            model.addAttribute("userInfo" , userInfo);
+        }
         QnasResponseDto dto = qnasService.findById(id);
         model.addAttribute("qnas", dto);
         return "view_board";
@@ -76,6 +83,12 @@ public class IndexController {
 
     @GetMapping("/board/update_board/{id}")
     public String update_board(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+
+            model.addAttribute("userInfo" , userInfo);
+        }
         QnasResponseDto dto = qnasService.findById(id);
         model.addAttribute("qnas", dto);
         return "update_board";
@@ -105,13 +118,15 @@ public class IndexController {
         return "software-switch";
     }
     @GetMapping("/products/view/{id}")
-    public String view_products(Model model, @LoginUser SessionUser user) {
+    public String view_products(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
             List<SessionUser> userInfo = new ArrayList<>();
             userInfo.add(user);
 
             model.addAttribute("userInfo" , userInfo);
         }
+        ConsolesResponseDto dto = consolesService.findById(id);
+        model.addAttribute("dto", dto);
         return "view_products";
     }
 
