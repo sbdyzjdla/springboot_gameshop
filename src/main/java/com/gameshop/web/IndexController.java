@@ -104,6 +104,16 @@ public class IndexController {
         }
         return "software-switch";
     }
+    @GetMapping("/products/view/{id}")
+    public String view_products(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+
+            model.addAttribute("userInfo" , userInfo);
+        }
+        return "view_products";
+    }
 
     @GetMapping("/cart")
     public String cart(Model model, @LoginUser SessionUser user) {

@@ -15,16 +15,16 @@ public class ConsolesUpdateRequestDto {
 
     private String manufact;
     private String edition;
-    private int c_price;
+    private int p_price;
     private int quantity;
     private MultipartFile consoles_img;
     private Long img_num;
 
     @Builder
-    public ConsolesUpdateRequestDto (String manufact, String edition, int c_price, int quantity) {
+    public ConsolesUpdateRequestDto (String manufact, String edition, int p_price, int quantity) {
         this.manufact = manufact;
         this.edition = edition;
-        this.c_price = c_price;
+        this.p_price = p_price;
         this.quantity = quantity;
     }
 }

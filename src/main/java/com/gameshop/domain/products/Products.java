@@ -9,28 +9,29 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Products extends BaseTimeEntity {
+public abstract class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String p_name;
+    private String manufact;
 
     @Column
-    private Long p_amount;
+    private int p_price;
 
     @Column
-    private Long p_price;
+    private int quiantity;
 
     @Column
-    private String p_img;
+    private String company;
+
+    @Column
+    private Long img_num;
 
     @Column
     private String category;
 
-    @Column
-    private String company;
 
 }
