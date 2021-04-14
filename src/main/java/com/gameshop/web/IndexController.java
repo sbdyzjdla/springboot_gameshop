@@ -2,9 +2,11 @@ package com.gameshop.web;
 
 import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
+import com.gameshop.domain.cart.dto.CartListResponseDto;
 import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
 import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
 import com.gameshop.domain.user.User;
+import com.gameshop.service.CartService;
 import com.gameshop.service.ConsolesService;
 import com.gameshop.service.FilesService;
 import com.gameshop.service.QnasService;
@@ -29,6 +31,7 @@ public class IndexController {
     private final QnasService qnasService;
     private final FilesService filesService;
     private final ConsolesService consolesService;
+    private final CartService cartService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
@@ -138,6 +141,9 @@ public class IndexController {
 
             model.addAttribute("userInfo" , userInfo);
         }
+        List<CartListResponseDto> cartList = cartService.findAllDesc(user);
+        model.addAttribute("cartList", cartList);
+
         return "cart";
     }
 

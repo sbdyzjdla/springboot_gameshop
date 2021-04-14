@@ -2,12 +2,14 @@ package com.gameshop.web;
 
 import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
+import com.gameshop.domain.cart.dto.CartListResponseDto;
 import com.gameshop.domain.cart.dto.CartSaveRequestDto;
 import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
 import com.gameshop.service.CartService;
 import com.gameshop.service.ConsolesService;
 import com.gameshop.service.FilesService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,4 +44,7 @@ public class CartApiController {
 
         return cartService.save(requestDto);
     }
+
+    @GetMapping("/cart/cartList")
+    public List<CartListResponseDto> findAllDesc(@LoginUser SessionUser user) { return cartService.findAllDesc(user); }
 }
