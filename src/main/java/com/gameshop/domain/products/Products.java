@@ -3,12 +3,16 @@ package com.gameshop.domain.products;
 import com.gameshop.domain.BaseTimeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn
 public abstract class Products {
 
     @Id
@@ -22,7 +26,10 @@ public abstract class Products {
     private int p_price;
 
     @Column
-    private int quiantity;
+    private String p_name;
+
+    @Column
+    private int quantity;
 
     @Column
     private String company;

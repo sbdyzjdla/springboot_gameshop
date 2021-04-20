@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class ConsolesSaveRequestDto {
 
     private String manufact;
-    private String edition;
+    private String p_name;
     private int p_price;
     private int quantity;
     private MultipartFile consoles_img;
@@ -25,9 +25,9 @@ public class ConsolesSaveRequestDto {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public ConsolesSaveRequestDto(String manufact, String edition, int p_price, int quantity, Long img_num) {
+    public ConsolesSaveRequestDto(String manufact, String p_name, int p_price, int quantity, Long img_num) {
         this.manufact = manufact;
-        this.edition = edition;
+        this.p_name = p_name;
         this.p_price = p_price;
         this.quantity = quantity;
         this.img_num = img_num;
@@ -37,7 +37,7 @@ public class ConsolesSaveRequestDto {
     public Consoles toEntity() {
         return Consoles.builder()
                 .manufact(manufact)
-                .edition(edition)
+                .p_name(p_name)
                 .p_price(p_price)
                 .quantity(quantity)
                 .img_num(img_num)
