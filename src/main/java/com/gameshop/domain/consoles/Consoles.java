@@ -13,24 +13,6 @@ import javax.persistence.*;
 @Entity
 public class Consoles extends Products {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-
-//    @Column
-//    private String manufact;
-
-//    @Column
-//    private String edition;
-
-//    @Column
-//    private int p_price;
-//
-//    @Column
-//    private int quantity;
-//
-//    @Column
-//    private Long img_num;
 
     @Builder
     public Consoles(String manufact, String p_name, int p_price, Long img_num, int quantity ) {
