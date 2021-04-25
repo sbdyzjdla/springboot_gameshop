@@ -90,7 +90,7 @@ var admin = {
                      $('#conList').append('<div class=\"col-lg-4 col-sm-4\">'
                         + '<div class=\"single_product_item text-center\" onclick=\"admin.view(' + consoleData[i].id + ');\">'
                         +       '<img src=\"/display/'+consoleData[i].img_num+'\" alt=\"#\" class=\"img-fluid\">'
-                        +       '<h3> ' + consoleData[i].edition + ' </h3>'
+                        +       '<h3> ' + consoleData[i].p_name + ' </h3>'
                         +       '<p>' + admin.numberWithCommas(consoleData[i].p_price) + '원</p>'
                         +       '<p>' + consoleData[i].quantity + '개</p>'
                         +       '</div>'
