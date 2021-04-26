@@ -15,6 +15,6 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    private Cart cart;
-    private User user;
+//    private Cart cart;
+//    private User user;
 }
