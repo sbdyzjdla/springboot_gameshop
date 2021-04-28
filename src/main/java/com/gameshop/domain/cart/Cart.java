@@ -27,12 +27,16 @@ public class Cart {
     @Column
     private Long img_num;
 
+    @Column
+    private String p_name;
+
     @Builder
-    public Cart (Long user_id, Long product_id, int quantity, Long img_num) {
+    public Cart (Long user_id, Long product_id, int quantity, Long img_num, String p_name) {
         this.user_id = user_id;
         this.product_id = product_id;
         this.quantity = quantity;
         this.img_num = img_num;
+        this.p_name = p_name;
     }
 
 

@@ -16,6 +16,7 @@ public class CartListResponseDto {
     private Long product_id;
     private int quantity;
     private Long img_num;
+    private String p_name;
 
     @Builder
     public CartListResponseDto(Cart entity) {
@@ -24,5 +25,6 @@ public class CartListResponseDto {
         this.product_id = entity.getProduct_id();
         this.quantity = entity.getQuantity();
         this.img_num = entity.getImg_num();
+        this.p_name = entity.getP_name();
     }
 }

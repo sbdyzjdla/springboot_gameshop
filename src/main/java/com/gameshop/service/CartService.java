@@ -6,6 +6,7 @@ import com.gameshop.domain.cart.dto.CartListResponseDto;
 import com.gameshop.domain.cart.dto.CartSaveRequestDto;
 import com.gameshop.domain.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
