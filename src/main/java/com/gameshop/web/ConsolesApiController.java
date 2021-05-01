@@ -49,4 +49,5 @@ public class ConsolesApiController {
     public List<ConsolesListResponseDto> findAllNint() {
         return consolesService.findAllNint();
     }
+
 }

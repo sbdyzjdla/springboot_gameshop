@@ -49,6 +49,4 @@ public class OAuthAttributes {
                 .role(Role.ADMIN)
                 .build();
     }
-
-
 }
