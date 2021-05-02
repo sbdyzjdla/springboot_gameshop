@@ -30,7 +30,10 @@ public class FilesService {
     private final FilesRepository filesRepository;
 
     //로컬
-    private String baseDir = "C:\\쇼핑몰이미지\\";
+    private String baseDir = "/Users/yoonsung/web/save_img/";
+    // 윈도우
+    // private String baseDir = "C:\\쇼핑몰이미지\\";
+
 
 
     @Transactional
