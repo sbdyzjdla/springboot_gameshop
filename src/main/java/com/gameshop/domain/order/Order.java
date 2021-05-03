@@ -5,7 +5,7 @@ import com.gameshop.domain.user.User;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Order {
 
     @Id

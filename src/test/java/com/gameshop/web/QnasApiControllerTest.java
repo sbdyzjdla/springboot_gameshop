@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -72,8 +73,13 @@ public class QnasApiControllerTest {
                 .author(author)
                 .content(content)
                 .reply_state(reply_state)
+                .img_num(1L)
                 .build();
 
+        // !!단위테스트 이기 때문에 절대 값을 비워둬서는 안됨 따라서 더미데이터 생성
+        MockMultipartFile file = new MockMultipartFile("user-file", "test.txt",
+                null, "test data".getBytes());
+        requestDto.setQnas_img(file);
         String url = "http://localhost:" + port + "/api/v1/qnas";
 
         /*       TestRestTemplate 쓰는경우
@@ -86,11 +92,17 @@ public class QnasApiControllerTest {
         */
 
         //when        springSecurity 적용할시 테스트 코드
-        mvc.perform(post(url)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(new ObjectMapper().writeValueAsString(requestDto)))
-                .andExpect(status().isOk());
+//        mvc.perform(post(url)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(new ObjectMapper().writeValueAsString(requestDto)))
+//                .andExpect(status().isOk());
 
+
+        //modelAttribute는 파라미터값으로 바인딩 하는방식이라 setter 필요
+        //따라서 body값이 아닌 파라미터 값으로 요청을 해야함
+        mvc.perform(post(url)
+                .flashAttr("requestDto", requestDto))
+                .andExpect(status().isOk());
 
         //then
         List<Qnas> all = qnasRepository.findAll();
@@ -98,6 +110,7 @@ public class QnasApiControllerTest {
         assertThat(all.get(0).getAuthor()).isEqualTo(author);
         assertThat(all.get(0).getContent()).isEqualTo(content);
         assertThat(all.get(0).getReply_state()).isEqualTo(reply_state);
+
     }
 
     @Test
