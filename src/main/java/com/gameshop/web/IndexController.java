@@ -97,7 +97,7 @@ public class IndexController {
         return "update_board";
     }
 
-    @GetMapping("/hardware-nintendo")
+    @GetMapping("/products/hardware-nintendo")
     public String hardware_nintendo(Model model, @LoginUser SessionUser user) {
         if(user != null) {
             List<SessionUser> userInfo = new ArrayList<>();
@@ -110,7 +110,7 @@ public class IndexController {
         return "hardware-nintendo";
     }
 
-    @GetMapping("/software-switch")
+    @GetMapping("/products/software-switch")
     public String software_switch(Model model, @LoginUser SessionUser user) {
         if(user != null) {
             List<SessionUser> userInfo = new ArrayList<>();

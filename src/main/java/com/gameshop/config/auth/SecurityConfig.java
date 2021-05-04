@@ -19,8 +19,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
                         .antMatchers("/", "/css/**", "/js/**", "/img/**",
                                         "/fonts/**", "/sass/**", "/webfonts/**",
-                                        "/h2-console/**").permitAll()
-                        .antMatchers("/api/v1/**").hasRole(Role.ADMIN.name())
+                                        "/h2-console/**",
+                                        "/board", "/board/view_board/**", "/api/v1/qnas/qnaslist",
+                                        "/products", "/products/**", "/api/v1/consoles/nintendoCList",
+                                        "/display/**").permitAll()
+                        .antMatchers("/api/v1/qnas/**").hasRole(Role.ADMIN.name())
                         .anyRequest().authenticated()
                 .and()
                     .logout()
