@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers("/", "/css/**", "/js/**", "/img/**",
                                         "/fonts/**", "/sass/**", "/webfonts/**",
                                         "/h2-console/**",
-                                        "/board", "/board/view_board/**", "/api/v1/qnas/qnaslist",
+                                        "/board", "/board/view_board/**",
                                         "/products", "/products/**", "/api/v1/consoles/nintendoCList",
                                         "/display/**").permitAll()
                         .antMatchers("/api/v1/qnas/**").hasRole(Role.ADMIN.name())
