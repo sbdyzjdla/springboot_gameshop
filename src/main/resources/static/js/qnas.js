@@ -83,7 +83,7 @@ var qnas = {
 
         $.ajax({
             type : 'GET',
-            url : '/api/v1/qnas/qnaslist',
+            url : '/api/v1/qnaslist',
             dataType : 'json',
         }).done(function(success) {
         $('#qnasTable').children().remove();
@@ -110,7 +110,7 @@ var qnas = {
     viewQnas : function() {
          $.ajax({
             type : 'GET',
-            url : '/api/v1/qnas/qnaslist',
+            url : '/api/v1/qnaslist',
             dataType : 'json',
         }).done(function(success) {
             alert('게시글 성공!!');

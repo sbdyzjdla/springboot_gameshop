@@ -43,7 +43,7 @@ public class QnasApiController {
         return  qnasService.findById(id);
     }
 
-    @GetMapping("/api/v1/qnas/qnaslist")
+    @GetMapping("/api/v1/qnaslist")
     public List<QnasListResponseDto> findAll() {
         return qnasService.findAllDesc();
     }
