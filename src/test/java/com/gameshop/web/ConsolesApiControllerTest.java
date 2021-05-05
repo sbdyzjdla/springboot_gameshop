@@ -71,59 +71,59 @@ class ConsolesApiControllerTest {
         repository.deleteAll();;
     }
 
-    @WithMockUser
-    @Test
-    void 콘솔등록() throws Exception{
-        //given
-        String manufact = "제조업체";
-        String p_name = "제품명";
-        int p_price = 420000;
-        int quantity = 10;
-        Long img_num = 1L;
-        ConsolesSaveRequestDto dto = ConsolesSaveRequestDto.builder()
-                .manufact(manufact)
-                .p_name(p_name)
-                .p_price(p_price)
-                .quantity(quantity)
-                .build();
-
-        String url = "http://localhost:" + port + "/admin/consoles/save";
-
-        dto.setImg_num(img_num);
-        //when
-        ResponseEntity<Long> responseEntity = restTemplate
-                .postForEntity(url, dto, Long.class);
-
-//        mvc.perform(post(url)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(new ObjectMapper().writeValueAsString(dto)))
-//                .andExpect(status().isOk());
-
-        //then
-        //assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.FOUND);
-        //200은 정상  302 found 요청을 완료하기 위해 추가 동작이 필요
-        //assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        //assertThat(responseEntity.getBody()).isGreaterThan(1L);
-
-        List<Consoles> consolesList = repository.findAllDesc();
-        System.out.println("consolesList : " + consolesList);
-        //assertThat(consolesList.get(0).getManufact()).isEqualTo(manufact);
-
-    }
-
-    @Test
-    void findAllDesc() {
-    }
-
-    @Test
-    void findById() {
-    }
-
-    @Test
-    void update() {
-    }
-
-    @Test
-    void findAllNint() {
-    }
+//    @WithMockUser
+//    @Test
+//    void 콘솔등록() throws Exception{
+//        //given
+//        String manufact = "제조업체";
+//        String p_name = "제품명";
+//        int p_price = 420000;
+//        int quantity = 10;
+//        Long img_num = 1L;
+//        ConsolesSaveRequestDto dto = ConsolesSaveRequestDto.builder()
+//                .manufact(manufact)
+//                .p_name(p_name)
+//                .p_price(p_price)
+//                .quantity(quantity)
+//                .build();
+//
+//        String url = "http://localhost:" + port + "/admin/consoles/save";
+//
+//        dto.setImg_num(img_num);
+//        //when
+//        ResponseEntity<Long> responseEntity = restTemplate
+//                .postForEntity(url, dto, Long.class);
+//
+////        mvc.perform(post(url)
+////                .contentType(MediaType.APPLICATION_JSON)
+////                .content(new ObjectMapper().writeValueAsString(dto)))
+////                .andExpect(status().isOk());
+//
+//        //then
+//        //assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.FOUND);
+//        //200은 정상  302 found 요청을 완료하기 위해 추가 동작이 필요
+//        //assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+//        //assertThat(responseEntity.getBody()).isGreaterThan(1L);
+//
+//        List<Consoles> consolesList = repository.findAllDesc();
+//        System.out.println("consolesList : " + consolesList);
+//        //assertThat(consolesList.get(0).getManufact()).isEqualTo(manufact);
+//
+//    }
+//
+//    @Test
+//    void findAllDesc() {
+//    }
+//
+//    @Test
+//    void findById() {
+//    }
+//
+//    @Test
+//    void update() {
+//    }
+//
+//    @Test
+//    void findAllNint() {
+//    }
 }
