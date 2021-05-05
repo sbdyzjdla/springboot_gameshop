@@ -35,13 +35,10 @@ dependencies {
 
 	compile("org.mariadb.jdbc:mariadb-java-client")
 
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-
-
 	compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+	compile("org.mariadb.jdbc:mariadb-java-client")
 
-	compile('org.springframework.session:spring-session-jdbc')
-
+	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')
 	testCompileOnly 'org.projectlombok:lombok:1.18.12' // 테스트 의존성 추가
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12' // 테스트 의존성 추가
