@@ -23,7 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                         "/board", "/board/view_board/**", "/api/v1/qnaslist",
                                         "/products", "/products/**", "/api/v1/consoles/nintendoCList",
                                         "/display/**").permitAll()
-                        .antMatchers("/api/v1/qnas/**").hasRole(Role.ADMIN.name())
+                        .antMatchers("/api/v1/qnas/**").hasRole(Role.USER.name())
+                        .antMatchers("/admin/**", "/api/v1/qnas/**").hasRole(Role.ADMIN.name())
                         .anyRequest().authenticated()
                 .and()
                     .logout()
