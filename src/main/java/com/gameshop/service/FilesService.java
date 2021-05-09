@@ -6,6 +6,7 @@ import com.gameshop.web.dto.FilesResponseDto;
 import com.gameshop.web.dto.FilesSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.h2.util.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -29,10 +30,13 @@ public class FilesService {
 
     private final FilesRepository filesRepository;
 
-    //로컬
-    private String baseDir = "/Users/yoonsung/web/save_img/";
+    // 로컬
+    //private String baseDir = "/Users/yoonsung/web/save_img/";
     // 윈도우
     // private String baseDir = "C:\\쇼핑몰이미지\\";
+    // 서버
+    @Value("${filepath}")
+    private String baseDir;
 
 
 
