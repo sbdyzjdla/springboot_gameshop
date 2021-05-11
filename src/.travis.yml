@@ -9,12 +9,12 @@ branches:
 # Travis CI 서버의 Home
 cache:
     directories:
-    - '$HMOE/.m2/repository'
-    - '$MOHE/.gradle'
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
 script: "./gradlew clean build"
 
 # CI 실행 완료시 메일로 알람
 notifications:
     email:
         recipients:
-            -sbdyzjdla@gmail.com
+            - sbdyzjdla@gmail.com
