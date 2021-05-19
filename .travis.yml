@@ -17,9 +17,26 @@ script: "./gradlew clean build"
 before_install:
     - chmod +x gradlew
 
+before_deploy:
+    - zip -r springboot_gameshop *
+    - mkdir -p deploy
+    - mv springboot_gameshop.zip deploy/springboot_gameshop.zip
+
+deploy:
+    - provider: s3
+      access_key_id: $AWS_ACCESS_KEY
+      secret_access_key: $AWS_SECRET_KEY
+      bucket: springboot-gameshop  # S3 버킷
+      region: ap-northeast-2
+      skip_cleanup: true
+      acl: private #zip 파일 접근을 private으로
+      local_dir: deploy
+      wait-until-deployed: true
+
 # CI 실행 완료시 메일로 알람
 notifications:
     email:
         recipients:
             - sbdyzjdla@gmail.com
-#
+
+
