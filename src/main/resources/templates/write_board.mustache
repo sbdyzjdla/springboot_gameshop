@@ -23,11 +23,16 @@
                         <input class="form-control" name="title" id="title" type="text" placeholder="제목">
                     </div>
                 </div>
+                {{#userInfo}}
+                    <input type="hidden" name="author" id="author" value="{{name}}">
+                {{/userInfo}}
+                {{^userInfo}}
                 <div class="col-sm-6">
                     <div class="form-group">
                         <input class="form-control" name="author" id="author" type="text" placeholder="이름">
                     </div>
                 </div>
+                {{/userInfo}}
                 <div class="col-12">
                     <div class="form-group">
                         <textarea class="form-control w-100" name="content" id="content" cols="30" rows="9" placeholder="내용"></textarea>

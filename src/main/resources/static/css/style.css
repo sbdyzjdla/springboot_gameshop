@@ -726,7 +726,6 @@ ul {
 
 /* line 10, /Applications/MAMP/htdocs/old/palash/cl/shop_html/sass/_blog.scss */
 .blog_area a {
-  color: white !important;
   text-decoration: none;
   -webkit-transition: 0.5s;
   transition: 0.5s;
