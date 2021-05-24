@@ -21,7 +21,7 @@ public class QnasApiController {
     private final FilesService filesService;
 
     @PostMapping("/api/v1/qnas")
-    public Long save(@ModelAttribute("requestDto") QnasSaveRequestDto requestDto) {
+    public Long save(@ModelAttribute QnasSaveRequestDto requestDto) {
         if(!requestDto.getQnas_img().isEmpty()) {
             Long file_id = filesService.save(requestDto.getQnas_img(), requestDto.getAuthor());
             requestDto.setImg_num(file_id);

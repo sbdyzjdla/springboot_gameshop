@@ -24,8 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                         "/products", "/products/**", "/api/v1/consoles/nintendoCList",
                                         "/display/**",
                                         "/cart/**").permitAll()
-                        .antMatchers("/api/v1/qnas/**").hasRole(Role.USER.name())
-                        .antMatchers("/admin/**", "/api/v1/qnas/**").hasRole(Role.ADMIN.name())
+                        .antMatchers("/api/v1/qnas/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+                        .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
                         .anyRequest().authenticated()
                 .and()
                     .logout()
