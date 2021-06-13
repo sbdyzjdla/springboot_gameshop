@@ -14,6 +14,7 @@ public class Qnas extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "QNAS_ID")
     private Long id;
 
     @Column

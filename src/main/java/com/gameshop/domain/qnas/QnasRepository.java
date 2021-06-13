@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface QnasRepository extends JpaRepository<Qnas, Long> {
 
-    @Query("SELECT q FROM Qnas q ORDER BY q.id DESC")
-    List<Qnas> findAllDesc();
+//    @Query("SELECT q FROM Qnas q ORDER BY q.id DESC")
+//    List<Qnas> findAllDesc();
 }
