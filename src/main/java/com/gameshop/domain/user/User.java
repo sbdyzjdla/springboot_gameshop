@@ -1,11 +1,14 @@
 package com.gameshop.domain.user;
 
 import com.gameshop.domain.BaseTimeEntity;
+import com.gameshop.domain.cart.Cart;
+import com.gameshop.domain.products.Products;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -14,6 +17,7 @@ public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_ID")
     private Long id;
 
     @Column(nullable = false)
@@ -27,6 +31,15 @@ public class User extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+
+    //객체관계
+    @OneToMany(mappedBy = "user")
+    private List<Cart> carts;
+
+    @OneToMany(mappedBy = "user")
+    private List<Products> products;
+
 
     @Builder
     public User (String name, String email, String picture, Role role) {

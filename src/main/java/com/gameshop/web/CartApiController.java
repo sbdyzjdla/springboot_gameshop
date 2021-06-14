@@ -28,9 +28,7 @@ public class CartApiController {
 
     @PostMapping("/cart/save")
     public Long save(HttpServletRequest request, @LoginUser SessionUser user) {
-        if(user != null) {
-            System.out.println("유저!!!" + user.getId());
-        }
+
         Long id = Long.parseLong(request.getParameter("id"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         ConsolesResponseDto dto = consolesService.findById(id);

@@ -17,6 +17,7 @@ public abstract class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PRODUCTS_ID")
     private Long id;
 
     @Column
