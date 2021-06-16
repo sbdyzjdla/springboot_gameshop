@@ -1,4 +1,4 @@
-# :video_game: 스프링부트로 만드는 온라인 게임샵
+# :video_game: 스프링부트로 만드는 온라인 게임샵 [![Build Status](https://travis-ci.com/sbdyzjdla/springboot_gameshop.svg?branch=master)](https://travis-ci.com/sbdyzjdla/springboot_gameshop)
 
 ## 사용 기술
 
