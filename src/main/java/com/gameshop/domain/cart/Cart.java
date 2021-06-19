@@ -18,9 +18,8 @@ public class Cart {
     @Column(name = "CART_ID")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
-    private User user;
+    @Column
+    private Long user_id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCTS_ID")
@@ -29,8 +28,8 @@ public class Cart {
     private int quantity;
 
     @Builder
-    public Cart (User user, Products products, int quantity){
-        this.user = user;
+    public Cart (Long user_id, Products products, int quantity){
+        this.user_id = user_id;
         this.products = products;
         this.quantity = quantity;
     }

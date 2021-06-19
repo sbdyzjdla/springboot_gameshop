@@ -32,15 +32,6 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
-
-    //객체관계
-    @OneToMany(mappedBy = "user")
-    private List<Cart> carts;
-
-//    @OneToMany(mappedBy = "user")
-//    private List<Products> products;
-
-
     @Builder
     public User (String name, String email, String picture, Role role) {
 

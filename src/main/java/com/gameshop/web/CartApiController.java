@@ -36,11 +36,10 @@ public class CartApiController {
         int quantity = Integer.parseInt(request.getParameter("quantity"));
 
         Products products = productsService.findById(id);
-        User findUser = userService.findById(user.getId());
 //        ConsolesResponseDto dto = consolesService.findById(id);
 //
         CartSaveRequestDto requestDto = CartSaveRequestDto.builder()
-                .user(findUser)
+                .user_id(user.getId())
                 .products(products)
                 .quantity(quantity)
                 .build();

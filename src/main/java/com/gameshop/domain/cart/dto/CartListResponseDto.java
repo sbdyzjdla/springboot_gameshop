@@ -21,7 +21,7 @@ public class CartListResponseDto {
     @Builder
     public CartListResponseDto(Cart entity) {
         this.id = entity.getId();
-        this.user_id = entity.getUser().getId();
+        this.user_id = entity.getUser_id();
         this.product_id = entity.getProducts().getId();
         this.quantity = entity.getProducts().getQuantity();
         this.img_num = entity.getProducts().getImg_num();

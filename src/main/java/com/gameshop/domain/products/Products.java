@@ -44,7 +44,7 @@ public abstract class Products {
     @Column
     private String category;
 
-    @OneToMany(mappedBy = "products", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
     private List<Cart> carts;
 
 //    @Builder

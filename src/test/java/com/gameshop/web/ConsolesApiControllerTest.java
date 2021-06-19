@@ -90,6 +90,7 @@ class ConsolesApiControllerTest {
                 .p_price(p_price)
                 .quantity(quantity)
                 .consoles_img(file)
+                .img_num(1L)
                 .build();
 
         String url = "http://localhost:" + port + "/admin/consoles/save";

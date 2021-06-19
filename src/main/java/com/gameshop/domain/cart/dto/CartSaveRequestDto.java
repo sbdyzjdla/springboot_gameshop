@@ -13,20 +13,20 @@ import javax.persistence.Column;
 @NoArgsConstructor
 public class CartSaveRequestDto {
 
-    private User user;
+    private Long user_id;
     private Products products;
     private int quantity;
 
     @Builder
-    public CartSaveRequestDto (User user, Products products, int quantity) {
-        this.user = user;
+    public CartSaveRequestDto (Long user_id, Products products, int quantity) {
+        this.user_id = user_id;
         this.products = products;
         this.quantity = quantity;
     }
 
     public Cart toEntity() {
         return Cart.builder()
-                .user(user)
+                .user_id(user_id)
                 .products(products)
                 .quantity(quantity)
                 .build();
