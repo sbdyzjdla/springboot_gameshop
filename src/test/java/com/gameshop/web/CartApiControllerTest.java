@@ -82,7 +82,7 @@ class CartApiControllerTest {
         assertThat(findAll.get(1).getProducts().getP_name()).isEqualTo("상품2");
         assertThat(findAll.get(0).getUser_id()).isEqualTo(findUser.getId());
     }
-
+//
 
     private Products createProducts(String manufact, String p_name, int p_price, int quantity) throws Exception{
         ConsolesSaveRequestDto requestDto = ConsolesSaveRequestDto.builder()
