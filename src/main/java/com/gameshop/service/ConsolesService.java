@@ -33,7 +33,7 @@ public class ConsolesService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public ConsolesResponseDto findById(Long id) {
         Consoles entity = consolesRepository.findById(id)
                 .orElseThrow(() -> new

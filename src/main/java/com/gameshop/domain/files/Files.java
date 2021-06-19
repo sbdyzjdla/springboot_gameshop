@@ -14,6 +14,7 @@ public class Files extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "FILES_ID")
     private Long id;
 
     @Column

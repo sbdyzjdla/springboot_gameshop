@@ -24,12 +24,14 @@ public class QnasSaveRequestDto {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public QnasSaveRequestDto(String title, String author, String content, String reply_state, Long img_num) {
+    public QnasSaveRequestDto(String title, String author, String content, String reply_state, Long img_num
+        , MultipartFile qnas_img) {
         this.title = title;
         this.author = author;
         this.content = content;
         this.reply_state = reply_state;
         this.img_num = img_num;
+        this.qnas_img = qnas_img;
     }
 
     public Qnas toEntity() {

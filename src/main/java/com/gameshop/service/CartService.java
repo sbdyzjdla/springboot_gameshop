@@ -23,14 +23,14 @@ public class CartService {
     public Long save(CartSaveRequestDto requestDto) {
         return cartRepository.save(requestDto.toEntity()).getId();
     }
-
-    @Transactional
-    public List<CartListResponseDto> findAllDesc(SessionUser user) {
-
-        return cartRepository.findAllDesc(user.getId()).stream()
-                .map(CartListResponseDto::new)
-                .collect(Collectors.toList());
-
-
-    }
+//
+//    @Transactional
+//    public List<CartListResponseDto> findAllDesc(SessionUser user) {
+//
+//        return cartRepository.findAllDesc(user.getId()).stream()
+//                .map(CartListResponseDto::new)
+//                .collect(Collectors.toList());
+//
+//
+//    }
 }
