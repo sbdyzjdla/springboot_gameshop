@@ -37,8 +37,8 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "user")
     private List<Cart> carts;
 
-    @OneToMany(mappedBy = "user")
-    private List<Products> products;
+//    @OneToMany(mappedBy = "user")
+//    private List<Products> products;
 
 
     @Builder

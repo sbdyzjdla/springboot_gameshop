@@ -25,12 +25,14 @@ public class ConsolesSaveRequestDto {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public ConsolesSaveRequestDto(String manufact, String p_name, int p_price, int quantity, Long img_num) {
+    public ConsolesSaveRequestDto(String manufact, String p_name, int p_price, int quantity, Long img_num,
+                                  MultipartFile consoles_img) {
         this.manufact = manufact;
         this.p_name = p_name;
         this.p_price = p_price;
         this.quantity = quantity;
         this.img_num = img_num;
+        this.consoles_img = consoles_img;
 
     }
 

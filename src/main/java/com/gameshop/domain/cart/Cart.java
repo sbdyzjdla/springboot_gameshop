@@ -26,9 +26,13 @@ public class Cart {
     @JoinColumn(name = "PRODUCTS_ID")
     private Products products;
 
-    @Builder
-    public Cart() {
+    private int quantity;
 
+    @Builder
+    public Cart (User user, Products products, int quantity){
+        this.user = user;
+        this.products = products;
+        this.quantity = quantity;
     }
 
     //    @Column

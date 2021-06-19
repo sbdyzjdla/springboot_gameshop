@@ -19,6 +19,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -69,6 +70,38 @@ class ConsolesApiControllerTest {
     @AfterEach
     void tearDown() {
         repository.deleteAll();;
+    }
+
+    @WithMockUser(roles = "ADMIN")
+    @Test
+    void 기기추가() throws Exception{
+        //given
+        String manufact = "제조업체";
+        String p_name = "제품명";
+        int p_price = 420000;
+        int quantity = 10;
+
+        // !!단위테스트 이기 때문에 절대 값을 비워둬서는 안됨 따라서 더미데이터 생성
+        MockMultipartFile file = new MockMultipartFile("user-file", "test.txt",
+                null, "test data".getBytes());
+        ConsolesSaveRequestDto requestDto = ConsolesSaveRequestDto.builder()
+                .manufact(manufact)
+                .p_name(p_name)
+                .p_price(p_price)
+                .quantity(quantity)
+                .consoles_img(file)
+                .build();
+
+        String url = "http://localhost:" + port + "/admin/consoles/save";
+        //when
+//        mvc.perform(post(url)
+//                .contentType(MediaType.MULTIPART_FORM_DATA)
+//                .accept(MediaType.MULTIPART_FORM_DATA)
+//            )
+
+
+
+        //then
     }
 
 //    @WithMockUser
