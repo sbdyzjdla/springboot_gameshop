@@ -1,17 +1,12 @@
 package com.gameshop.service;
 
-import com.gameshop.config.auth.dto.SessionUser;
+import com.gameshop.domain.cart.Cart;
+import com.gameshop.domain.cart.CartProducts;
 import com.gameshop.domain.cart.CartRepository;
-import com.gameshop.domain.cart.dto.CartListResponseDto;
-import com.gameshop.domain.cart.dto.CartSaveRequestDto;
-import com.gameshop.domain.user.User;
+import com.gameshop.domain.products.Products;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -20,8 +15,17 @@ public class CartService {
     private final CartRepository cartRepository;
 
     @Transactional
-    public Long save(CartSaveRequestDto requestDto) {
-        return cartRepository.save(requestDto.toEntity()).getId();
+    public Long save(Products products, int quantity, Long userId) {
+
+        CartProducts cartProducts = CartProducts.builder()
+                .products(products)
+                .orderPrice(products.getP_price())
+                .quantity(quantity)
+                .build();
+
+        Cart cart = Cart.createCart(userId ,cartProducts);
+
+        return cartRepository.save(cart).getId();
     }
 //
 //    @Transactional

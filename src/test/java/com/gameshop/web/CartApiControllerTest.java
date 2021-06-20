@@ -2,7 +2,7 @@ package com.gameshop.web;
 
 import com.gameshop.domain.cart.Cart;
 import com.gameshop.domain.cart.CartRepository;
-import com.gameshop.domain.cart.dto.CartSaveRequestDto;
+import com.gameshop.domain.cart.CartRepositorySupport;
 import com.gameshop.domain.consoles.ConsolesRepository;
 import com.gameshop.domain.consoles.dto.ConsolesSaveRequestDto;
 import com.gameshop.domain.products.Products;
@@ -40,6 +40,8 @@ class CartApiControllerTest {
     private CartRepository cartRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CartRepositorySupport cartRepositorySupport;
 
     @Test
     @WithMockUser(roles = "USER")
@@ -63,23 +65,14 @@ class CartApiControllerTest {
                 .build();
 
         //when
-        CartSaveRequestDto cartRequestDto1 = CartSaveRequestDto.builder()
-                .user_id(findUser.getId())
-                .products(products1)
-                .quantity(p1_quantity)
-                .build();
-        CartSaveRequestDto cartRequestDto2 = CartSaveRequestDto.builder()
-                .user_id(findUser.getId())
-                .products(products2)
-                .quantity(p2_quantity)
-                .build();
-        Long cartNum = cartService.save(cartRequestDto1);
-        cartNum = cartService.save(cartRequestDto2);
+
+        Long cartNum = cartService.save(products1, p1_quantity, findUser.getId());
+        cartNum = cartService.save(products2, p2_quantity, findUser.getId());
 
 //        //then
-        List<Cart> findAll = cartRepository.findAll();
-        assertThat(findAll.get(0).getProducts().getP_name()).isEqualTo("상품1");
-        assertThat(findAll.get(1).getProducts().getP_name()).isEqualTo("상품2");
+        List<Cart> findAll = cartRepositorySupport.findAllUser(findUser.getId());
+        assertThat(findAll.get(0).getCartProducts().get(0).getProducts().getP_name()).isEqualTo("상품1");
+        assertThat(findAll.get(1).getCartProducts().get(0).getProducts().getP_name()).isEqualTo("상품2");
         assertThat(findAll.get(0).getUser_id()).isEqualTo(findUser.getId());
     }
 

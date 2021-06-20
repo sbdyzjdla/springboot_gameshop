@@ -2,22 +2,13 @@ package com.gameshop.web;
 
 import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
-import com.gameshop.domain.cart.Cart;
-import com.gameshop.domain.cart.dto.CartListResponseDto;
-import com.gameshop.domain.cart.dto.CartSaveRequestDto;
-import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
 import com.gameshop.domain.products.Products;
-import com.gameshop.domain.user.User;
 import com.gameshop.service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -36,15 +27,9 @@ public class CartApiController {
         int quantity = Integer.parseInt(request.getParameter("quantity"));
 
         Products products = productsService.findById(id);
-//        ConsolesResponseDto dto = consolesService.findById(id);
-//
-        CartSaveRequestDto requestDto = CartSaveRequestDto.builder()
-                .user_id(user.getId())
-                .products(products)
-                .quantity(quantity)
-                .build();
 
-        return cartService.save(requestDto);
+
+        return cartService.save(products, quantity, user.getId());
     }
 
 //    @GetMapping("/cart/cartList")
