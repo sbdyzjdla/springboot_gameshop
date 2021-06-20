@@ -8,6 +8,7 @@ import com.gameshop.domain.consoles.dto.ConsolesSaveRequestDto;
 import com.gameshop.domain.products.Products;
 import com.gameshop.domain.user.Role;
 import com.gameshop.domain.user.User;
+import com.gameshop.domain.user.UserRepository;
 import com.gameshop.service.CartService;
 import com.gameshop.service.ConsolesService;
 import com.gameshop.service.ProductsService;
@@ -39,14 +40,14 @@ class CartApiControllerTest {
     @Autowired
     private CartRepository cartRepository;
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
     @Autowired
     private CartRepositorySupport cartRepositorySupport;
 
     @Test
     @WithMockUser(roles = "USER")
     @Transactional   // join컬럼의 fetch type이 LAZY 일때 could not initialize proxy - no session 오류발생해서 단위테스트에 붙임
-    public void 장바구니_추가1() throws Exception {
+    public void 장바구니_추가() throws Exception {
         //given
         String manufact = "테스트 제조사명";
         int p_price = 420000;
@@ -63,13 +64,14 @@ class CartApiControllerTest {
                 .email("test이메일")
                 .role(Role.USER)
                 .build();
+        userRepository.save(findUser);
 
         //when
 
         Long cartNum = cartService.save(products1, p1_quantity, findUser.getId());
         cartNum = cartService.save(products2, p2_quantity, findUser.getId());
 
-//        //then
+        //then
         List<Cart> findAll = cartRepositorySupport.findAllUser(findUser.getId());
         assertThat(findAll.get(0).getCartProducts().get(0).getProducts().getP_name()).isEqualTo("상품1");
         assertThat(findAll.get(1).getCartProducts().get(0).getProducts().getP_name()).isEqualTo("상품2");

@@ -2,6 +2,7 @@ package com.gameshop.web;
 
 import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
+import com.gameshop.domain.cart.Cart;
 import com.gameshop.domain.cart.dto.CartListResponseDto;
 import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
 import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
@@ -133,19 +134,18 @@ public class IndexController {
         return "view_products";
     }
 
-//    @GetMapping("/cart")
-//    public String cart(Model model, @LoginUser SessionUser user) {
-//        if(user != null) {
-//            List<SessionUser> userInfo = new ArrayList<>();
-//            userInfo.add(user);
-//
-//            model.addAttribute("userInfo" , userInfo);
-//        }
-//        List<CartListResponseDto> cartList = cartService.findAllDesc(user);
-//        model.addAttribute("cartList", cartList);
-//
-//        return "cart";
-//    }
+    @GetMapping("/cart")
+    public String cart(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+
+            model.addAttribute("userInfo" , userInfo);
+        }
+        List<CartListResponseDto> cartList = cartService.findAllUser(user);
+        model.addAttribute("cartList", cartList);
+        return "cart";
+    }
 //
 //    @GetMapping("/order")
 //    public String order(Model model, @LoginUser SessionUser user) {

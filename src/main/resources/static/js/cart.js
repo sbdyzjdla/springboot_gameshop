@@ -24,7 +24,7 @@ var cart = {
          }).fail(function(error) {
              alert(JSON.stringify(error));
          });
-    },
+    },``
 }
 
 cart.init();

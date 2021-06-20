@@ -1,18 +1,24 @@
 package com.gameshop.service;
 
-import com.gameshop.domain.cart.Cart;
-import com.gameshop.domain.cart.CartProducts;
-import com.gameshop.domain.cart.CartRepository;
+import com.gameshop.config.auth.dto.SessionUser;
+import com.gameshop.domain.cart.*;
+import com.gameshop.domain.cart.dto.CartListResponseDto;
+import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
 import com.gameshop.domain.products.Products;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class CartService {
 
     private final CartRepository cartRepository;
+    private final CartRepositorySupport cartRepositorySupport;
+    private final CartProductsRepository cartProductsRepository;
 
     @Transactional
     public Long save(Products products, int quantity, Long userId) {
@@ -22,19 +28,19 @@ public class CartService {
                 .orderPrice(products.getP_price())
                 .quantity(quantity)
                 .build();
-
+        cartProductsRepository.save(cartProducts);
         Cart cart = Cart.createCart(userId ,cartProducts);
 
         return cartRepository.save(cart).getId();
     }
-//
-//    @Transactional
-//    public List<CartListResponseDto> findAllDesc(SessionUser user) {
-//
-//        return cartRepository.findAllDesc(user.getId()).stream()
-//                .map(CartListResponseDto::new)
-//                .collect(Collectors.toList());
-//
-//
-//    }
+
+    @Transactional
+    public List<CartListResponseDto> findAllUser(SessionUser user) {
+        return cartRepositorySupport.findAllUser(user.getId()).stream()
+                .map(CartListResponseDto::new)
+                .collect(Collectors.toList());
+
+//        return cartRepositorySupport.findAllUser(user.getId());
+
+    }
 }

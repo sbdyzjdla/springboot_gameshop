@@ -28,20 +28,16 @@ public class Cart {
 
     private int quantity;
 
-//    @Builder
-//    public Cart (Long user_id, int quantity, CartProducts... cartProducts){
-//        this.user_id = user_id;
-//        this.quantity = quantity;
-//        for(CartProducts cartProduct : cartProducts) {
-//            this.cartProducts.add(cartProduct);
-//        }
-//    }
+    public void addCartProducts(CartProducts paramCartProd) {
+        cartProducts.add(paramCartProd);
+        paramCartProd.setCart(this);
+    }
 
     public static Cart createCart(Long user_id, CartProducts... cartProducts) {
         Cart cart = new Cart();
         cart.setUser_id(user_id);
         for(CartProducts cartProduct : cartProducts) {
-            cart.cartProducts.add(cartProduct);
+            cart.addCartProducts(cartProduct);
         }
         return cart;
     }
