@@ -20,7 +20,7 @@ public class ConsolesApiController {
 
     @PostMapping("/admin/consoles/save")
     public Long save(@ModelAttribute ConsolesSaveRequestDto requestDto) {
-        if(!requestDto.getConsoles_img().isEmpty()) {
+        if(requestDto.getConsoles_img() != null && !requestDto.getConsoles_img().isEmpty()) {
             Long file_id = filesService.save(requestDto.getConsoles_img(), "admin");
             requestDto.setImg_num(file_id);
         }
