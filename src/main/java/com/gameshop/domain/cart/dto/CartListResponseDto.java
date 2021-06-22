@@ -19,8 +19,8 @@ public class CartListResponseDto {
     private int p_price;
     private String p_name;
     private Long img_num;
-
     private int quantity;
+    private int total_price;
 
     @Builder
     public CartListResponseDto(Cart entity) {
@@ -31,6 +31,6 @@ public class CartListResponseDto {
         this.p_price = entity.getCartProducts().get(0).getProducts().getP_price();
         this.p_name = entity.getCartProducts().get(0).getProducts().getP_name();
         this.img_num = entity.getCartProducts().get(0).getProducts().getImg_num();
-
+        this.total_price = p_price * quantity;
     }
 }

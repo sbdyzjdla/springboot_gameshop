@@ -21,10 +21,12 @@ var cart = {
              dataType: 'json',
          }).done(function() {
              alert('장바구니에 상품이 추가 되었습니다');
+             if (confirm("장바구니로 이동하시겠습니까??") == true){ location.href ="/cart";
+             } else {false}
          }).fail(function(error) {
              alert(JSON.stringify(error));
          });
-    },``
+    },
 }
 
 cart.init();

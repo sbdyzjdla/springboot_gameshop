@@ -36,4 +36,5 @@ public class CartProducts {
         this.orderPrice = orderPrice;
         this.quantity = quantity;
     }
+
 }

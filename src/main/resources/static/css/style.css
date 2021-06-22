@@ -1465,7 +1465,7 @@ ul {
 .blog_right_sidebar .post_category_widget .cat-list li a {
   font-size: 14px;
   line-height: 20px;
-  color: #888888;
+  /*color: #888888; */
 }
 
 /* line 762, /Applications/MAMP/htdocs/old/palash/cl/shop_html/sass/_blog.scss */

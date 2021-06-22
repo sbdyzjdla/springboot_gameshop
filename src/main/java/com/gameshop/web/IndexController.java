@@ -171,4 +171,16 @@ public class IndexController {
         }
         return "admin";
     }
+
+    @GetMapping("/about")
+        public String about(Model model, @LoginUser SessionUser user) {
+            if(user != null) {
+                List<SessionUser> userInfo = new ArrayList<>();
+                userInfo.add(user);
+
+                model.addAttribute("userInfo" , userInfo);
+            }
+            return "about";
+    }
+
 }
