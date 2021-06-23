@@ -7,9 +7,7 @@ import com.gameshop.domain.cart.dto.CartListResponseDto;
 import com.gameshop.domain.products.Products;
 import com.gameshop.service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -33,6 +31,13 @@ public class CartApiController {
         Products products = productsService.findById(id);
 
         return cartService.save(products, quantity, user.getId());
+    }
+
+    @PutMapping("/cart/update/{id}")
+    public Long update(@PathVariable Long id, HttpServletRequest request) {
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+
+        return cartService.update(id, quantity);
     }
 
     @GetMapping("/cart/cartList")

@@ -171,3 +171,7 @@ select.d_form_phone {
     font-family: "Rubik", sans-serif;
     margin-bottom: 0px;
 }
+
+th.count {
+    width: 0px;
+}

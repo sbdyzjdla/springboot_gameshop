@@ -30,11 +30,12 @@
                         </th>
                         <th scope="col">상품명</th>
                         <th scope="col">가격</th>
-                        <th scope="col">수량</th>
+                        <th scope="col" class="count">수량</th>
+                        <th scope="col"></th>
                         <th scope="col">합계</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="cartBody">
                     {{#cartList}}
                     <tr name="cartList">
                         <td>
@@ -54,7 +55,7 @@
                             </div>
                         </td>
                         <td>
-                            <h5>{{p_price}}</h5>
+                            <h5>{{p_price}}원</h5>
                         </td>
                         <td>
                             <div class="product_count">
@@ -64,11 +65,15 @@
                             </div>
                         </td>
                         <td>
-                            <h5>{{total_price}}</h5>
+                            <a href="#" class="genric-btn primary-border small" onclick="cart.cart_update({{id}}, this);">변경</a>
+                        </td>
+                        <td>
+                            <h5>{{total_price}}원</h5>
                         </td>
                     </tr>
                     {{/cartList}}
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -93,3 +98,10 @@
 </section>
 <!--================End Cart Area =================-->
 {{>layout/footer}}
+<script src="/js/cart.js"></script>
+<script>
+ $(document).ready(function() {
+    	cart.cart_update_calc();
+    	common.initCart();
+    });
+</script>

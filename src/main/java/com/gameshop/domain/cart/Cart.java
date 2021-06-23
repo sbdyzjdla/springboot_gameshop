@@ -20,7 +20,7 @@ public class Cart {
     @Column(name = "CART_ID")
     private Long id;
     private Long user_id;
-    private int quantity;
+    //private int quantity;
 
     @Enumerated(EnumType.STRING)
     private CartDelYn cartDelYn;
