@@ -20,7 +20,8 @@ public class CartRepositorySupport extends QuerydslRepositorySupport {
 
     public List<Cart> findAllUser(Long user_id) {
         return queryFactory.selectFrom(cart)
-                .where(cart.user_id.eq(user_id))
+                .where(cart.user_id.eq(user_id)
+                .and(cart.cartDelYn.eq(CartDelYn.NO)))
                 .fetch();
     }
 }

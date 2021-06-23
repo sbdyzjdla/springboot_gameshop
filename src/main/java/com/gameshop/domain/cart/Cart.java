@@ -19,14 +19,14 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CART_ID")
     private Long id;
-
-    @Column
     private Long user_id;
+    private int quantity;
+
+    @Enumerated(EnumType.STRING)
+    private CartDelYn cartDelYn;
 
     @OneToMany(mappedBy = "cart")
     private List<CartProducts> cartProducts = new ArrayList<CartProducts>();
-
-    private int quantity;
 
     public void addCartProducts(CartProducts paramCartProd) {
         cartProducts.add(paramCartProd);
@@ -39,6 +39,7 @@ public class Cart {
         for(CartProducts cartProduct : cartProducts) {
             cart.addCartProducts(cartProduct);
         }
+        cart.setCartDelYn(CartDelYn.NO);
         return cart;
     }
 

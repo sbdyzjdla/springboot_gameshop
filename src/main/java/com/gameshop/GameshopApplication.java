@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class GameshopApplication {
 
 	public static void main(String[] args) {
+
+		System.setProperty("spring.devtools.restart.enabled", "true");
+		System.setProperty("spring.devtools.livereload.enabled", "true");
 		SpringApplication.run(GameshopApplication.class, args);
 	}
-
 }
