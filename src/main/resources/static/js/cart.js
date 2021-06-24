@@ -58,6 +58,45 @@ var cart = {
         }
         total_price += '원';
         document.querySelector('#cartBody').children[cart_length].children[5].children[0].innerHTML = total_price;
-    }
+    },
+
+    cart_delete : function() {
+        var cart_length = $("tr[name=cartList]").length;
+        for(var i=0; i<cart_length; ++i) {
+            document.querySelector('#cartBody').children[i].children[6].value;
+        }
+
+    },
+
+    cart_selectAll : function(selectAll) {
+        const cart_checkboxes = document.getElementsByName('cart_check');
+
+        cart_checkboxes.forEach((cart_check) => {
+            cart_check.checked = selectAll.checked;
+        })
+        cart.cart_selectCalc();
+    },
+
+    cart_selectCalc : function() {
+
+            var cart_length = cart_length = $("tr[name=cartList]").length;
+                var total_price = 0;
+                var list_price = [];
+                for(var i=0; i<cart_length; ++i) {
+                    if(document.getElementsByName('cart_check')[i+1].checked) {
+                        var sum_price = document.querySelector('#cartBody').children[i].children[5].children[0].textContent;
+                        sum_price = sum_price.toString().replace('원', '');
+                        sum_price = sum_price.toString().replace(/,/gi, '');
+                        list_price.push(Number(sum_price));
+                        sum_price = 0;
+                    }
+                }
+                for(var i=0; i<list_price.length; ++i) {
+                    total_price += list_price[i];
+                }
+                total_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                total_price += '원';
+                document.querySelector('#cartBody').children[cart_length].children[5].children[0].innerHTML = total_price;
+    },
 }
 cart.init();
