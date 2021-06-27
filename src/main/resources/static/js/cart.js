@@ -60,14 +60,6 @@ var cart = {
         document.querySelector('#cartBody').children[cart_length].children[5].children[0].innerHTML = total_price;
     },
 
-    cart_delete : function() {
-        var cart_length = $("tr[name=cartList]").length;
-        for(var i=0; i<cart_length; ++i) {
-            document.querySelector('#cartBody').children[i].children[6].value;
-        }
-
-    },
-
     cart_selectAll : function(selectAll) {
         const cart_checkboxes = document.getElementsByName('cart_check');
 
@@ -97,6 +89,38 @@ var cart = {
                 total_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 total_price += '원';
                 document.querySelector('#cartBody').children[cart_length].children[5].children[0].innerHTML = total_price;
+    },
+
+
+    cart_delete : function() {
+        if (confirm("장바구니에서 삭제 하시겠습니까??") == true)
+            {
+                var cart_length = cart_length = $("tr[name=cartList]").length;
+                var id = 0;
+                var list_checked = [];
+                for(var i=0; i<cart_length; ++i) {
+                    if(document.getElementsByName('cart_check')[i+1].checked) {
+                        id = document.querySelector('#cartBody').children[i].children[6].value;
+                        list_checked.push(id);
+                    }
+                }
+                //ajax
+                var Data = { "list_checked" : list_checked};
+                console.log(list_checked);
+                $.ajax({
+                    type : 'PUT',
+                    url : '/cart/del/',
+                    dataType : 'json',
+                    data : Data,
+                }).done(function() {
+                    //alert('장바구니에서 삭제되었습니다.');
+                    location.href='/cart';
+                }).fail(function(error) {
+                    alert('수정에 실패하였습니다')
+                    alert(JSON.stringify(error))
+                })
+        } else {false}
+        //location.href='/cart';
     },
 }
 cart.init();

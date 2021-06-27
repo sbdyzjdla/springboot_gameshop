@@ -146,20 +146,20 @@ public class IndexController {
         model.addAttribute("cartList", cartList);
         return "cart";
     }
-//
-//    @GetMapping("/order")
-//    public String order(Model model, @LoginUser SessionUser user) {
-//        if(user != null) {
-//            List<SessionUser> userInfo = new ArrayList<>();
-//            userInfo.add(user);
-//
-//            model.addAttribute("userInfo" , userInfo);
-//        }
-//        List<CartListResponseDto> cartList = cartService.findAllDesc(user);
-//        model.addAttribute("cartList", cartList);
-//
-//        return "order";
-//    }
+
+    @GetMapping("/order")
+    public String order(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+
+            model.addAttribute("userInfo" , userInfo);
+        }
+        List<CartListResponseDto> cartList = cartService.findAllUser(user);
+        model.addAttribute("cartList", cartList);
+
+        return "order";
+    }
 
     @GetMapping("/admin")
     public String admin_page(Model model, @LoginUser SessionUser user) {

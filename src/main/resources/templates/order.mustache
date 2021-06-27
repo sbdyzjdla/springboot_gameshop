@@ -29,9 +29,9 @@
                         <th scope="col">합계</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="orderBody">
                     {{#cartList}}
-                    <tr>
+                    <tr name="cartList">
                         <td>
                             <div class="media">
                                 <div class="d-flex">
@@ -43,13 +43,13 @@
                             </div>
                         </td>
                         <td>
-                            <h5>12,000원</h5>
+                            <h5>{{p_price}}원</h5>
                         </td>
                         <td>
                             <h5>{{quantity}}</h5>
                         </td>
                         <td>
-                            <h5>12,000원</h5>
+                            <h5>{{total_price}}원</h5>
                         </td>
                     </tr>
                     {{/cartList}}
@@ -57,10 +57,10 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <h5>상품합계금액</h5>
+                            <h5 class="total_price">상품합계금액</h5>
                         </td>
                         <td>
-                            <h5 id="amount">6,8000원</h5>
+                            <h5 class="total_price" id="amount">6,8000원</h5>
                         </td>
                     </tr>
                     </tbody>
@@ -197,3 +197,8 @@ function payment(e){
 </script>
 <!--================End Cart Area =================-->
 {{>layout/footer}}
+<script>
+ $(document).ready(function() {
+    	common.initOrder();
+    });
+</script>

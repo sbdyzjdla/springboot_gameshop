@@ -27,7 +27,6 @@ public class CartApiController {
 
         Long id = Long.parseLong(request.getParameter("id"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-
         Products products = productsService.findById(id);
 
         return cartService.save(products, quantity, user.getId());
@@ -38,6 +37,15 @@ public class CartApiController {
         int quantity = Integer.parseInt(request.getParameter("quantity"));
 
         return cartService.update(id, quantity);
+    }
+
+    @PutMapping("/cart/del/")
+    public Long del(HttpServletRequest request) {
+        String[] del_list = request.getParameterValues("list_checked[]");
+        for(String num : del_list) {
+            cartService.del(Long.parseLong(num));
+        }
+        return 1L;
     }
 
     @GetMapping("/cart/cartList")

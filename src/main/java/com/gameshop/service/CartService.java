@@ -44,6 +44,15 @@ public class CartService {
     }
 
     @Transactional
+    public Long del(Long id) {
+        Cart cart = cartRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException());
+        cart.setCartDelYn(CartDelYn.YES);
+
+        return id;
+    }
+
+    @Transactional
     public List<CartListResponseDto> findAllUser(SessionUser user) {
         return cartRepositorySupport.findAllUser(user.getId()).stream()
                 .map(CartListResponseDto::new)
