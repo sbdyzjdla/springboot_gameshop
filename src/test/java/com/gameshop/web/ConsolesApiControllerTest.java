@@ -41,7 +41,7 @@ class ConsolesApiControllerTest {
     // @ExtendWith(SpringExtension.class : Junit5 //@RunWith(SpringRunner.class) Junit4 와 유사
     // Junit5 에서는 접근제어자가 public -> default
     // Before, After -> + Each
-    //
+
     @LocalServerPort
     private int port;
 
