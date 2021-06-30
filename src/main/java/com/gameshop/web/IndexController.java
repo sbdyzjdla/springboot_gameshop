@@ -41,7 +41,6 @@ public class IndexController {
             List<SessionUser> userInfo = new ArrayList<>();
             userInfo.add(user);
             model.addAttribute("userInfo" , userInfo);
-            System.out.println("ROLE!!" + user.getRole());
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
                 //return "admin";
@@ -57,6 +56,10 @@ public class IndexController {
             userInfo.add(user);
 
             model.addAttribute("userInfo" , userInfo);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                //return "admin";
+            }
         }
         return "board";
     }
@@ -79,6 +82,10 @@ public class IndexController {
             userInfo.add(user);
 
             model.addAttribute("userInfo" , userInfo);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                //return "admin";
+            }
         }
         QnasResponseDto dto = qnasService.findById(id);
         model.addAttribute("qnas", dto);
@@ -92,6 +99,10 @@ public class IndexController {
             userInfo.add(user);
 
             model.addAttribute("userInfo" , userInfo);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                //return "admin";
+            }
         }
         QnasResponseDto dto = qnasService.findById(id);
         model.addAttribute("qnas", dto);
@@ -105,8 +116,10 @@ public class IndexController {
             userInfo.add(user);
 
             model.addAttribute("userInfo" , userInfo);
-//            List<ConsolesListResponseDto> dto = consolesService.findAllNint();
-//            model.addAttribute("ninList", dto);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                //return "admin";
+            }
         }
         return "hardware-nintendo";
     }
@@ -118,6 +131,10 @@ public class IndexController {
             userInfo.add(user);
 
             model.addAttribute("userInfo" , userInfo);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                //return "admin";
+            }
         }
         return "software-switch";
     }
@@ -128,6 +145,10 @@ public class IndexController {
             userInfo.add(user);
 
             model.addAttribute("userInfo" , userInfo);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                //return "admin";
+            }
         }
         ConsolesResponseDto dto = consolesService.findById(id);
         model.addAttribute("dto", dto);
@@ -141,6 +162,10 @@ public class IndexController {
             userInfo.add(user);
 
             model.addAttribute("userInfo" , userInfo);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                //return "admin";
+            }
         }
         List<CartListResponseDto> cartList = cartService.findAllUser(user);
         model.addAttribute("cartList", cartList);
@@ -152,8 +177,11 @@ public class IndexController {
         if(user != null) {
             List<SessionUser> userInfo = new ArrayList<>();
             userInfo.add(user);
-
             model.addAttribute("userInfo" , userInfo);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                //return "admin";
+            }
         }
         List<CartListResponseDto> cartList = cartService.findAllUser(user);
         model.addAttribute("cartList", cartList);
@@ -168,6 +196,10 @@ public class IndexController {
             userInfo.add(user);
 
             model.addAttribute("userInfo" , userInfo);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                //return "admin";
+            }
         }
         return "admin";
     }
@@ -179,6 +211,10 @@ public class IndexController {
                 userInfo.add(user);
 
                 model.addAttribute("userInfo" , userInfo);
+                if(user.getRole().equals("ROLE_ADMIN")) {
+                    model.addAttribute("admin", "admin");
+                    //return "admin";
+                }
             }
             return "about";
     }
