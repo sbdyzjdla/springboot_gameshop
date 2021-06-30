@@ -61,6 +61,7 @@
                         </td>
                         <td>
                             <h5 class="total_price" id="amount">6,8000원</h5>
+                            <input type="hidden" id="pay_amount" value="">
                         </td>
                     </tr>
                     </tbody>
@@ -79,7 +80,7 @@
                 <h5>수령인</h5>
                 <input type="text" class="d_form_name" name="name" id="buyer_name" placeholder="이름">
                 <h5>연락처</h5>
-                <select class="d_form_phone" id="detailAddress" placeholder="">
+                <select class="d_form_phone" id="phone_first" placeholder="">
                     <option value="010">010</option>
                     <option value="011">011</option>
                     <option value="016">016</option>
@@ -87,16 +88,19 @@
                     <option value="010">018</option>
                     <option value="019">019</option>
                 </select>-
-                <input type="text" class="d_form_phone" id="detailAddress" placeholder="">-
-                <input type="text" class="d_form_phone" id="detailAddress" placeholder="">
+                <input type="text" class="d_form_phone" id="phone_second" placeholder="">-
+                <input type="text" class="d_form_phone" id="phone_third" placeholder="">
             </div>
             <div class="section-top-border">
                 <h3 class="text-heading">결제수단</h3>
             </div>
-            <div class="payment">
+            <div class="checkout_btn_inner float-left">
                 <a class="btn_1 checkout_btn_1" href='javascript:void(0)' onclick="payment(event);">결제하기</a>
             </div>
         </div>
+        {{#userInfo}}
+        <input type="hidden" id="buyer_email" value="{{email}}" />
+        {{/userInfo}}
 </section>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
@@ -110,12 +114,12 @@ function payment(e){
         pay_method : 'card',
         merchant_uid : 'merchant_' + new Date().getTime(),
         name : '주문명:결제테스트',
-        amount : 14000, //판매 가격
-        buyer_email : 'iamport@siot.do',
+        amount : $('#pay_amount').val(), //판매 가격
+        buyer_email : $('#buyer_email').val(),
         buyer_name : $('#buyer_name').val(),
-        buyer_tel : '010-1234-5678',
-        buyer_addr : '서울특별시 강남구 삼성동',
-        buyer_postcode : '123-456'
+        buyer_tel : $('phone_first').val() + "-" + $('phone_second').val() + "-" + $('phone_third').val(),
+        buyer_addr : $('#address').val() + " " + $('#extraAddress').val() + " " + $('#detailAddress').val(),
+        buyer_postcode : $('#postcode').val()
     }, function(rsp) {
         if ( rsp.success ) {
             var msg = '결제가 완료되었습니다.';

@@ -29,10 +29,11 @@ var common = {
                     document.querySelector('#orderBody').children[i].children[1].children[0].innerHTML
                                        = common.numberWithCommas(p_price);
                     var sum_price = document.querySelector('#orderBody').children[i].children[3].children[0].textContent;
-                    total_price += Number(sum_price = sum_price.toString().replace('원', ''));
+                    total_price += Number(sum_price.toString().replace('원', ''));
                     document.querySelector('#orderBody').children[i].children[3].children[0].innerHTML
                        = common.numberWithCommas(sum_price);
                 }
+                document.querySelector('#pay_amount').value = total_price;
                 total_price += '원';
                 document.querySelector('#amount').innerHTML = common.numberWithCommas(total_price);
 //                var total_price = document.querySelector('#orderBody').children[cart_length].children[5].children[0].innerHTML;
