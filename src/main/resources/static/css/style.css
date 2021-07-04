@@ -2404,13 +2404,13 @@ ul {
   }
   /* line 213, /Applications/MAMP/htdocs/old/palash/cl/shop_html/sass/_menu.scss */
   .navbar-brand img {
-    max-width: 120px;
+    max-width: 103px;
     margin: 0 auto;
     position: absolute;
     left: 0;
     right: 0;
     display: inline-block;
-    top: 3px;
+    top: -38px;
   }
   /* line 223, /Applications/MAMP/htdocs/old/palash/cl/shop_html/sass/_menu.scss */
   .navbar-light .navbar-toggler {

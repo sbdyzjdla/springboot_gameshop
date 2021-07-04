@@ -183,3 +183,7 @@ select.d_form_phone {
 th.count {
     width: 0px;
 }
+.banner_text_iner {
+    position: relative;
+    z-index: 1;
+}
