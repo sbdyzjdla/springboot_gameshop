@@ -35,18 +35,26 @@
 
 #social_login .login_picture {
         border-radius: 60%;
-        width: 28%;
+        /*width: 28%; */
+        width : 45px;
+        height : 45px;
+
 }
 
 #social_login .logout_picture {
         border-radius: 60%;
-        width: 23%;
-        margin-left: 40%;
+        width : 45px;
+        height : 45px;
+        margin-left: 29%;
         margin-top: 8%;
 }
-
 .logout_name {
-    margin-left: 26%;
+    font-size: small;
+    color: black;
+    text-align : center;
+}
+
+.logout_click {
     margin-top: 7%;
     font-size: small;
     color: black;

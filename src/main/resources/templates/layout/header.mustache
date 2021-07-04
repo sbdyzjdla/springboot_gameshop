@@ -94,9 +94,9 @@
                                 <a class="nav-link" href="#" onclick="qnas.listInit();">Q&A</a>
                             </li>
                             {{#admin}}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin" onclick="">관리자페이지</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin" onclick="">관리자페이지</a>
+                                </li>
                             {{/admin}}
                         </ul>
                     </div>
@@ -106,11 +106,11 @@
                             <i class="flaticon-shopping-cart-black-shape"></i>
                         </a>
                         {{#userInfo}}
-                        <a href="#" id="social_login">
-                            <i>
-                                <img class="login_picture" src="{{picture}}" data-container="body" data-toggle="popover" data-placement="bottom"
-                                     data-content="{{name}}"
-                                     data-template='<div class="popover" role="tooltip"><div class="arrow"></div>
+                            <a href="#" id="social_login">
+                                <i>
+                                    <img class="login_picture" src="{{picture}}" data-container="body" data-toggle="popover" data-placement="bottom"
+                                         data-content="{{name}}"
+                                         data-template='<div class="popover" role="tooltip"><div class="arrow"></div>
                                      <h3 class="popover-title"><a href="#" id="social_login">
                                         <i>
                                             <img class="logout_picture" src="{{picture}}" />
@@ -119,12 +119,15 @@
                                     <p></p>
                                     <div class="logout_name">
                                         {{name}}
+                                    </div>
+                                    <div class="logout_click">
+
                                          <a href="/logout" class="genric-btn link">로그아웃</a></h3>
                                      </div>
                                      <div class="popover-content"></div>
                                      </div>'/>
-                            </i>
-                        </a>
+                                </i>
+                            </a>
                             <!-- a href="logout" class="genric-btn link">로그아웃</a-->
                         {{/userInfo}}
                         {{^userInfo}}
@@ -167,7 +170,9 @@
                         <a href="/oauth2/authorization/naver">
                         <img src="img/oauth/naver_login.png" class="oauth_button" alt="#" >
                         </a>
+                        <a href="/oauth2/authorization/kakao">
                         <img src="img/oauth/kakao_login.png" class="oauth_button" alt="#" >
+                        </a>
                         <br>
                     </a>
                 </div>
