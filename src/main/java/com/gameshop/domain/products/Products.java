@@ -42,6 +42,4 @@ public class Products extends BaseTimeEntity{
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
     private List<CartProducts> cartProducts;
 
-
-
 }

@@ -4,10 +4,8 @@ import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
 import com.gameshop.domain.cart.dto.CartListResponseDto;
 import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
-import com.gameshop.service.CartService;
-import com.gameshop.service.ConsolesService;
-import com.gameshop.service.FilesService;
-import com.gameshop.service.QnasService;
+import com.gameshop.domain.products.dto.ProductsResponseDto;
+import com.gameshop.service.*;
 import com.gameshop.web.dto.QnasResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -25,6 +23,7 @@ public class IndexController {
     private final QnasService qnasService;
     private final FilesService filesService;
     private final ConsolesService consolesService;
+    private final ProductsService productsService;
     private final CartService cartService;
 
     @GetMapping("/")
@@ -143,7 +142,8 @@ public class IndexController {
                 //return "admin";
             }
         }
-        ConsolesResponseDto dto = consolesService.findById(id);
+        //ConsolesResponseDto dto = consolesService.findById(id);
+        ProductsResponseDto dto = productsService.findById(id);
         model.addAttribute("dto", dto);
         return "view_products";
     }

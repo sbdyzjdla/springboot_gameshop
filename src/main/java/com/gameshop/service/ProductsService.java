@@ -2,6 +2,9 @@ package com.gameshop.service;
 
 import com.gameshop.domain.products.Products;
 import com.gameshop.domain.products.ProductsRepository;
+import com.gameshop.domain.products.dto.ProductsResponseDto;
+import com.gameshop.domain.products.titles.Titles;
+import com.gameshop.domain.products.titles.dto.TitlesResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,13 +16,21 @@ public class ProductsService {
     private final ProductsRepository productsRepository;
 
     @Transactional(readOnly = true)
-    public Products findById(Long id) {
+    public ProductsResponseDto findById(Long id) {
+        Products entity = productsRepository.findById(id)
+                .orElseThrow(() -> new
+                        IllegalArgumentException("해당 상품이 없습니다"));
+
+        return new ProductsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public Products findByIdCart(Long id) {
         Products entity = productsRepository.findById(id)
                 .orElseThrow(() -> new
                         IllegalArgumentException("해당 상품이 없습니다"));
 
         return entity;
     }
-
 
 }

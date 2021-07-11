@@ -27,7 +27,7 @@ public class CartApiController {
 
         Long id = Long.parseLong(request.getParameter("id"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        Products products = productsService.findById(id);
+        Products products = productsService.findByIdCart(id);
 
         return cartService.save(products, quantity, user.getId());
     }
