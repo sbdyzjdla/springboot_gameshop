@@ -2,26 +2,19 @@ package com.gameshop.web;
 
 import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
-import com.gameshop.domain.cart.Cart;
 import com.gameshop.domain.cart.dto.CartListResponseDto;
-import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
-import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
-import com.gameshop.domain.user.User;
+import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
 import com.gameshop.service.CartService;
 import com.gameshop.service.ConsolesService;
 import com.gameshop.service.FilesService;
 import com.gameshop.service.QnasService;
-import com.gameshop.web.dto.FilesResponseDto;
 import com.gameshop.web.dto.QnasResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -183,8 +176,10 @@ public class IndexController {
                 //return "admin";
             }
         }
+
         List<CartListResponseDto> cartList = cartService.findAllUser(user);
         model.addAttribute("cartList", cartList);
+
 
         return "order";
     }

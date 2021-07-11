@@ -1,14 +1,12 @@
-package com.gameshop.domain.consoles.dto;
+package com.gameshop.domain.products.consoles.dto;
 
-import com.gameshop.domain.consoles.Consoles;
-import com.gameshop.domain.qnas.Qnas;
+import com.gameshop.domain.products.consoles.Consoles;
 import lombok.Getter;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class ConsolesListResponseDto {
+public class ConsolesResponseDto {
 
     private Long id;
     private String manufact;
@@ -19,7 +17,7 @@ public class ConsolesListResponseDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public ConsolesListResponseDto(Consoles entity) {
+    public ConsolesResponseDto(Consoles entity) {
         this.id = entity.getId();
         this.manufact = entity.getManufact();
         this.p_name = entity.getP_name();
@@ -27,4 +25,5 @@ public class ConsolesListResponseDto {
         this.quantity = entity.getQuantity();
         this.img_num = entity.getImg_num();
     }
+
 }

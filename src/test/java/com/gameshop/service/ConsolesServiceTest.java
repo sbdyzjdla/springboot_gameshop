@@ -1,8 +1,8 @@
 package com.gameshop.service;
 
-import com.gameshop.domain.consoles.Consoles;
-import com.gameshop.domain.consoles.ConsolesRepository;
-import com.gameshop.domain.consoles.dto.ConsolesSaveRequestDto;
+import com.gameshop.domain.products.consoles.Consoles;
+import com.gameshop.domain.products.consoles.ConsolesRepository;
+import com.gameshop.domain.products.consoles.dto.ConsolesSaveRequestDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

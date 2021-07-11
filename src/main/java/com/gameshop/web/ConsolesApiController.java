@@ -1,11 +1,11 @@
 package com.gameshop.web;
 
-import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
-import com.gameshop.domain.consoles.dto.ConsolesSaveRequestDto;
-import com.gameshop.domain.consoles.dto.ConsolesUpdateRequestDto;
+import com.gameshop.domain.products.consoles.dto.ConsolesListResponseDto;
+import com.gameshop.domain.products.consoles.dto.ConsolesSaveRequestDto;
+import com.gameshop.domain.products.consoles.dto.ConsolesUpdateRequestDto;
 import com.gameshop.service.ConsolesService;
 import com.gameshop.service.FilesService;
-import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
+import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

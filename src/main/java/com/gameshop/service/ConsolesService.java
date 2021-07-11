@@ -1,18 +1,16 @@
 package com.gameshop.service;
 
-import com.gameshop.domain.consoles.Consoles;
-import com.gameshop.domain.consoles.ConsolesRepository;
-import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
-import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
-import com.gameshop.domain.consoles.dto.ConsolesSaveRequestDto;
-import com.gameshop.domain.consoles.dto.ConsolesUpdateRequestDto;
-import com.gameshop.domain.qnas.Qnas;
+import com.gameshop.domain.products.consoles.Consoles;
+import com.gameshop.domain.products.consoles.ConsolesRepository;
+import com.gameshop.domain.products.consoles.dto.ConsolesListResponseDto;
+import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
+import com.gameshop.domain.products.consoles.dto.ConsolesSaveRequestDto;
+import com.gameshop.domain.products.consoles.dto.ConsolesUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -47,7 +45,7 @@ public class ConsolesService {
         Consoles consoles = consolesRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다. id=" + id));
 
-        consoles.update(requestDto.getManufact(), requestDto.getEdition(), requestDto.getP_price(), requestDto.getQuantity());
+        consoles.update(requestDto.getManufact(), requestDto.getP_name(), requestDto.getP_price(), requestDto.getQuantity());
         return id;
     }
 

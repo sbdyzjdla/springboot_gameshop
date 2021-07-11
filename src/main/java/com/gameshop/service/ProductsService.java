@@ -1,10 +1,7 @@
 package com.gameshop.service;
 
-import com.gameshop.domain.consoles.Consoles;
-import com.gameshop.domain.consoles.dto.ConsolesResponseDto;
 import com.gameshop.domain.products.Products;
 import com.gameshop.domain.products.ProductsRepository;
-import com.gameshop.domain.products.dto.ProductsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

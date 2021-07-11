@@ -39,7 +39,7 @@ public class CartApiController {
         return cartService.update(id, quantity);
     }
 
-    @PutMapping("/cart/del/")
+    @DeleteMapping("/cart/del/")
     public Long del(HttpServletRequest request) {
         String[] del_list = request.getParameterValues("list_checked[]");
         for(String num : del_list) {
@@ -50,4 +50,6 @@ public class CartApiController {
 
     @GetMapping("/cart/cartList")
     public List<CartListResponseDto> findAllUser(@LoginUser SessionUser user) { return cartService.findAllUser(user); }
+
+
 }

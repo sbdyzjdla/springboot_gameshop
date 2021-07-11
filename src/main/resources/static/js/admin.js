@@ -58,24 +58,24 @@ var admin = {
 
      console_update : function() {
 
-                      var form = $('#console_update_form');
-                      var formData = new FormData(form[0]);
-                      var id = $('#admin_id').val();
-                      $.ajax({
-                          type: 'PUT',
-                          url : '/admin/consoles/update/' + id,
-                          data: formData,
-                          dataType: 'json',
-                          processData: false,
-                          contentType: false,
-                      }).done(function() {
-                          alert('콘솔기종이 등록되었습니다');
-                          document.querySelector('#console_update_cancel').click();
-                          admin.list();
-                      }).fail(function(error) {
-                          alert(JSON.stringify(error));
-                      });
-                  },
+                  var form = $('#console_update_form');
+                  var formData = new FormData(form[0]);
+                  var id = $('#admin_id').val();
+                  $.ajax({
+                      type: 'PUT',
+                      url : '/admin/consoles/update/' + id,
+                      data: formData,
+                      dataType: 'json',
+                      processData: false,
+                      contentType: false,
+                  }).done(function() {
+                      alert('수정되었습니다');
+                      document.querySelector('#console_update_cancel').click();
+                      admin.list();
+                  }).fail(function(error) {
+                      alert(JSON.stringify(error));
+                  });
+              },
 
      list : function() {
 
@@ -90,9 +90,10 @@ var admin = {
                      $('#conList').append('<div class=\"col-lg-4 col-sm-4\">'
                         + '<div class=\"single_product_item text-center\" onclick=\"admin.view(' + consoleData[i].id + ');\">'
                         +       '<img src=\"/display/'+consoleData[i].img_num+'\" alt=\"#\" class=\"img-fluid\">'
-                        +       '<h3> ' + consoleData[i].p_name + ' </h3>'
-                        +       '<p>' + admin.numberWithCommas(consoleData[i].p_price) + '원</p>'
-                        +       '<p>' + consoleData[i].quantity + '개</p>'
+                        +       '<h4> 제조사 : ' + consoleData[i].manufact + ' </h4>'
+                        +       '<h4> 제품명 : ' + consoleData[i].p_name + ' </h4>'
+                        +       '<h5> 가격 : ' + admin.numberWithCommas(consoleData[i].p_price) + '원</h5>'
+                        +       '<h5> 수량 : ' + consoleData[i].quantity + '개</h5>'
                         +       '</div>'
                         +  '</div>');
                 }
@@ -112,8 +113,10 @@ var admin = {
                          dataType : 'json',
                      }).done(function(success) {
                         var consoleData = success;
-                        $('#up_manufact_nm').val(consoleData.manufact);
-                        $('#_up_edition_nm').val(consoleData.edition);
+                        //$('#up_manufact_nm').val(consoleData.manufact);
+                        $('#up_manufact_nm').val(consoleData.manufact).prop("selected", true)
+                        $('#up_manufact_nm_sel').text(consoleData.manufact)
+                        $('#_up_edition_nm').val(consoleData.p_name);
                         $('#up_p_price').val(consoleData.p_price);
                         $('#up_quantity').val(consoleData.quantity);
                         $('#admin_id').val(consoleData.id);

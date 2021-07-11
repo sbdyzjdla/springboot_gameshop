@@ -3,7 +3,6 @@ package com.gameshop.service;
 import com.gameshop.config.auth.dto.SessionUser;
 import com.gameshop.domain.cart.*;
 import com.gameshop.domain.cart.dto.CartListResponseDto;
-import com.gameshop.domain.consoles.dto.ConsolesListResponseDto;
 import com.gameshop.domain.products.Products;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -47,7 +46,8 @@ public class CartService {
     public Long del(Long id) {
         Cart cart = cartRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException());
-        cart.setCartDelYn(CartDelYn.YES);
+
+        cartRepository.delete(cart);
 
         return id;
     }
@@ -60,5 +60,12 @@ public class CartService {
 
 //        return cartRepositorySupport.findAllUser(user.getId());
 
+    }
+
+    @Transactional
+    public Cart findById(Long id) {
+        Cart cart = cartRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException());
+        return cart;
     }
 }

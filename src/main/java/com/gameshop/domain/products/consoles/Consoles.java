@@ -1,4 +1,4 @@
-package com.gameshop.domain.consoles;
+package com.gameshop.domain.products.consoles;
 
 import com.gameshop.domain.BaseTimeEntity;
 import com.gameshop.domain.products.Products;

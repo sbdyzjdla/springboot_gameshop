@@ -106,9 +106,8 @@ var cart = {
                 }
                 //ajax
                 var Data = { "list_checked" : list_checked};
-                console.log(list_checked);
                 $.ajax({
-                    type : 'PUT',
+                    type : 'DELETE',
                     url : '/cart/del/',
                     dataType : 'json',
                     data : Data,
@@ -122,5 +121,34 @@ var cart = {
         } else {false}
         //location.href='/cart';
     },
+
+    cart_order : function() {
+            if (confirm("선택하신 상품을 주문 하시겠습니까??") == true)
+                {
+                    var cart_length = cart_length = $("tr[name=cartList]").length;
+                    var id = 0;
+                    var list_checked = [];
+                    for(var i=0; i<cart_length; ++i) {
+                        if(document.getElementsByName('cart_check')[i+1].checked) {
+                            id = document.querySelector('#cartBody').children[i].children[6].value;
+                            list_checked.push(id);
+                        }
+                    }
+                    //ajax
+                    var Data = { "list_checked" : list_checked};
+                    $.ajax({
+                        type : 'GET',
+                        url : '/order/',
+                        dataType : 'json',
+                        data : Data,
+                    }).done(function() {
+                        //alert('장바구니에서 삭제되었습니다.');
+                    }).fail(function(error) {
+                        alert('주문에 실패하였습니다')
+                        alert(JSON.stringify(error))
+                    })
+            } else {false}
+            //location.href='/cart';
+        },
 }
 cart.init();

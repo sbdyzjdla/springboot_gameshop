@@ -1,4 +1,4 @@
-package com.gameshop.domain.consoles;
+package com.gameshop.domain.products.consoles;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

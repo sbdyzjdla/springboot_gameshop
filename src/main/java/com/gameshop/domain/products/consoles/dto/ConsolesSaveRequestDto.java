@@ -1,13 +1,12 @@
-package com.gameshop.domain.consoles.dto;
+package com.gameshop.domain.products.consoles.dto;
 
-import com.gameshop.domain.consoles.Consoles;
+import com.gameshop.domain.products.consoles.Consoles;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Setter

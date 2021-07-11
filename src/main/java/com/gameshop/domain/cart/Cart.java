@@ -1,5 +1,6 @@
 package com.gameshop.domain.cart;
 
+import com.gameshop.domain.BaseTimeEntity;
 import com.gameshop.domain.products.Products;
 import com.gameshop.domain.user.User;
 import lombok.Builder;
@@ -13,19 +14,18 @@ import java.util.List;
 
 @Data
 @Entity
-public class Cart {
+public class Cart extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CART_ID")
     private Long id;
     private Long user_id;
-    //private int quantity;
 
     @Enumerated(EnumType.STRING)
     private CartDelYn cartDelYn;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private List<CartProducts> cartProducts = new ArrayList<CartProducts>();
 
     public void addCartProducts(CartProducts paramCartProd) {

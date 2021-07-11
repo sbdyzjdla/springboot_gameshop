@@ -1,12 +1,12 @@
-package com.gameshop.domain.consoles.dto;
+package com.gameshop.domain.products.consoles.dto;
 
-import com.gameshop.domain.consoles.Consoles;
+import com.gameshop.domain.products.consoles.Consoles;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class ConsolesResponseDto {
+public class ConsolesListResponseDto {
 
     private Long id;
     private String manufact;
@@ -17,7 +17,7 @@ public class ConsolesResponseDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public ConsolesResponseDto(Consoles entity) {
+    public ConsolesListResponseDto(Consoles entity) {
         this.id = entity.getId();
         this.manufact = entity.getManufact();
         this.p_name = entity.getP_name();
@@ -25,5 +25,4 @@ public class ConsolesResponseDto {
         this.quantity = entity.getQuantity();
         this.img_num = entity.getImg_num();
     }
-
 }

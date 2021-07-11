@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
-public abstract class Products {
+public class Products extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,13 +37,7 @@ public abstract class Products {
     private int quantity;
 
     @Column
-    private String company;
-
-    @Column
     private Long img_num;
-
-    @Column
-    private String category;
 
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
     private List<CartProducts> cartProducts;

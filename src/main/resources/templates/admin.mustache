@@ -227,7 +227,26 @@
                 <form id="console_update_form" method = "POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">제조사</label>
-                        <input type="text" class="form-control" id="up_manufact_nm" name="manufact">
+                        <div class="input-group-icon mt-10">
+                            <div class="icon"><i class="fa fa-building" aria-hidden="true"></i></div>
+                            <div class="form-select" id="default-select">
+                                <select style="display: none;" id="up_manufact_nm" name="manufact">
+                                    <option value="선택">선택</option>
+                                    <option value="닌텐도">닌텐도</option>
+                                    <option value="소니">소니</option>
+                                    <option value="마이크로소프트">마이크로소프트</option>
+                                </select>
+                                <div class="nice-select" tabindex="0">
+                                    <span class="current" id="up_manufact_nm_sel">선택</span>
+                                    <ul class="list">
+                                        <li data-value="선택" class="option selected focus">선택</li>
+                                        <li data-value="닌텐도" class="option">닌텐도</li>
+                                        <li data-value="소니" class="option">소니</li>
+                                        <li data-value="마이크로소프트" class="option">마이크로소프트</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">제품명</label>

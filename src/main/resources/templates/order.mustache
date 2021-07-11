@@ -66,7 +66,7 @@
                     </tr>
                     </tbody>
                 </table>
-
+            {{#userInfo}}
             </div>
             <h3 class="text-heading">배송지 정보</h3>
                 <input type="text" class="d_form mini" id="postcode" placeholder="우편번호">
@@ -78,7 +78,7 @@
             <div class="section-top-border">
                 <h3 class="text-heading">수령인 정보</h3>
                 <h5>수령인</h5>
-                <input type="text" class="d_form_name" name="name" id="buyer_name" placeholder="이름">
+                <input type="text" class="d_form_name" name="name" id="buyer_name" placeholder="이름" value="{{name}}">
                 <h5>연락처</h5>
                 <select class="d_form_phone" id="phone_first" placeholder="">
                     <option value="010">010</option>
@@ -98,7 +98,7 @@
                 <a class="btn_1 checkout_btn_1" href='javascript:void(0)' onclick="payment(event);">결제하기</a>
             </div>
         </div>
-        {{#userInfo}}
+
         <input type="hidden" id="buyer_email" value="{{email}}" />
         {{/userInfo}}
 </section>
