@@ -86,7 +86,7 @@ class CartApiControllerTest {
                 .quantity(quantity)
                 .build();
         Long consoleNum = consolesService.save(requestDto);
-        return productsService.findById(consoleNum);
+        return productsService.findByIdCart(consoleNum);
     }
 
 }

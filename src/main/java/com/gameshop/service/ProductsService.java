@@ -2,6 +2,7 @@ package com.gameshop.service;
 
 import com.gameshop.domain.products.Products;
 import com.gameshop.domain.products.ProductsRepository;
+import com.gameshop.domain.products.dto.ProductsOrderResponseDto;
 import com.gameshop.domain.products.dto.ProductsResponseDto;
 import com.gameshop.domain.products.titles.Titles;
 import com.gameshop.domain.products.titles.dto.TitlesResponseDto;
@@ -31,6 +32,15 @@ public class ProductsService {
                         IllegalArgumentException("해당 상품이 없습니다"));
 
         return entity;
+    }
+
+    @Transactional(readOnly = true)
+    public ProductsOrderResponseDto findByIdOrder(Long id, int quantity) {
+        Products entity = productsRepository.findById(id)
+                .orElseThrow(() -> new
+                        IllegalArgumentException("해당 상품이 없습니다"));
+        entity.setQuantity(quantity);
+        return new ProductsOrderResponseDto(entity);
     }
 
 }

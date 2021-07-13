@@ -2,8 +2,10 @@ package com.gameshop.web;
 
 import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
+import com.gameshop.domain.cart.Cart;
 import com.gameshop.domain.cart.dto.CartListResponseDto;
 import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
+import com.gameshop.domain.products.dto.ProductsOrderResponseDto;
 import com.gameshop.domain.products.dto.ProductsResponseDto;
 import com.gameshop.service.*;
 import com.gameshop.web.dto.QnasResponseDto;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,7 @@ public class IndexController {
     private final ConsolesService consolesService;
     private final ProductsService productsService;
     private final CartService cartService;
+    private final OrderService orderService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
@@ -166,7 +170,7 @@ public class IndexController {
     }
 
     @GetMapping("/order")
-    public String order(Model model, @LoginUser SessionUser user) {
+    public String order(Model model, @LoginUser SessionUser user, @RequestParam(value = "list_checked")List<String> list_checked) {
         if(user != null) {
             List<SessionUser> userInfo = new ArrayList<>();
             userInfo.add(user);
@@ -176,10 +180,34 @@ public class IndexController {
                 //return "admin";
             }
         }
+        List<CartListResponseDto> cartList = new ArrayList<>();
+        for(String list_id : list_checked) {
+            Long cart_id = Long.parseLong(list_id);
+            Cart cart = cartService.findById(cart_id);
+            //cartList.add(new CartListResponseDto(cartService.findById(cart_id)));
+            cartList.add(new CartListResponseDto(cart));
+            orderService.order_ready(cart, user.getId());
+        }
 
-        List<CartListResponseDto> cartList = cartService.findAllUser(user);
-        model.addAttribute("cartList", cartList);
+        model.addAttribute("orderList", cartList);
 
+
+        return "order";
+    }
+
+    @GetMapping("/order/one/{id}/{quantity}")
+    public String order(Model model, @LoginUser SessionUser user, @PathVariable Long id, @PathVariable int quantity) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+            model.addAttribute("userInfo" , userInfo);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                //return "admin";
+            }
+        }
+        ProductsOrderResponseDto dto = productsService.findByIdOrder(id, quantity);
+        model.addAttribute("orderList", dto);
 
         return "order";
     }

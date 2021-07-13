@@ -22,7 +22,7 @@ var common = {
     },
 
     initOrder : function() {
-            var cart_length = $("tr[name=cartList]").length;
+            var cart_length = $("tr[name=orderList]").length;
             var total_price = 0;
                 for(var i=0; i<cart_length; ++i) {
                     var p_price = document.querySelector('#orderBody').children[i].children[1].children[0].textContent;
