@@ -13,5 +13,8 @@ public interface ConsolesRepository extends JpaRepository<Consoles, Long> {
     @Query("SELECT c FROM Consoles c WHERE c.manufact = '닌텐도' ORDER BY c.id DESC")
     List<Consoles> findAllNint();
 
+    @Query("SELECT c FROM Consoles c WHERE c.manufact = '소니' ORDER BY c.id DESC")
+    List<Consoles> findAllPs5();
+
 
 }

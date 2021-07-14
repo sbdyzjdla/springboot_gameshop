@@ -50,4 +50,9 @@ public class ConsolesApiController {
         return consolesService.findAllNint();
     }
 
+    @GetMapping("/api/v1/consoles/ps5CList")
+    public List<ConsolesListResponseDto> findAllPs5() {
+        return consolesService.findAllPs5();
+    }
+
 }

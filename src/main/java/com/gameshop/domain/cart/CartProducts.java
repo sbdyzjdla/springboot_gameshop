@@ -27,18 +27,21 @@ public class CartProducts {
     @JoinColumn(name = "PRODUCTS_ID")
     private Products products;
 
+    private int p_price;
     private int orderPrice;
     private int quantity;
 
     @Builder
-    public CartProducts (Products products, int orderPrice, int quantity) {
+    public CartProducts (Products products, int p_price, int orderPrice, int quantity) {
         this.products = products;
+        this.p_price = p_price;
         this.orderPrice = orderPrice;
         this.quantity = quantity;
     }
 
     public void update(int quantity) {
         this.quantity = quantity;
+        this.orderPrice = this.p_price * quantity;
     }
 
 }

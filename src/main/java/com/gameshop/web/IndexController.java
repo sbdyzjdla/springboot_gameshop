@@ -120,6 +120,21 @@ public class IndexController {
         return "hardware-nintendo";
     }
 
+    @GetMapping("/products/hardware-ps5")
+    public String hardware_ps5(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+
+            model.addAttribute("userInfo" , userInfo);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                //return "admin";
+            }
+        }
+        return "hardware-ps5";
+    }
+
     @GetMapping("/products/software-switch")
     public String software_switch(Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -133,6 +148,20 @@ public class IndexController {
             }
         }
         return "software-switch";
+    }
+    @GetMapping("/products/software-ps5")
+    public String software_ps5(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+
+            model.addAttribute("userInfo" , userInfo);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                //return "admin";
+            }
+        }
+        return "software-ps5";
     }
     @GetMapping("/products/view/{id}")
     public String view_products(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
@@ -180,6 +209,7 @@ public class IndexController {
                 //return "admin";
             }
         }
+        int total_price = 0;
         List<CartListResponseDto> cartList = new ArrayList<>();
         for(String list_id : list_checked) {
             Long cart_id = Long.parseLong(list_id);
@@ -187,7 +217,9 @@ public class IndexController {
             //cartList.add(new CartListResponseDto(cartService.findById(cart_id)));
             cartList.add(new CartListResponseDto(cart));
             orderService.order_ready(cart, user.getId());
+            total_price += cart.getCartProducts().get(0).getOrderPrice();
         }
+        System.out.println("전체가격 !!!" + total_price);
 
         model.addAttribute("orderList", cartList);
 

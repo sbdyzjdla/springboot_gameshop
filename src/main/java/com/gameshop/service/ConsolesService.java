@@ -63,5 +63,12 @@ public class ConsolesService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public List<ConsolesListResponseDto> findAllPs5() {
+        return consolesRepository.findAllPs5().stream()
+                .map(ConsolesListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
 
 }

@@ -56,4 +56,11 @@ public class TitleService {
                 .map(TitlesListResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public List<TitlesListResponseDto> findAllPS() {
+        return titleRepositroy.findAllPS().stream()
+                .map(TitlesListResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }

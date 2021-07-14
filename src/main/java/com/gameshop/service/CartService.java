@@ -24,7 +24,8 @@ public class CartService {
 
         CartProducts cartProducts = CartProducts.builder()
                 .products(products)
-                .orderPrice(products.getP_price())
+                .p_price(products.getP_price())
+                .orderPrice(products.getP_price()*quantity)
                 .quantity(quantity)
                 .build();
         cartProductsRepository.save(cartProducts);

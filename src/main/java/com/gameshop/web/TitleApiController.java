@@ -46,4 +46,9 @@ public class TitleApiController {
         return titleService.findAllNS();
     }
 
+    @GetMapping("/api/v1/titles/ps5SoftList")
+    public List<TitlesListResponseDto> findAllPs5() {
+        return titleService.findAllPS();
+    }
+
 }
