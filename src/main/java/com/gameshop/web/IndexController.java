@@ -206,7 +206,6 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
-                //return "admin";
             }
         }
         int total_price = 0;
