@@ -24,17 +24,22 @@ public class OrderService {
 
     @Transactional
     public Long order_ready(Cart cart, Long user_id) {
-
-        Long ready_count = orderRepositorySupport.find_order_ready(user_id);
-        if(ready_count != null) {
-            orderRepositorySupport.del_order_ready(user_id);
-        }
         Order entity = Order.builder()
                 .cart(cart)
                 .user_id(user_id)
                 .orderStatus(OrderStatus.READY)
                 .build();
         return orderRepository.save(entity).getId();
+    }
+
+    @Transactional
+    public Long find_order_ready(Long user_id) {
+        return orderRepositorySupport.find_order_ready(user_id);
+    }
+
+    @Transactional
+    public void del_order_ready(Long user_id) {
+        orderRepositorySupport.del_order_ready(user_id);
     }
 
     @Transactional

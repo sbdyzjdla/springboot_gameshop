@@ -210,6 +210,12 @@ public class IndexController {
         }
         int total_price = 0;
         List<CartListResponseDto> cartList = new ArrayList<>();
+
+        Long ready_count = orderService.find_order_ready(user.getId());
+        if(ready_count != null) {
+            orderService.del_order_ready(user.getId());
+        }
+
         for(String list_id : list_checked) {
             Long cart_id = Long.parseLong(list_id);
             Cart cart = cartService.findById(cart_id);
