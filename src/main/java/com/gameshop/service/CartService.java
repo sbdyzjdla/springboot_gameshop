@@ -3,6 +3,7 @@ package com.gameshop.service;
 import com.gameshop.config.auth.dto.SessionUser;
 import com.gameshop.domain.cart.*;
 import com.gameshop.domain.cart.dto.CartListResponseDto;
+import com.gameshop.domain.cart.dto.CartProdListResDto;
 import com.gameshop.domain.products.Products;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,30 @@ public class CartService {
     }
 
     @Transactional
+    public Long add(Products products, int quantity, Long userId) {
+
+        CartProducts cartProducts = CartProducts.builder()
+                .products(products)
+                .p_price(products.getP_price())
+                .orderPrice(products.getP_price()*quantity)
+                .quantity(quantity)
+                .build();
+        cartProductsRepository.save(cartProducts);
+
+        Long cartCount = cartRepositorySupport.findByCart(userId);
+        if(cartCount.equals(0L)) {
+            Cart new_cart = Cart.createCart(userId ,cartProducts);
+            return cartRepository.save(new_cart).getId();
+        } else {
+            Cart cart = cartRepositorySupport.findByUserId(userId)
+                    .orElseThrow(() -> new IllegalArgumentException("cart not exist"));
+            cart.addCartProducts(cartProducts);
+            return cart.getId();
+        }
+    }
+
+
+    @Transactional
     public Long update(Long id, int quantity) {
         CartProducts cartProducts = cartProductsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException());
@@ -64,8 +89,23 @@ public class CartService {
     }
 
     @Transactional
+    public List<CartProdListResDto> findAllCartUser(SessionUser user) {
+        return cartRepositorySupport.findAllCartUser(user.getId());
+
+//        return cartRepositorySupport.findAllUser(user.getId());
+
+    }
+
+    @Transactional
     public Cart findById(Long id) {
         Cart cart = cartRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException());
+        return cart;
+    }
+
+    @Transactional
+    public Cart findByUserId(Long id) {
+        Cart cart = cartRepositorySupport.findByUserId(id)
                 .orElseThrow(() -> new IllegalArgumentException());
         return cart;
     }

@@ -41,9 +41,9 @@
                     <tr name="cartList">
                         <td>
                             <div class="primary-checkbox">
-                                <input type="checkbox" id="checkbox_{{id}}" name="cart_check" checked=""
+                                <input type="checkbox" id="checkbox_{{cart_products_id}}" name="cart_check" checked=""
                                     onclick="cart.cart_selectCalc();">
-                                <label for="checkbox_{{id}}"></label>
+                                <label for="checkbox_{{cart_products_id}}"></label>
                             </div>
                         </td>
                         <td>
@@ -67,12 +67,12 @@
                             </div>
                         </td>
                         <td>
-                            <a href="#" class="genric-btn primary-border small" onclick="cart.cart_update({{id}}, this);">변경</a>
+                            <a href="#" class="genric-btn primary-border small" onclick="cart.cart_update({{cart_products_id}}, this);">변경</a>
                         </td>
                         <td>
-                            <h5>{{total_price}}원</h5>
+                            <h5>{{order_price}}원</h5>
                         </td>
-                        <input type="hidden" value="{{id}}"/>
+                        <input type="hidden" value="{{cart_id}}"/>
                     </tr>
                     {{/cartList}}
                     <tr>

@@ -17,63 +17,63 @@
 <!--================Cart Area =================-->
 <section class="cart_area section_padding">
     <div class="container">
-        <div class="cart_inner">
-            <h3 class="text-heading">주문상품</h3>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">상품명</th>
-                        <th scope="col">가격</th>
-                        <th scope="col">수량</th>
-                        <th scope="col">합계</th>
-                    </tr>
-                    </thead>
-                    <tbody id="orderBody">
-                    {{#orderList}}
-                    <tr name="orderList">
-                        <td>
-                            <div class="media">
-                                <div class="d-flex">
-                                    <img src="/display/{{img_num}}" alt="" />
-                                </div>
-                                <div class="media-body">
-                                    <p>{{p_name}}</p>
-                                </div>
+    <div class="cart_inner">
+        <h3 class="text-heading">주문상품</h3>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">상품명</th>
+                <th scope="col">가격</th>
+                <th scope="col">수량</th>
+                <th scope="col">합계</th>
+            </tr>
+            </thead>
+            <tbody id="orderBody">
+            {{#orderList}}
+                <tr name="orderList">
+                    <td>
+                        <div class="media">
+                            <div class="d-flex">
+                                <img src="/display/{{img_num}}" alt="" />
                             </div>
-                        </td>
-                        <td>
-                            <h5>{{p_price}}원</h5>
-                        </td>
-                        <td>
-                            <h5>{{quantity}}</h5>
-                        </td>
-                        <td>
-                            <h5>{{total_price}}원</h5>
-                        </td>
-                    </tr>
-                    {{/orderList}}
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <h5 class="total_price">상품합계금액</h5>
-                        </td>
-                        <td>
-                            <h5 class="total_price" id="amount">6,8000원</h5>
-                            <input type="hidden" id="pay_amount" value="">
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            {{#userInfo}}
-            </div>
+                            <div class="media-body">
+                                <p>{{p_name}}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>{{p_price}}원</h5>
+                    </td>
+                    <td>
+                        <h5>{{quantity}}</h5>
+                    </td>
+                    <td>
+                        <h5>{{total_price}}원</h5>
+                    </td>
+                </tr>
+            {{/orderList}}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <h5 class="total_price">상품합계금액</h5>
+                </td>
+                <td>
+                    <h5 class="total_price" id="amount">6,8000원</h5>
+                    <input type="hidden" id="pay_amount" value="">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        {{#userInfo}}
+        </div>
             <h3 class="text-heading">배송지 정보</h3>
-                <input type="text" class="d_form mini" id="postcode" placeholder="우편번호">
-                <input type="button" class="d_btn" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-                <input type="text" class="d_form large" id="address" placeholder="주소"><br>
-                <input type="text" class="d_form" id="detailAddress" placeholder="상세주소">
-                <input type="text" class="d_form" id="extraAddress" placeholder="참고항목">
+            <input type="text" class="d_form mini" id="postcode" placeholder="우편번호">
+            <input type="button" class="d_btn" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+            <input type="text" class="d_form large" id="address" placeholder="주소"><br>
+            <input type="text" class="d_form" id="detailAddress" placeholder="상세주소">
+            <input type="text" class="d_form" id="extraAddress" placeholder="참고항목">
 
             <div class="section-top-border">
                 <h3 class="text-heading">수령인 정보</h3>
@@ -99,7 +99,7 @@
             </div>
         </div>
 
-        <input type="hidden" id="buyer_email" value="{{email}}" />
+            <input type="hidden" id="buyer_email" value="{{email}}" />
         {{/userInfo}}
 </section>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>

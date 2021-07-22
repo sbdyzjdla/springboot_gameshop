@@ -4,6 +4,7 @@ import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
 import com.gameshop.domain.cart.Cart;
 import com.gameshop.domain.cart.dto.CartListResponseDto;
+import com.gameshop.domain.cart.dto.CartProdListResDto;
 import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
 import com.gameshop.domain.products.dto.ProductsOrderResponseDto;
 import com.gameshop.domain.products.dto.ProductsResponseDto;
@@ -193,7 +194,7 @@ public class IndexController {
                 //return "admin";
             }
         }
-        List<CartListResponseDto> cartList = cartService.findAllUser(user);
+        List<CartProdListResDto> cartList = cartService.findAllCartUser(user);
         model.addAttribute("cartList", cartList);
         return "cart";
     }
@@ -247,6 +248,19 @@ public class IndexController {
         model.addAttribute("orderList", dto);
 
         return "order";
+    }
+
+    @GetMapping("/order/confirm")
+    public String orderConfirm(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+            model.addAttribute("userInfo", userInfo);
+            if (user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+            }
+        }
+        return "order_confirm";
     }
 
     @GetMapping("/admin")

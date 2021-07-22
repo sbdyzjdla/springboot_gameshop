@@ -3,16 +3,15 @@ package com.gameshop.domain.cart;
 import com.gameshop.domain.BaseTimeEntity;
 import com.gameshop.domain.products.Products;
 import com.gameshop.domain.user.User;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Setter
+@NoArgsConstructor
+@Getter
 @Entity
 public class Cart extends BaseTimeEntity {
 
@@ -21,9 +20,6 @@ public class Cart extends BaseTimeEntity {
     @Column(name = "CART_ID")
     private Long id;
     private Long user_id;
-
-    @Enumerated(EnumType.STRING)
-    private CartDelYn cartDelYn;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private List<CartProducts> cartProducts = new ArrayList<CartProducts>();
@@ -39,7 +35,6 @@ public class Cart extends BaseTimeEntity {
         for(CartProducts cartProduct : cartProducts) {
             cart.addCartProducts(cartProduct);
         }
-        cart.setCartDelYn(CartDelYn.NO);
         return cart;
     }
 

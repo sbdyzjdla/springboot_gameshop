@@ -4,6 +4,7 @@ import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
 import com.gameshop.domain.cart.Cart;
 import com.gameshop.domain.cart.dto.CartListResponseDto;
+import com.gameshop.domain.cart.dto.CartProdListResDto;
 import com.gameshop.domain.products.Products;
 import com.gameshop.service.*;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class CartApiController {
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         Products products = productsService.findByIdCart(id);
 
-        return cartService.save(products, quantity, user.getId());
+        return cartService.add(products, quantity, user.getId());
     }
 
     @PutMapping("/cart/update/{id}")
@@ -49,7 +50,7 @@ public class CartApiController {
     }
 
     @GetMapping("/cart/cartList")
-    public List<CartListResponseDto> findAllUser(@LoginUser SessionUser user) { return cartService.findAllUser(user); }
+    public List<CartProdListResDto> findAllCartUser(@LoginUser SessionUser user) { return cartService.findAllCartUser(user); }
 
 
 }

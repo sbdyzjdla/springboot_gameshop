@@ -2,6 +2,7 @@ package com.gameshop.domain.order;
 
 import com.gameshop.domain.cart.Cart;
 import com.gameshop.domain.cart.CartProducts;
+import com.gameshop.domain.delivery.Delivery;
 import com.gameshop.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +26,10 @@ public class Order {
 
     @OneToOne
     private Cart cart;
+
+    @OneToOne
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
 
     private Long user_id;
 
