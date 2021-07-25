@@ -3,6 +3,7 @@ package com.gameshop.web;
 import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
 import com.gameshop.domain.cart.Cart;
+import com.gameshop.domain.cart.CartProducts;
 import com.gameshop.domain.cart.dto.CartListResponseDto;
 import com.gameshop.domain.cart.dto.CartProdListResDto;
 import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
@@ -210,7 +211,7 @@ public class IndexController {
             }
         }
         int total_price = 0;
-        List<CartListResponseDto> cartList = new ArrayList<>();
+        List<CartProdListResDto> cartList = new ArrayList<>();
 
         Long ready_count = orderService.find_order_ready(user.getId());
         if(ready_count != null) {
@@ -218,12 +219,15 @@ public class IndexController {
         }
 
         for(String list_id : list_checked) {
-            Long cart_id = Long.parseLong(list_id);
-            Cart cart = cartService.findById(cart_id);
-            //cartList.add(new CartListResponseDto(cartService.findById(cart_id)));
-            cartList.add(new CartListResponseDto(cart));
-            orderService.order_ready(cart, user.getId());
-            total_price += cart.getCartProducts().get(0).getOrderPrice();
+            Long cartProduct_id = Long.parseLong(list_id);
+            CartProdListResDto cartProducts = cartService.CartProdFindById(cartProduct_id);
+            cartList.add(cartProducts);
+
+            //orderService.order_ready(cart, user.getId());
+            //total_price += cart.getCartProducts().get(0).getOrderPrice();
+        }
+        for(CartProdListResDto cart : cartList) {
+            total_price += cart.getOrder_price();
         }
         System.out.println("전체가격 !!!" + total_price);
 

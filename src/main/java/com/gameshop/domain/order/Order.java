@@ -2,8 +2,7 @@ package com.gameshop.domain.order;
 
 import com.gameshop.domain.cart.Cart;
 import com.gameshop.domain.cart.CartProducts;
-import com.gameshop.domain.delivery.Delivery;
-import com.gameshop.domain.user.User;
+import com.gameshop.domain.order.delivery.Delivery;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

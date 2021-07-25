@@ -134,23 +134,17 @@ var cart = {
                             list_checked.push(id);
                         }
                     }
+                    if(list_checked.length == 0) {
+                        alert("상품을 하나 이상 선택해주세요")
+                        return;
+                    }
+
                     //ajax
                     //var Data = { "list_checked" : list_checked};
 
                     $('#list_checked_id').val(list_checked);
                     console.log($('#list_checked_id').val());
                     $("#cart_order").submit();
-//                    $.ajax({
-//                        type : 'GET',
-//                        url : '/order/',
-//                        dataType : 'json',
-//                        data : Data,
-//                    }).done(function() {
-//                        //alert('장바구니에서 삭제되었습니다.');
-//                    }).fail(function(error) {
-//                        alert('주문에 실패하였습니다')
-//                        alert(JSON.stringify(error))
-//                    })
             } else {false}
             //location.href='/cart';
         },

@@ -47,6 +47,20 @@ public class CartRepositorySupport extends QuerydslRepositorySupport {
                 .fetch();
     }
 
+    public CartProdListResDto CartProdFindById(Long id) {
+        return queryFactory.select(Projections.fields(CartProdListResDto.class,
+                cartProducts.id.as("cart_products_id"),
+                cartProducts.orderPrice.as("order_price"),
+                cartProducts.p_price.as("p_price"),
+                cartProducts.quantity.as("quantity"),
+                cartProducts.products.img_num.as("img_num"),
+                cartProducts.products.p_name.as("p_name")
+        ))
+                .from(cartProducts)
+                .where(cartProducts.id.eq(id))
+                .fetchOne();
+    }
+
     public Optional<Cart> findByUserId(Long user_id) {
         return Optional.ofNullable(queryFactory.selectFrom(cart)
                 .where(cart.user_id.eq(user_id))

@@ -104,10 +104,15 @@ public class CartService {
     }
 
     @Transactional
-    public Cart findByUserId(Long id) {
-        Cart cart = cartRepositorySupport.findByUserId(id)
+    public Cart findByUserId(Long user_id) {
+        Cart cart = cartRepositorySupport.findByUserId(user_id)
                 .orElseThrow(() -> new IllegalArgumentException());
         return cart;
+    }
+
+    @Transactional
+    public CartProdListResDto CartProdFindById(Long id) {
+        return cartRepositorySupport.CartProdFindById(id);
     }
 
 }
