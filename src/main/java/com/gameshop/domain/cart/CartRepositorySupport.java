@@ -72,4 +72,10 @@ public class CartRepositorySupport extends QuerydslRepositorySupport {
                 .where(cart.user_id.eq(user_id))
                 .fetchCount();
     }
+
+    public CartProducts cartProdEntityFindById(Long id) {
+        return queryFactory.selectFrom(cartProducts)
+                .where(cartProducts.id.eq(id))
+                .fetchOne();
+    }
 }

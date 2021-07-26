@@ -3,6 +3,7 @@ package com.gameshop.domain.order.delivery;
 import com.gameshop.domain.order.Address;
 import com.gameshop.domain.order.Order;
 import com.gameshop.domain.order.Recipient;
+import lombok.Builder;
 
 import javax.persistence.*;
 
@@ -25,4 +26,11 @@ public class Delivery {
     @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
 
+    @Builder
+    public Delivery(Order order, Address address, Recipient recipient, DeliveryStatus deliveryStatus) {
+        this.order = order;
+        this.address = address;
+        this.recipient = recipient;
+        this.deliveryStatus = deliveryStatus;
+    }
 }

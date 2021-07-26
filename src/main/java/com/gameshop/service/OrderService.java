@@ -1,10 +1,10 @@
 package com.gameshop.service;
 
 import com.gameshop.domain.cart.Cart;
-import com.gameshop.domain.order.Order;
-import com.gameshop.domain.order.OrderRepository;
-import com.gameshop.domain.order.OrderRepositorySupport;
-import com.gameshop.domain.order.OrderStatus;
+import com.gameshop.domain.order.*;
+import com.gameshop.domain.order.delivery.Delivery;
+import com.gameshop.domain.order.delivery.DeliveryRepository;
+import com.gameshop.domain.order.delivery.DeliveryStatus;
 import com.gameshop.domain.order.dto.OrderListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.parameters.P;
@@ -21,21 +21,24 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderRepositorySupport orderRepositorySupport;
+    private final DeliveryRepository deliveryRepository;
 
     @Transactional
-    public Long order_ready(Cart cart, Long user_id) {
+    public Order order_ready(Long user_id) {
         Order entity = Order.builder()
-                .cart(cart)
                 .user_id(user_id)
                 .orderStatus(OrderStatus.READY)
                 .build();
-        return orderRepository.save(entity).getId();
+        return orderRepository.save(entity);
     }
 
     @Transactional
-    public Long find_order_ready(Long user_id) {
-        return orderRepositorySupport.find_order_ready(user_id);
+    public Long find_order_ready_cnt(Long user_id) {
+        return orderRepositorySupport.find_order_ready_cnt(user_id);
     }
+
+    @Transactional
+    public Order find_order_ready(Long user_id) {return orderRepositorySupport.find_order_ready(user_id);}
 
     @Transactional
     public void del_order_ready(Long user_id) {
@@ -52,6 +55,17 @@ public class OrderService {
             total_price += order.getCart().getCartProducts().get(0).getOrderPrice();
         }
         return total_price;
+    }
+
+    @Transactional
+    public Delivery delivery_save(Order order, Address address, Recipient recipient) {
+        Delivery delivery = Delivery.builder()
+                .order(order)
+                .address(address)
+                .recipient(recipient)
+                .deliveryStatus(DeliveryStatus.READY)
+                .build();
+        return deliveryRepository.save(delivery);
     }
 
 }

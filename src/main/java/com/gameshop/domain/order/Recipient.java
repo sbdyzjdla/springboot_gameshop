@@ -9,13 +9,13 @@ import javax.persistence.Embeddable;
 public class Recipient {
 
     private String order_name;
-    private int phone_first;
-    private int phone_second;
-    private int phone_third;
+    private String phone_first;
+    private String phone_second;
+    private String phone_third;
 
     protected Recipient() {}
 
-    public Recipient(String order_name, int phone_first, int phone_second, int phone_third) {
+    public Recipient(String order_name, String phone_first, String phone_second, String phone_third) {
         this.order_name = order_name;
         this.phone_first = phone_first;
         this.phone_second = phone_second;

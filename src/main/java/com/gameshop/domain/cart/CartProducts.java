@@ -1,5 +1,6 @@
 package com.gameshop.domain.cart;
 
+import com.gameshop.domain.order.Order;
 import com.gameshop.domain.products.Products;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +23,10 @@ public class CartProducts {
     @ManyToOne
     @JoinColumn(name = "CART_ID")
     private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ID")
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "PRODUCTS_ID")

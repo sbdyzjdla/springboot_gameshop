@@ -25,10 +25,18 @@ public class OrderRepositorySupport extends QuerydslRepositorySupport {
                 .execute();
     }
 
-    public Long find_order_ready(Long user_id) {
+    public Long find_order_ready_cnt(Long user_id) {
         return queryFactory.selectFrom(order)
-                .where(order.user_id.eq(user_id))
+                .where(order.user_id.eq(user_id)
+                .and(order.orderStatus.eq(OrderStatus.READY)))
                 .fetchCount();
+    }
+
+    public Order find_order_ready(Long user_id) {
+        return queryFactory.selectFrom(order)
+                .where(order.user_id.eq(user_id)
+                        .and(order.orderStatus.eq(OrderStatus.READY)))
+                .fetchOne();
     }
 
     public List<Order> find_order_ready_total_price(Long user_id) {

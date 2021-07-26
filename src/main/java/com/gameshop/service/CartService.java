@@ -115,4 +115,9 @@ public class CartService {
         return cartRepositorySupport.CartProdFindById(id);
     }
 
+    @Transactional
+    public CartProducts cartProdEntityFindById(Long id) {
+        return cartRepositorySupport.cartProdEntityFindById(id);
+    }
+
 }
