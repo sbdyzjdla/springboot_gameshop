@@ -1,5 +1,6 @@
 package com.gameshop.web;
 
+import com.gameshop.domain.qnas.Qnas;
 import com.gameshop.service.FilesService;
 import com.gameshop.service.QnasService;
 import com.gameshop.web.dto.QnasListResponseDto;
@@ -7,6 +8,7 @@ import com.gameshop.web.dto.QnasResponseDto;
 import com.gameshop.web.dto.QnasSaveRequestDto;
 import com.gameshop.web.dto.QnasUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,6 +48,11 @@ public class QnasApiController {
     @GetMapping("/api/v1/qnaslist")
     public List<QnasListResponseDto> findAll() {
         return qnasService.findAllDesc();
+    }
+
+    @GetMapping("/api/v1/qnalist/{p_num}")
+    public Page<Qnas> findAllPageDesc(@PathVariable int p_num) {
+        return qnasService.findAllPageDesc(p_num);
     }
 
     @DeleteMapping("/api/v1/qnas/{id}")

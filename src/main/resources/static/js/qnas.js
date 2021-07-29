@@ -32,7 +32,8 @@ var qnas = {
                 contentType: false,
             }).done(function() {
                 alert('글이 등록되었습니다');
-                qnas.listInit();
+                //qnas.listInit();
+                location.href="/board/1"
             }).fail(function(error) {
                 alert(JSON.stringify(error));
             });
@@ -51,7 +52,8 @@ var qnas = {
             contentType: false,
         }).done(function() {
             alert('글이 수정되었습니다');
-            qnas.listInit();
+            //qnas.listInit();
+            location.href="/board/1"
         }).fail(function(error) {
             alert('게시글 수정에 실패하였습니다');
             alert(JSON.stringify(error));

@@ -27,7 +27,15 @@
         </tr>
         </thead>
         <tbody id="qnasTable">
-
+        {{#qnasList}}
+            <tr onclick="qnas.viewInit({{id}})">
+                <td>{{id}}</th>
+                <td>{{reply_state}}</td>
+                <td>{{title}}</td>
+                <td>{{author}}</td>
+                <td>{{createdDate}}</td>
+            </tr>
+        {{/qnasList}}
         </tbody>
     </table>
     <div class="mr-5 float-right">
@@ -36,19 +44,23 @@
     <nav class="blog-pagination justify-content-center d-flex">
         <ul class="pagination">
             <li class="page-item">
-                <a href="#" class="page-link" aria-label="Previous">
-                    <i class="ti-angle-left"></i>
+                <a href="/board/1" class="page-link" aria-label="Previous">
+                    <i class="ti-angle-double-left"></i>
                 </a>
             </li>
+            {{#prev}}
             <li class="page-item">
-                <a href="#" class="page-link">1</a>
+                <a href="/board/{{prev}}" class="page-link">이전</a>
             </li>
-            <li class="page-item active">
-                <a href="#" class="page-link">2</a>
-            </li>
+            {{/prev}}
+            {{#next}}
             <li class="page-item">
-                <a href="#" class="page-link" aria-label="Next">
-                    <i class="ti-angle-right"></i>
+                <a href="/board/{{next}}" class="page-link">다음</a>
+            </li>
+            {{/next}}
+            <li class="page-item">
+                <a href="/board/{{last}}" class="page-link" aria-label="Next">
+                    <i class="ti-angle-double-right"></i>
                 </a>
             </li>
         </ul>
@@ -56,10 +68,10 @@
 
 </div>
     <div class="row justify-content-center">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="form-group">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'" style="height:auto">
+                    <input type="text" class="form-control" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = '게시물 검색'" style="height:auto">
                     <div class="input-group-append">
                         <a href="#" class="genric-btn primary">검색</a>
                     </div>
@@ -73,7 +85,9 @@
 
 {{>layout/footer}}
 <script>
+/*
  $(document).ready(function() {
     	qnas.list();
     });
+*/
 </script>

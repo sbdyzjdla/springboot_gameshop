@@ -4,16 +4,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gameshop.domain.qnas.Qnas;
 import com.gameshop.domain.qnas.QnasRepository;
 import com.gameshop.service.FilesService;
+import com.gameshop.service.QnasService;
 import com.gameshop.web.dto.QnasSaveRequestDto;
 import com.gameshop.web.dto.QnasUpdateRequestDto;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.data.domain.Page;
 import org.springframework.http.*;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -22,6 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -54,6 +57,8 @@ public class QnasApiControllerTest {
     }
 
     @Autowired
+    private QnasService qnasService;
+    @Autowired
     private QnasRepository qnasRepository;
 
     @Autowired
@@ -62,6 +67,50 @@ public class QnasApiControllerTest {
     @After
     public void tearDown() throws Exception {
         qnasRepository.deleteAll();
+    }
+
+    @WithMockUser(roles = "USER")
+    @Test
+    public void 게시글검색() throws Exception {
+
+        //given
+        String title = "테스트 게시글";
+        String author = "테스트 작성자";
+        String content = "테스트 작성내용";
+        String reply_state = "답변완료";
+
+        String title2 = "테스트 질문";
+        String author2 = "테스트 작성자";
+        String content2 = "테스트 작성내용";
+        String reply_state2 = "답변완료";
+
+        MockMultipartFile file = new MockMultipartFile("user-file", "test.txt",
+                null, "test data".getBytes());
+
+        QnasSaveRequestDto requestDto = QnasSaveRequestDto.builder()
+                .title(title)
+                .author(author)
+                .content(content)
+                .reply_state(reply_state)
+                .qnas_img(file)
+                .build();
+        QnasSaveRequestDto requestDto1 = QnasSaveRequestDto.builder()
+                .title(title2)
+                .author(author2)
+                .content(content2)
+                .reply_state(reply_state2)
+                .qnas_img(file)
+                .build();
+        qnasService.save(requestDto);
+        qnasService.save(requestDto1);
+
+        //when
+        Page<Qnas> qnasPage1 =  qnasService.findByTitle("게시글", 1);
+        Page<Qnas> qnasPage2 = qnasService.findByTitle("문", 1);
+        //then
+        assertThat(qnasPage1.getContent().get(0).getTitle()).isEqualTo("테스트 게시글");
+        assertThat(qnasPage2.getContent().get(0).getTitle()).isEqualTo("테스트 질문");
+
     }
 
     @Test
