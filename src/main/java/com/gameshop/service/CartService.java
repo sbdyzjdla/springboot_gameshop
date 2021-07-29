@@ -120,4 +120,8 @@ public class CartService {
         return cartRepositorySupport.cartProdEntityFindById(id);
     }
 
+    @Transactional
+    public List<CartProducts> findByOrderId(Long order_id) {
+        return cartRepositorySupport.findByOrderId(order_id);
+    }
 }

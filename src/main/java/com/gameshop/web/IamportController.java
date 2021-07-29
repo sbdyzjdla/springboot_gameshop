@@ -32,9 +32,6 @@ public class IamportController {
     public IamportResponse<Payment> paymentByImpUid (Model model, Locale locale , HttpSession session
 			, @PathVariable(value= "imp_uid") String imp_uid, @LoginUser SessionUser user) throws IamportResponseException, IOException
         {
-            int total_price = orderService.order_ready_total_price(user.getId());
-            //if(total_price == api.paymentByImpUid(imp_uid).getResponse().getAmount())
-            System.out.println("가격비교 !!" + total_price + " api" + api.paymentByImpUid(imp_uid).getResponse().getAmount());
             return api.paymentByImpUid(imp_uid);
         }
 }

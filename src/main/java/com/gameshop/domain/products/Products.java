@@ -42,4 +42,11 @@ public class Products extends BaseTimeEntity{
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
     private List<CartProducts> cartProducts;
 
+    public void removeStock(int quantity) {
+        int restStock = this.quantity - quantity;
+        if(restStock <0 ) {
+            throw new RuntimeException("재고가 부족합니다");
+        }
+        this.quantity = restStock;
+    }
 }

@@ -43,4 +43,12 @@ public class ProductsService {
         return new ProductsOrderResponseDto(entity);
     }
 
+    @Transactional
+    public void updateQuantity(Long id, int quantity) {
+        Products entity = productsRepository.findById(id)
+                .orElseThrow(() -> new
+                        IllegalArgumentException("해당 상품이 없습니다"));
+        entity.removeStock(quantity);
+    }
+
 }

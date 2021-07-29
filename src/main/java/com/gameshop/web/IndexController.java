@@ -6,12 +6,17 @@ import com.gameshop.domain.cart.Cart;
 import com.gameshop.domain.cart.CartProducts;
 import com.gameshop.domain.cart.dto.CartListResponseDto;
 import com.gameshop.domain.cart.dto.CartProdListResDto;
+import com.gameshop.domain.order.Order;
+import com.gameshop.domain.order.dto.OrderConfirmResponseDto;
 import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
 import com.gameshop.domain.products.dto.ProductsOrderResponseDto;
 import com.gameshop.domain.products.dto.ProductsResponseDto;
+import com.gameshop.domain.qnas.Qnas;
 import com.gameshop.service.*;
 import com.gameshop.web.dto.QnasResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
@@ -47,8 +53,23 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/board")
-    public String board(Model model, @LoginUser SessionUser user){
+//    @GetMapping("/board")
+//    public String board(Model model, @LoginUser SessionUser user){
+//        if(user != null) {
+//            List<SessionUser> userInfo = new ArrayList<>();
+//            userInfo.add(user);
+//
+//            model.addAttribute("userInfo" , userInfo);
+//            if(user.getRole().equals("ROLE_ADMIN")) {
+//                model.addAttribute("admin", "admin");
+//                //return "admin";
+//            }
+//        }
+//        return "board";
+//    }
+
+    @GetMapping("/board/{p_num}")
+    public String board(Model model, @LoginUser SessionUser user, @PathVariable(required = false) Integer p_num){
         if(user != null) {
             List<SessionUser> userInfo = new ArrayList<>();
             userInfo.add(user);
@@ -59,6 +80,22 @@ public class IndexController {
                 //return "admin";
             }
         }
+        if(p_num.equals(null)) {
+            p_num = 1;
+        }
+        Page<Qnas> qnasList = qnasService.findAllPageDesc(p_num);
+        boolean hasPrev = qnasList.hasPrevious();
+        boolean hasNext = qnasList.hasNext();
+
+        model.addAttribute("qnasList", qnasList.getContent());
+        if(hasPrev) {
+            model.addAttribute("prev", qnasList.getPageable().getPageNumber());
+        }
+        if(hasNext) {
+            model.addAttribute("next", qnasList.getPageable().getPageNumber() +2);
+        }
+        model.addAttribute("last", qnasList.getTotalPages());
+
         return "board";
     }
 
@@ -213,21 +250,27 @@ public class IndexController {
         int total_price = 0;
         List<CartProdListResDto> cartList = new ArrayList<>();
 
-        Long ready_count = orderService.find_order_ready(user.getId());
-        if(ready_count != null) {
-            orderService.del_order_ready(user.getId());
+        Long ready_count = orderService.find_order_ready_cnt(user.getId());
+        Order order;
+        if(ready_count != 0L) {
+            order = orderService.find_order_ready(user.getId());
+            order.initOrderProducts();
+        } else {
+            order = orderService.order_ready(user.getId());
         }
 
         for(String list_id : list_checked) {
             Long cartProduct_id = Long.parseLong(list_id);
             CartProdListResDto cartProducts = cartService.CartProdFindById(cartProduct_id);
             cartList.add(cartProducts);
-
-            //orderService.order_ready(cart, user.getId());
-            //total_price += cart.getCartProducts().get(0).getOrderPrice();
+            CartProducts orderProduct = cartService.cartProdEntityFindById(cartProduct_id);
+            orderProduct.setOrder(null);
+            order.addOrderProducts(orderProduct);
         }
+
         for(CartProdListResDto cart : cartList) {
             total_price += cart.getOrder_price();
+            order.setOrder_price(total_price);
         }
         System.out.println("전체가격 !!!" + total_price);
 
@@ -254,8 +297,8 @@ public class IndexController {
         return "order";
     }
 
-    @GetMapping("/order/confirm")
-    public String orderConfirm(Model model, @LoginUser SessionUser user) {
+    @GetMapping("/order/confirm/{id}")
+    public String orderConfirm(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
             List<SessionUser> userInfo = new ArrayList<>();
             userInfo.add(user);
@@ -264,6 +307,11 @@ public class IndexController {
                 model.addAttribute("admin", "admin");
             }
         }
+        OrderConfirmResponseDto responseDto = orderService.order_confirm(id);
+        if(responseDto.getUser_id() != user.getId()) {
+            return HttpStatus.BAD_REQUEST.toString();     //BAD_REQUEST 400에러
+        }
+        model.addAttribute("order_confirm", responseDto);
         return "order_confirm";
     }
 

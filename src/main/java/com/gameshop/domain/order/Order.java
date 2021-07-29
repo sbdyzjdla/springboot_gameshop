@@ -30,7 +30,7 @@ public class Order {
 
     private int order_price;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
@@ -47,9 +47,6 @@ public class Order {
     public void initOrderProducts() {
         orderProducts.clear();
     }
-
-    @OneToOne
-    private Cart cart;
 
     @Builder
     public Order(Long user_id, OrderStatus orderStatus) {
@@ -68,13 +65,5 @@ public class Order {
             order.addOrderProducts(cartProduct);
         }
         return order;
-    }
-
-    public int getTotalPrice() {
-        int totalPrice = 0;
-        for(CartProducts cartProducts : cart.getCartProducts()) {
-            totalPrice += cartProducts.getOrderPrice();
-        }
-        return totalPrice;
     }
 }

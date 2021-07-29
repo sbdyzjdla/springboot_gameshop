@@ -1,6 +1,8 @@
 package com.gameshop.domain.order;
 
+import com.gameshop.domain.order.dto.OrderConfirmResponseDto;
 import com.gameshop.domain.order.dto.OrderListResponse;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import static com.gameshop.domain.order.QOrder.order;
+import static com.gameshop.domain.order.delivery.QDelivery.delivery;
 
 @Repository
 public class OrderRepositorySupport extends QuerydslRepositorySupport {
@@ -43,7 +46,27 @@ public class OrderRepositorySupport extends QuerydslRepositorySupport {
         return queryFactory.selectFrom(order)
                 .where(order.user_id.eq(user_id)
                     .and(order.orderStatus.eq(OrderStatus.READY))).fetch();
-
+    }
+    public OrderConfirmResponseDto order_confirm(Long id) {
+        return queryFactory.select(Projections.fields(OrderConfirmResponseDto.class,
+                order.id.as("order_id"),
+                order.order_price.as("order_price"),
+                order.user_id.as("user_id"),
+                delivery.address.address.as("address"),
+                delivery.address.detailAddress.as("detail_address"),
+                delivery.address.extraAddress.as("extra_address"),
+                delivery.address.postcode.as("postcode"),
+                delivery.deliveryStatus.as("delivery_status"),
+                delivery.recipient.order_name.as("order_name"),
+                delivery.recipient.phone_first.as("phone_first"),
+                delivery.recipient.phone_second.as("phone_second"),
+                delivery.recipient.phone_third.as("phone_third")
+        ))
+            .from(order)
+                .join(delivery)
+                .on(order.id.eq(delivery.id))
+                .where(order.id.eq(id))
+                .fetchOne();
 
     }
 }

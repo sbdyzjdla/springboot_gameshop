@@ -150,11 +150,11 @@ function payment(e){
 function orderpaid() {
     var form = $('#orderForm');
     var formData = new FormData(form[0]);
+    formData.append("amount",  $('#pay_amount').val());
     var Data = {
         "postcode" : $('#postocde').val(),
         "order_name" : $('#buyer_name').val(),
     };
-
     $.ajax({
         type : "POST",
         url : "/order/delivery/save",
@@ -164,6 +164,7 @@ function orderpaid() {
         contentType: false,
     }).done(function(data) {
         console.log(data);
+        location.href="/order/confirm/" + data;
     }).fail(function(error) {
         alert(JSON.stringify(error));
     });

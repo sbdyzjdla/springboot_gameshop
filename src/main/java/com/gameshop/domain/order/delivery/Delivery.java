@@ -4,9 +4,11 @@ import com.gameshop.domain.order.Address;
 import com.gameshop.domain.order.Order;
 import com.gameshop.domain.order.Recipient;
 import lombok.Builder;
+import lombok.Getter;
 
 import javax.persistence.*;
 
+@Getter
 @Entity
 public class Delivery {
 
