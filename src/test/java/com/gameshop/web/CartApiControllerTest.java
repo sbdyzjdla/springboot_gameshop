@@ -14,6 +14,8 @@ import com.gameshop.domain.user.UserRepository;
 import com.gameshop.service.CartService;
 import com.gameshop.service.ConsolesService;
 import com.gameshop.service.ProductsService;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,42 +50,8 @@ class CartApiControllerTest {
 
     @Test
     @WithMockUser(roles = "USER")
-    @Transactional   // join컬럼의 fetch type이 LAZY 일때 could not initialize proxy - no session 오류발생해서 단위테스트에 붙임
+    @Transactional  // join컬럼의 fetch type이 LAZY 일때 could not initialize proxy - no session 오류발생해서 단위테스트에 붙임
     public void 장바구니_추가() throws Exception {
-        //given
-        String manufact = "테스트 제조사명";
-        int p_price = 420000;
-        int quantity = 100;
-        Products products1 = createProducts(manufact, "상품1", p_price, quantity);
-        Products products2 = createProducts(manufact, "상품2", p_price, quantity);
-        //수량
-        int p1_quantity = 10;
-        int p2_quantity = 20;
-
-        //유저 세팅
-        User findUser = User.builder()
-                .name("test유저")
-                .email("test이메일")
-                .role(Role.USER)
-                .build();
-        userRepository.save(findUser);
-
-        //when
-
-        Long cartNum = cartService.save(products1, p1_quantity, findUser.getId());
-        cartNum = cartService.save(products2, p2_quantity, findUser.getId());
-
-        //then
-        List<Cart> findAll = cartRepositorySupport.findAllUser(findUser.getId());
-        assertThat(findAll.get(0).getCartProducts().get(0).getProducts().getP_name()).isEqualTo("상품1");
-        assertThat(findAll.get(1).getCartProducts().get(0).getProducts().getP_name()).isEqualTo("상품2");
-        assertThat(findAll.get(0).getUser_id()).isEqualTo(findUser.getId());
-    }
-
-    @Test
-    @WithMockUser(roles = "USER")
-    @Transactional
-    public void 장바구니_추가2() throws Exception {
         //given
         String manufact = "테스트 제조사명";
         int p_price = 420000;
@@ -109,7 +77,8 @@ class CartApiControllerTest {
 
         //then
         List<CartProdListResDto> findAll = cartRepositorySupport.findAllCartUser(findUser.getId());
-        assertThat(findAll.get(0).getCart_products_id()).isEqualTo(1L);
+        assertThat(findAll.get(0).getCart_products_id()).isEqualTo(1L);   //단위 테스트
+        //assertThat(findAll.get(0).getCart_products_id()).isEqualTo(3L);   //통합테스트
         assertThat(findAll.get(1).getP_name()).isEqualTo("상품2");
         assertThat(findAll.size()).isEqualTo(2);
     }

@@ -18,6 +18,12 @@
 <section class="cart_area section_padding">
     <div class="container">
         <div class="cart_inner">
+            <div id="order_success" style="display: none">
+                <div class="cart_area section_padding">
+                    <h1 class="text-center">주문이 정상적으로 완료되었습니다</h1>
+                </div>
+            </div>
+
             <h3 class="text-heading">주문상품</h3>
             <div class="table-responsive">
                 <table class="table">
@@ -68,37 +74,80 @@
                 </table>
             {{#userInfo}}
             </div>
-            <form class="form-contact comment_form" action="#" id="orderForm" method = "POST" enctype="multipart/form-data">
-                <h3 class="text-heading">배송지 정보</h3>
-                    <input type="text" class="d_form mini" id="postcode" name="postcode" placeholder="우편번호">
-                    <input type="button" class="d_btn" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-                    <input type="text" class="d_form large" id="address" name="address" placeholder="주소"><br>
-                    <input type="text" class="d_form" id="detailAddress" name="detailAddress" placeholder="상세주소">
-                    <input type="text" class="d_form" id="extraAddress" name="extraAddress" placeholder="참고항목">
+            <div id="order_info_input">
+                <form class="form-contact comment_form" action="#" id="orderForm" method = "POST" enctype="multipart/form-data">
+                    <h3 class="text-heading">배송지 정보</h3>
+                        <input type="text" class="d_form mini" id="postcode" name="postcode" placeholder="우편번호">
+                        <input type="button" class="d_btn" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+                        <input type="text" class="d_form large" id="address" name="address" placeholder="주소"><br>
+                        <input type="text" class="d_form" id="detailAddress" name="detailAddress" placeholder="상세주소">
+                        <input type="text" class="d_form" id="extraAddress" name="extraAddress" placeholder="참고항목">
 
+                    <div class="section-top-border">
+                        <h3 class="text-heading">수령인 정보</h3>
+                        <h5>수령인</h5>
+                        <input type="text" class="d_form_name" name="order_name" id="buyer_name" placeholder="이름" value="{{name}}">
+                        <h5>연락처</h5>
+                        <select class="d_form_phone" id="phone_first" name="phone_first" placeholder="">
+                            <option value="010">010</option>
+                            <option value="011">011</option>
+                            <option value="016">016</option>
+                            <option value="017">017</option>
+                            <option value="010">018</option>
+                            <option value="019">019</option>
+                        </select>-
+                        <input type="text" class="d_form_phone" id="phone_second" name="phone_second" placeholder="">-
+                        <input type="text" class="d_form_phone" id="phone_third"  name="phone_third" placeholder="">
+                    </div>
+                </form>
                 <div class="section-top-border">
-                    <h3 class="text-heading">수령인 정보</h3>
-                    <h5>수령인</h5>
-                    <input type="text" class="d_form_name" name="order_name" id="buyer_name" placeholder="이름" value="{{name}}">
-                    <h5>연락처</h5>
-                    <select class="d_form_phone" id="phone_first" name="phone_first" placeholder="">
-                        <option value="010">010</option>
-                        <option value="011">011</option>
-                        <option value="016">016</option>
-                        <option value="017">017</option>
-                        <option value="010">018</option>
-                        <option value="019">019</option>
-                    </select>-
-                    <input type="text" class="d_form_phone" id="phone_second" name="phone_second" placeholder="">-
-                    <input type="text" class="d_form_phone" id="phone_third"  name="phone_third" placeholder="">
+                    <h3 class="text-heading">결제수단</h3>
                 </div>
-            </form>
-            <div class="section-top-border">
-                <h3 class="text-heading">결제수단</h3>
+                <div class="checkout_btn_inner float-left">
+                    <!-- a class="btn_1 checkout_btn_1" href='javascript:void(0)' onclick="payment(event);">결제하기</a-->
+                    <a class="btn_1 checkout_btn_1" href='javascript:void(0)' onclick="orderpaid();">결제하기</a>
+                </div>
             </div>
-            <div class="checkout_btn_inner float-left">
-                <!-- a class="btn_1 checkout_btn_1" href='javascript:void(0)' onclick="payment(event);">결제하기</a-->
-                <a class="btn_1 checkout_btn_1" href='javascript:void(0)' onclick="orderpaid();">결제하기</a>
+
+            <div id="order_info_after" style="display: none">
+                <section class="confirmation_part section_padding">
+                    <div class="col-lg-6 col-lx-4">
+                        <div class="single_confirmation_details">
+                            <h4>주문자 정보</h4>
+                            <ul>
+                                <li>
+                                    <p>주문번호</p><span>: 1</span>
+                                </li>
+                                <li>
+                                    <p>이름</p><span>: 윤성</span>
+                                </li>
+                                <li>
+                                    <p>전화번호</p><span>: 010-1234-1234</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-lx-4">
+                        <div class="single_confirmation_details">
+                            <h4>배송지 정보</h4>
+                            <ul>
+                                <li>
+                                    <p>우편번호</p><span>: 15432</span>
+                                </li>
+                                <li>
+                                    <p>주소</p><span>: 경기도 군포시 000동</span>
+                                </li>
+                                <li>
+                                    <p>상세주소</p><span>: 010-1234-1234</span>
+                                </li>
+                                <li>
+                                    <p>참고항목</p><span>: 010-1234-1234</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
 
@@ -146,7 +195,7 @@ function payment(e){
         alert(msg);
     });
 }
-
+var aaa;
 function orderpaid() {
     var form = $('#orderForm');
     var formData = new FormData(form[0]);
@@ -164,7 +213,11 @@ function orderpaid() {
         contentType: false,
     }).done(function(data) {
         console.log(data);
-        location.href="/order/confirm/" + data;
+        document.querySelector('#order_success').style.display='block';
+        document.querySelector('#order_info_input').style.display='none';
+        document.querySelector('#order_info_after').style.display='block';
+        aaa = data;
+        //location.href="/order/confirm/" + data;
     }).fail(function(error) {
         alert(JSON.stringify(error));
     });
