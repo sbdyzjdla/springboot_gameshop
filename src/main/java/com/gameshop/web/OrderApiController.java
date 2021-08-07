@@ -40,7 +40,7 @@ public class OrderApiController {
             //상품 수량변경
             List<CartProducts> cartProductsList = cartService.findByOrderId(order.getId());
             for(CartProducts cartProducts : cartProductsList) {
-                productsService.updateQuantity(cartProducts.getId(), cartProducts.getQuantity());
+                productsService.updateQuantity(cartProducts.getProducts().getId(), cartProducts.getQuantity());
             }
 
             //배송지, 주문자정보 등록

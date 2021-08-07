@@ -38,7 +38,8 @@ public class CartRepositorySupport extends QuerydslRepositorySupport {
                 cartProducts.p_price.as("p_price"),
                 cartProducts.quantity.as("quantity"),
                 cartProducts.products.img_num.as("img_num"),
-                cartProducts.products.p_name.as("p_name")
+                cartProducts.products.p_name.as("p_name"),
+                cartProducts.products.quantity.as("max_quantity")
                 ))
         .from(cart)
                 .join(cartProducts)

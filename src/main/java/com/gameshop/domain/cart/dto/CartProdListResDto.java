@@ -15,5 +15,6 @@ public class CartProdListResDto {
     private String p_name;
     private Long img_num;
     private int quantity;
+    private int max_quantity;
 
 }
