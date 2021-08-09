@@ -13,6 +13,10 @@ var qnas = {
         $('#qna-delete').on('click', function() {
             _this.delete();
         })
+
+        $('#qnas_search_btn').on('click', function() {
+            _this.search();
+        })
     },
 
      save : function() {
@@ -119,6 +123,11 @@ var qnas = {
         }).fail(function(error) {
             alert('게시글을 불러올수 없습니다');
         });
+    },
+
+    search : function() {
+       var search = $('#qnas_search').val();
+       location.href = '/board/1/' + search;
     }
 }
 

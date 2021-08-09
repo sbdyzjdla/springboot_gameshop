@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -68,8 +69,9 @@ public class IndexController {
 //        return "board";
 //    }
 
-    @GetMapping("/board/{p_num}")
-    public String board(Model model, @LoginUser SessionUser user, @PathVariable(required = false) Integer p_num){
+    @GetMapping(value = {"/board/{p_num}", "/board/{p_num}/{search}"})
+    public String board(Model model, @LoginUser SessionUser user, @PathVariable(required = false) Integer p_num
+                , @PathVariable(required = false) String search){
         if(user != null) {
             List<SessionUser> userInfo = new ArrayList<>();
             userInfo.add(user);
@@ -83,9 +85,18 @@ public class IndexController {
         if(p_num.equals(null)) {
             p_num = 1;
         }
-        Page<Qnas> qnasList = qnasService.findAllPageDesc(p_num);
+
+        Page<Qnas> qnasList;
+        if(search == null) {
+            qnasList = qnasService.findAllPageDesc(p_num);
+        } else {
+            qnasList = qnasService.findByTitle(search, p_num);
+        }
+
         boolean hasPrev = qnasList.hasPrevious();
         boolean hasNext = qnasList.hasNext();
+        boolean hasLast = qnasList.isLast();
+        boolean hasFirst = qnasList.isFirst();
 
         model.addAttribute("qnasList", qnasList.getContent());
         if(hasPrev) {
@@ -94,7 +105,13 @@ public class IndexController {
         if(hasNext) {
             model.addAttribute("next", qnasList.getPageable().getPageNumber() +2);
         }
-        model.addAttribute("last", qnasList.getTotalPages());
+        if(!hasFirst) {
+            model.addAttribute("first", 1);
+        }
+        if(!hasLast) {
+            model.addAttribute("last", qnasList.getTotalPages());
+        }
+        model.addAttribute("search", search);
 
         return "board";
     }

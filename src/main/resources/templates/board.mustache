@@ -43,26 +43,30 @@
     </div>
     <nav class="blog-pagination justify-content-center d-flex">
         <ul class="pagination">
+            {{#first}}
             <li class="page-item">
-                <a href="/board/1" class="page-link" aria-label="Previous">
+                <a href="/board/1/{{#search}}{{search}}{{/search}}" class="page-link" aria-label="Previous">
                     <i class="ti-angle-double-left"></i>
                 </a>
             </li>
+            {{/first}}
             {{#prev}}
             <li class="page-item">
-                <a href="/board/{{prev}}" class="page-link">이전</a>
+                <a href="/board/{{prev}}/{{#search}}{{search}}{{/search}}" class="page-link">이전</a>
             </li>
             {{/prev}}
             {{#next}}
             <li class="page-item">
-                <a href="/board/{{next}}" class="page-link">다음</a>
+                <a href="/board/{{next}}/{{#search}}{{search}}{{/search}}" class="page-link">다음</a>
             </li>
             {{/next}}
+            {{#last}}
             <li class="page-item">
-                <a href="/board/{{last}}" class="page-link" aria-label="Next">
+                <a href="/board/{{last}}/{{#search}}{{search}}{{/search}}" class="page-link" aria-label="Next">
                     <i class="ti-angle-double-right"></i>
                 </a>
             </li>
+            {{/last}}
         </ul>
     </nav>
 
@@ -71,9 +75,10 @@
         <div class="col-md-5">
             <div class="form-group">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = '게시물 검색'" style="height:auto">
+                    <input type="text" class="form-control" id="qnas_search" placeholder="" onfocus="this.placeholder = ''"
+                           onblur="this.placeholder = '게시물 검색'" style="height:auto" onkeyup="search_run();">
                     <div class="input-group-append">
-                        <a href="#" class="genric-btn primary">검색</a>
+                        <a href="#" class="genric-btn primary" id="qnas_search_btn">검색</a>
                     </div>
                 </div>
             </div>
@@ -85,9 +90,9 @@
 
 {{>layout/footer}}
 <script>
-/*
- $(document).ready(function() {
-    	qnas.list();
-    });
-*/
+function search_run() {
+    if(window.event.keyCode == 13) {
+        $('#qnas_search_btn').click();
+    }
+}
 </script>
