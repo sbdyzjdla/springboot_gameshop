@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                         "/fonts/**", "/sass/**", "/webfonts/**",
                                         "/h2-console/**",
                                         "/board", "/board/view_board/**", "/api/v1/qnaslist",
-                                        "/products", "/products/**", "/api/v1/consoles/nintendoCList",
+                                        "/products", "/products/**", "/api/v1/consoles/nintendoCList/**",
                                         "/display/**",
                                         "/cart/**",
                                         "/about/**").permitAll()

@@ -7,6 +7,7 @@ import com.gameshop.service.ConsolesService;
 import com.gameshop.service.FilesService;
 import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,9 +46,17 @@ public class ConsolesApiController {
         return consolesService.update(id, requestDto);
     }
 
-    @GetMapping("/api/v1/consoles/nintendoCList")
-    public List<ConsolesListResponseDto> findAllNint() {
-        return consolesService.findAllNint();
+//    @GetMapping("/api/v1/consoles/nintendoCList")
+//    public List<ConsolesListResponseDto> findAllNint() {
+//        return consolesService.findAllNint();
+//    }
+
+    @GetMapping(value = {"/api/v1/consoles/nintendoCList/{p_num}", "/api/v1/consoles/nintendoCList/" } )
+    public Page<ConsolesListResponseDto> findAllNint(@PathVariable(required = false) Integer p_num) {
+        if(p_num == null) {
+            p_num = 0;
+        }
+        return consolesService.findAllNint(p_num);
     }
 
     @GetMapping("/api/v1/consoles/ps5CList")
