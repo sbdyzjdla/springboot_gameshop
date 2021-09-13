@@ -69,7 +69,7 @@ public class ConsolesService {
 
     @Transactional
     public Page<ConsolesListResponseDto> findAllNint(int p_num) {
-        PageRequest paging = PageRequest.of(p_num, 3, Sort.by("id").descending());
+        PageRequest paging = PageRequest.of(p_num, 9, Sort.by("id").descending());
 
         QueryResults<Consoles> query = consolesRepositorySupport.findAllNint(paging);
         List<ConsolesListResponseDto> resultList = query.getResults().stream()
@@ -83,10 +83,14 @@ public class ConsolesService {
     }
 
     @Transactional
-    public List<ConsolesListResponseDto> findAllPs5() {
-        return consolesRepository.findAllPs5().stream()
+    public Page<ConsolesListResponseDto> findAllPs5(int p_num) {
+        PageRequest paging = PageRequest.of(p_num, 9, Sort.by("id").descending());
+
+        QueryResults<Consoles> query = consolesRepositorySupport.findAllPs5(paging);
+        List<ConsolesListResponseDto> resultList = query.getResults().stream()
                 .map(ConsolesListResponseDto::new)
                 .collect(Collectors.toList());
+        return new PageImpl<>(resultList, paging, query.getTotal());
     }
 
 

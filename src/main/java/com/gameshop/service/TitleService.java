@@ -1,12 +1,19 @@
 package com.gameshop.service;
 
+import com.gameshop.domain.products.consoles.dto.ConsolesListResponseDto;
 import com.gameshop.domain.products.titles.TitleRepositroy;
 import com.gameshop.domain.products.titles.Titles;
+import com.gameshop.domain.products.titles.TitlesRepositorySupport;
 import com.gameshop.domain.products.titles.dto.TitlesListResponseDto;
 import com.gameshop.domain.products.titles.dto.TitlesResponseDto;
 import com.gameshop.domain.products.titles.dto.TitlesSaveRequestDto;
 import com.gameshop.domain.products.titles.dto.TitlesUpdateRequestDto;
+import com.querydsl.core.QueryResults;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +25,7 @@ import java.util.stream.Collectors;
 public class TitleService {
 
     private final TitleRepositroy titleRepositroy;
+    private final TitlesRepositorySupport titlesRepositorySupport;
 
     @Transactional
     public Long save(TitlesSaveRequestDto requestDto) {
@@ -51,16 +59,22 @@ public class TitleService {
     }
 
     @Transactional
-    public List<TitlesListResponseDto> findAllNS() {
-        return titleRepositroy.findAllNS().stream()
+    public Page<TitlesListResponseDto> findAllNS(int p_num) {
+        PageRequest paging = PageRequest.of(p_num, 9, Sort.by("id").descending());
+        QueryResults<Titles> query = titlesRepositorySupport.findAllNS(paging);
+        List<TitlesListResponseDto> resultList = query.getResults().stream()
                 .map(TitlesListResponseDto::new)
                 .collect(Collectors.toList());
+        return new PageImpl<>(resultList, paging, query.getTotal());
     }
 
     @Transactional
-    public List<TitlesListResponseDto> findAllPS() {
-        return titleRepositroy.findAllPS().stream()
+    public Page<TitlesListResponseDto> findAllPS(int p_num) {
+        PageRequest paging = PageRequest.of(p_num, 9, Sort.by("id").descending());
+        QueryResults<Titles> query = titlesRepositorySupport.findAllPS(paging);
+        List<TitlesListResponseDto> resultList = query.getResults().stream()
                 .map(TitlesListResponseDto::new)
                 .collect(Collectors.toList());
+        return new PageImpl<>(resultList, paging, query.getTotal());
     }
 }

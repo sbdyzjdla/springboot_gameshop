@@ -59,9 +59,12 @@ public class ConsolesApiController {
         return consolesService.findAllNint(p_num);
     }
 
-    @GetMapping("/api/v1/consoles/ps5CList")
-    public List<ConsolesListResponseDto> findAllPs5() {
-        return consolesService.findAllPs5();
+    @GetMapping(value = {"/api/v1/consoles/ps5CList/{p_num}", "/api/v1/consoles/ps5CList/"})
+    public Page<ConsolesListResponseDto> findAllPs5(@PathVariable(required = false) Integer p_num) {
+        if(p_num == null) {
+            p_num = 0;
+        }
+        return consolesService.findAllPs5(p_num);
     }
 
 }

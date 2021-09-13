@@ -27,4 +27,12 @@ public class ConsolesRepositorySupport extends QuerydslRepositorySupport {
                 .limit(pageable.getPageSize())
                 .fetchResults();
     }
+
+    public QueryResults<Consoles> findAllPs5(Pageable pageable) {
+        return queryFactory.selectFrom(consoles)
+                .where(consoles.manufact.eq("소니"))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+    }
 }

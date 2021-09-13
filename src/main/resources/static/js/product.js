@@ -5,6 +5,12 @@ var product = {
         $('#qna-save').on('click', function() {
             _this.list_nin_console();
         })
+
+        $('#more_products').on('click', function(e) {
+            e.preventDefault();
+            _this.list_nin_console_more();
+        })
+
     },
 
     list_nin_console : function() {
@@ -39,7 +45,7 @@ var product = {
     },
 
     list_nin_console_more : function() {
-        var p_num =
+        var p_num = $('#products_page').val();
         $.ajax({
                     type : 'GET',
                     url : '/api/v1/consoles/nintendoCList/' + p_num,

@@ -7,6 +7,7 @@ import com.gameshop.domain.products.titles.dto.TitlesUpdateRequestDto;
 import com.gameshop.service.FilesService;
 import com.gameshop.service.TitleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,14 +42,20 @@ public class TitleApiController {
         return titleService.update(id, requestDto);
     }
 
-    @GetMapping("/api/v1/titles/nsSoftList")
-    public List<TitlesListResponseDto> findAllNint() {
-        return titleService.findAllNS();
+    @GetMapping(value = {"/api/v1/titles/nsSoftList/" , "/api/v1/titles/nsSoftList/{p_num}"})
+    public Page<TitlesListResponseDto> findAllNint(@PathVariable(required = false) Integer p_num) {
+        if(p_num == null) {
+            p_num = 0;
+        }
+        return titleService.findAllNS(p_num);
     }
 
-    @GetMapping("/api/v1/titles/ps5SoftList")
-    public List<TitlesListResponseDto> findAllPs5() {
-        return titleService.findAllPS();
+    @GetMapping(value = {"/api/v1/titles/ps5SoftList/", "/api/v1/titles/ps5SoftList/{p_num}"})
+    public Page<TitlesListResponseDto> findAllPs5(@PathVariable(required = false) Integer p_num) {
+        if(p_num == null) {
+            p_num = 0;
+        }
+        return titleService.findAllPS(p_num);
     }
 
 }
