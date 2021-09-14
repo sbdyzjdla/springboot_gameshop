@@ -27,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="load_more_btn text-center" id="more_products">
+                    <div class="load_more_btn text-center" id="more_consoles">
                         <a href="#" class="btn_3 col-md-2">더보기</a>
                     </div>
                 </div>
@@ -49,12 +49,13 @@
         </div>
     </div>
 </div>
+<input type="hidden" id="products_url" value="ps5CList/">
 
 {{>layout/footer}}
 <script src="/js/product.js"></script>
 <script src="/js/cart.js"></script>
 <script>
  $(document).ready(function() {
-    	product.list_ps5_console();
+    	product.list_console();
     });
 </script>
