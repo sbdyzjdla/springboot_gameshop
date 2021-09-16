@@ -20,8 +20,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers("/", "/css/**", "/js/**", "/img/**",
                                         "/fonts/**", "/sass/**", "/webfonts/**",
                                         "/h2-console/**",
-                                        "/board", "/board/view_board/**", "/api/v1/qnaslist",
+                                        "/board/**", "/board/view_board/**", "/api/v1/qnaslist", "/api/v1/qnaslist/**",
                                         "/products", "/products/**", "/api/v1/consoles/nintendoCList/**",
+                                        "/api/v1/consoles/ps5CList/**", "/api/v1/titles/nsSoftList/**",
+                                        "/api/v1/titles/ps5SoftList/**",
                                         "/display/**",
                                         "/cart/**",
                                         "/about/**").permitAll()
