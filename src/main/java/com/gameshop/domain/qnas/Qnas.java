@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -23,7 +24,7 @@ public class Qnas extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT")
     private String author;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @Column
@@ -31,6 +32,11 @@ public class Qnas extends BaseTimeEntity {
 
     @Column
     private Long img_num;
+
+    @Column
+    @OneToMany(mappedBy = "qnas", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
 
     @Builder
     public Qnas(String title, String author, String content, String reply_state, Long img_num) {
