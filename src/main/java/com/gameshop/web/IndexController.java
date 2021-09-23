@@ -121,7 +121,6 @@ public class IndexController {
         if(user != null) {
             List<SessionUser> userInfo = new ArrayList<>();
             userInfo.add(user);
-
             model.addAttribute("userInfo" , userInfo);
         }
         return "write_board";
