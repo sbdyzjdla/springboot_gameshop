@@ -34,7 +34,7 @@ public class Qnas extends BaseTimeEntity {
     private Long img_num;
 
     @Column
-    @OneToMany(mappedBy = "qnas")
+    @OneToMany(mappedBy = "qnas", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
 
