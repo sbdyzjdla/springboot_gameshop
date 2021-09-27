@@ -128,7 +128,27 @@ var qnas = {
     search : function() {
        var search = $('#qnas_search').val();
        location.href = '/board/1/' + search;
-    }
+    },
+
+    commentSave : function() {
+        var Data = {
+            'qnas_id' : document.querySelector('#id').value,
+            'user_id' : document.querySelector('#userId').value,
+            'content' : document.querySelector('#comment').value
+        }
+        $.ajax({
+            type: 'POST',
+            url : '/comment',
+            data: Data,
+            data: JSON.stringify(Data),
+            processData: false,
+            contentType: 'application/json; charset=utf-8',
+        }).done(function() {
+            alert('댓글이 등록되었습니다');
+        }).fail(function(error) {
+            alert(JSON.stringify(error));
+        });
+    },
 }
 
 qnas.init();
