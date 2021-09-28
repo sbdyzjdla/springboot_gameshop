@@ -7,7 +7,9 @@ import com.gameshop.domain.qnas.QnasRepository;
 import com.gameshop.domain.user.Role;
 import com.gameshop.domain.user.User;
 import com.gameshop.domain.user.UserRepository;
+import com.gameshop.web.dto.CommentResponseDto;
 import com.gameshop.web.dto.CommentSaveRequestDto;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +23,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CommentServiceTest {
@@ -39,6 +42,7 @@ class CommentServiceTest {
     private User admin;
     private CommentSaveRequestDto requestDto1;
     private CommentSaveRequestDto requestDto2;
+    private CommentSaveRequestDto requestDto3;
     private Long qnas_id;
 
     @BeforeEach
@@ -137,6 +141,7 @@ class CommentServiceTest {
         //given
         commentService.save(requestDto1);
         commentService.save(requestDto2);
+        //다른게시글 + 댓글
         qnas = Qnas.builder()
                 .author("테스트유저")
                 .content("테스트게시글2")
@@ -144,11 +149,27 @@ class CommentServiceTest {
                 .title("테스트제목")
                 .build();
         Long qnas2_id = qnasRepository.save(qnas).getId();
+        requestDto3 = CommentSaveRequestDto.builder()
+                .qnas_id(qnas2_id)
+                .user_id(1L)
+                .content("답변")
+                .build();
+        commentService.save(requestDto3);
         //when
-        List<Comment> commentList1 = commentService.findAllQnas(qnas_id);
-        List<Comment> commentList2 = commentService.findAllQnas(qnas2_id);
+        List<CommentResponseDto> commentList1 = commentService.findAllQnas(qnas_id);
+        List<CommentResponseDto> commentList2 = commentService.findAllQnas(qnas2_id);
         //then
-        assertThat(commentList1.size()).isEqualTo(2);
-        assertThat(commentList2.size()).isEqualTo(0);
+        assertThat(commentList1.size()).isEqualTo(2);        //게시글1에는 댓글2개
+        assertThat(commentList2.size()).isEqualTo(1);        //게시글2에는 댓글1개
+        assertThat(commentList1.get(0).getComment_id()).isEqualTo(1);
+        assertThat(commentList1.get(0).getEmail()).isEqualTo("bbb@naver.com");
+        assertThat(commentList1.get(0).getRole()).isEqualTo(Role.USER);
+
+        for(CommentResponseDto dto : commentList1) {
+            log.info("comment : {} => id {} => date {} => content", dto.getComment_id(),
+                    dto.getComment_data(), dto.getContent());
+            log.info("userinfo : {} => email {} => name {} => role",
+                    dto.getEmail(), dto.getName(), dto.getRole());
+        }
     }
 }

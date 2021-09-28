@@ -3,6 +3,7 @@ package com.gameshop.service;
 import com.gameshop.domain.qnas.*;
 import com.gameshop.domain.user.User;
 import com.gameshop.domain.user.UserRepository;
+import com.gameshop.web.dto.CommentResponseDto;
 import com.gameshop.web.dto.CommentSaveRequestDto;
 import com.gameshop.web.dto.CommentUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -50,7 +51,7 @@ public class CommentService {
     }
 
     @Transactional(readOnly = true)
-    public List<Comment> findAllQnas(Long qnas_id) {
+    public List<CommentResponseDto> findAllQnas(Long qnas_id) {
         return commentRepositorySupport.findAllQnas(qnas_id);
     }
 }
