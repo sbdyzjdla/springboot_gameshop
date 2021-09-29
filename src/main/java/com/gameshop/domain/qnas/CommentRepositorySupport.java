@@ -29,7 +29,7 @@ public class CommentRepositorySupport extends QuerydslRepositorySupport {
     public List<CommentResponseDto> findAllQnas(Long qnas_id) {
         return queryFactory.select(Projections.fields(CommentResponseDto.class,
                     comment.id.as("comment_id"),
-                    comment.modifiedDate.as("comment_data"),
+                    comment.modifiedDate.as("comment_date"),
                     comment.content.as("content"),
                     user.id.as("user_id"),
                     user.email.as("email"),
@@ -39,7 +39,7 @@ public class CommentRepositorySupport extends QuerydslRepositorySupport {
                 ))
                 .from(comment)
                     .leftJoin(user)
-                        .on(comment.id.eq(user.id))
+                        .on(comment.user.id.eq(user.id))
                     .where(comment.qnas.id.eq(qnas_id))
                 .fetch();
     }

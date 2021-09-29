@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class CommentResponseDto {
 
     private Long comment_id;
-    private LocalDateTime comment_data;
+    private LocalDateTime comment_date;
     private String content;
     private Long user_id;
     private String email;

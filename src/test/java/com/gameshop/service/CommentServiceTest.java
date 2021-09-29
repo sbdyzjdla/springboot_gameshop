@@ -164,10 +164,11 @@ class CommentServiceTest {
         assertThat(commentList1.get(0).getComment_id()).isEqualTo(1);
         assertThat(commentList1.get(0).getEmail()).isEqualTo("bbb@naver.com");
         assertThat(commentList1.get(0).getRole()).isEqualTo(Role.USER);
+        assertThat(commentList2.get(0).getName()).isEqualTo("테스트유저1");
 
         for(CommentResponseDto dto : commentList1) {
             log.info("comment : {} => id {} => date {} => content", dto.getComment_id(),
-                    dto.getComment_data(), dto.getContent());
+                    dto.getComment_date(), dto.getContent());
             log.info("userinfo : {} => email {} => name {} => role",
                     dto.getEmail(), dto.getName(), dto.getRole());
         }
