@@ -205,3 +205,9 @@ a.del-reply.text-uppercase {
     display: block;
     font-weight: 400;
 }
+
+aside.single_sidebar_widget.newsletter_widget {
+    background: #fbf9ff;
+    padding: 10px 10px 10px 10px;
+    margin: 19px 10px 10px 58px;
+}
