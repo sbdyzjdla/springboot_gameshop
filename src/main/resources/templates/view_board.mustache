@@ -49,8 +49,35 @@
     <a href="/board/1" class="genric-btn primary radius" >목록</a>
 </div>
 <!-- comments -->
-<div class="comments-area">
+<div class="comments-area" id="comments-area">
     <h4>1개의 댓글</h4>
+    <div class="comment-list">
+        <div class="single-comment justify-content-between d-flex">
+            <div class="user justify-content-between d-flex">
+                <div class="thumb">
+                    <img src="/img/comment/comment_1.png" alt="">
+                </div>
+                <div class="desc">
+                    <p class="comment">
+                        Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                        Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <h5>
+                                <a href="#">Emilly Blunt</a>
+                            </h5>
+                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                        </div>
+                        <div class="reply-btn">
+                            <a href="#" class="btn-reply text-uppercase">reply</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="comment-list">
         <div class="single-comment justify-content-between d-flex">
             <div class="user justify-content-between d-flex">
@@ -93,7 +120,7 @@
             </div>
         </div>
         <div class="form-group mt-3">
-            <a href="#" class="btn_3 button-contactForm" onclick="qnas.commentSave();">등록</a>
+            <a href="#" class="btn_3 button-contactForm" onclick="qnas.commentSave(event);">등록</a>
         </div>
     </form>
     <input type="hidden" id="userId" value="{{id}}">
@@ -101,4 +128,10 @@
 {{/userInfo}}
 <!-- //reply comments -->
 </div>
+
 {{>layout/footer}}
+<script>
+$(document).ready(function() {
+    qnas.commentView();
+});
+</script>

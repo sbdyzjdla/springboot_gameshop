@@ -197,3 +197,11 @@ img.img-fluid-detail {
     max-width: 100%;
     height: 32rem;
 }
+a.del-reply.text-uppercase {
+    background-color: transparent;
+    color: crimson;
+    padding: 5px 0px;
+    font-size: 14px;
+    display: block;
+    font-weight: 400;
+}

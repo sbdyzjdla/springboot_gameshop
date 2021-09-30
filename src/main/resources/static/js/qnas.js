@@ -130,7 +130,9 @@ var qnas = {
        location.href = '/board/1/' + search;
     },
 
-    commentSave : function() {
+    commentSave : function(e) {
+        console.log(e);
+        e.preventDefault();
         var Data = {
             'qnas_id' : document.querySelector('#id').value,
             'user_id' : document.querySelector('#userId').value,
@@ -139,16 +141,127 @@ var qnas = {
         $.ajax({
             type: 'POST',
             url : '/comment',
-            data: Data,
             data: JSON.stringify(Data),
             processData: false,
             contentType: 'application/json; charset=utf-8',
         }).done(function() {
-            alert('댓글이 등록되었습니다');
+            qnas.commentView();
         }).fail(function(error) {
             alert(JSON.stringify(error));
         });
     },
+
+    commentView : function() {
+            var qnas_id = document.querySelector('#id').value;
+            $.ajax({
+                type: 'GET',
+                url : '/comment/' + qnas_id,
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+            }).done(function(success) {
+                $('#comments-area').children().remove();
+                console.log(success);
+                for(var i in success) {
+                    if(success[i].role == 'ADMIN') {
+                        success[i].name = '관리자';
+                    }
+                    var content = '';
+                    content +=( '<div class=\"comment-list\">'
+                                +'<div class=\"single-comment justify-content-between d-flex\">'
+                                +    '<div class=\"user justify-content-between d-flex\">'
+                                +    '<div class=\"thumb\">'
+                                +        '<img src=\"' + success[i].picture + ' \" alt=\"\">'
+                                +    '</div>'
+                                +    '<div class=\"desc\">'
+                                +        '<p class=\"comment\">'
+                                +         success[i].content
+                                +        '</p>'
+                                +        '<div class=\"d-flex justify-content-between\">'
+                                +            '<div class=\"d-flex align-items-center\">'
+                                +                '<h5>'
+                                +                    '<a href=\"#\">'+ success[i].name +'</a>'
+                                +                '</h5>'
+                                +                '<p class=\"date\">'+ success[i].comment_date +'</p>'
+                                +            '</div>'
+                                +            '<div class=\"reply-btn'+ success[i].user_id +'\">'
+                                +            '</div>'
+                                +            '<div class=\"del-btn'+ success[i].user_id +'\"'
+                                +             'onclick=\"qnas.commentDel(' + success[i].comment_id + ')\">'
+                                +               '<input type=\"hidden\" value=\"' + success[i].comment_id + '\" />'
+                                +            '</div>'
+                                +        '</div>'
+                                +    '</div>'
+                            +    '</div>'
+                            +   '</div>'
+                        +    '</div>' );
+                $('#comments-area').append(content);
+                };
+                $('.reply-btn'+document.querySelector('#userId').value).append(
+                    '<a href=\"#\" class=\"btn-reply text-uppercase\">수정</a>'
+                    );
+                $('.del-btn'+document.querySelector('#userId').value).append(
+                    '<a href=\"#\" class=\"del-reply text-uppercase\">삭제</a>'
+                    );
+
+            }).fail(function(error) {
+                alert(JSON.stringify(error));
+            });
+        },
+
+         commentUpdate : function(e) {
+            e.preventDefault();
+            var Data = {
+                'qnas_id' : document.querySelector('#id').value,
+                'user_id' : document.querySelector('#userId').value,
+                'content' : document.querySelector('#comment').value
+            }
+            $.ajax({
+                type: 'POST',
+                url : '/comment',
+                data: JSON.stringify(Data),
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+            }).done(function() {
+                qnas.commentView();
+            }).fail(function(error) {
+                alert(JSON.stringify(error));
+            });
+        },
+
+        commentUpdateView : function(e) {
+            e.preventDefault();
+            var Data = {
+                'qnas_id' : document.querySelector('#id').value,
+                'user_id' : document.querySelector('#userId').value,
+                'content' : document.querySelector('#comment').value
+            }
+            $.ajax({
+                type: 'POST',
+                url : '/comment',
+                data: JSON.stringify(Data),
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+            }).done(function() {
+                qnas.commentView();
+            }).fail(function(error) {
+                alert(JSON.stringify(error));
+            });
+        },
+
+        commentDel : function(id) {
+                $.ajax({
+                    type: 'DELETE',
+                    url : '/comment/'+id,
+                    dataType : 'json',
+                    contentType:'application/json; charset=utf-8',
+                }).done(function() {
+                    qnas.commentView();
+                }).fail(function(error) {
+                    alert('댓글 삭제에 실패하였습니다');
+                    alert(JSON.stringify(error));
+                });
+            },
+
 }
 
 qnas.init();

@@ -1,14 +1,13 @@
 package com.gameshop.web;
 
 import com.gameshop.service.CommentService;
+import com.gameshop.web.dto.CommentResponseDto;
 import com.gameshop.web.dto.CommentSaveRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,5 +25,15 @@ public class CommentApiController {
         Long id = Long.parseLong(request.getParameter("id"));
 
         return commentService.update(id, content);
+    }
+
+    @GetMapping("/comment/{qnas_id}")
+    public List<CommentResponseDto> findAllQnas(@PathVariable Long qnas_id) {
+        return commentService.findAllQnas(qnas_id);
+    }
+
+    @DeleteMapping("/comment/{id}")
+    public Long delete(@PathVariable Long id) {
+        return commentService.delete(id);
     }
 }

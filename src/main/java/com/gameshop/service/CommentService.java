@@ -44,10 +44,11 @@ public class CommentService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public Long delete(Long id) {
         Comment comment = commentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다."));
         commentRepository.delete(comment);
+        return id;
     }
 
     @Transactional(readOnly = true)

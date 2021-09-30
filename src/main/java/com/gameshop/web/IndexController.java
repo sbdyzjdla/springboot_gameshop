@@ -13,6 +13,7 @@ import com.gameshop.domain.products.dto.ProductsOrderResponseDto;
 import com.gameshop.domain.products.dto.ProductsResponseDto;
 import com.gameshop.domain.qnas.Qnas;
 import com.gameshop.service.*;
+import com.gameshop.web.dto.CommentResponseDto;
 import com.gameshop.web.dto.QnasResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -38,6 +39,7 @@ public class IndexController {
     private final ProductsService productsService;
     private final CartService cartService;
     private final OrderService orderService;
+    private final CommentService commentService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
@@ -138,6 +140,8 @@ public class IndexController {
                 //return "admin";
             }
         }
+        List<CommentResponseDto> comment = new ArrayList<>();
+        model.addAttribute("comment", comment = commentService.findAllQnas(id));
         QnasResponseDto dto = qnasService.findById(id);
         model.addAttribute("qnas", dto);
         return "view_board";
