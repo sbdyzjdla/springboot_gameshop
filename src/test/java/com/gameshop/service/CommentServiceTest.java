@@ -91,19 +91,6 @@ class CommentServiceTest {
     @Test
     public void 댓글작성() throws Exception {
         //given
-//        Comment comment1 = Comment.builder()
-//                .qnas(qnas)
-//                .user(user)
-//                .content("질문")
-//                .build();
-//        Comment comment2 = Comment.builder()
-//               .qnas(qnas)
-//                .user(admin)
-//                .content("답변")
-//                .build();
-        //when
-//        commentRepository.save(comment1);
-//        commentRepository.save(comment2);
         commentService.save(requestDto1);
         commentService.save(requestDto2);
 
