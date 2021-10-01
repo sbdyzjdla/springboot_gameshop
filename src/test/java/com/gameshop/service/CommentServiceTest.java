@@ -11,7 +11,6 @@ import com.gameshop.web.dto.CommentResponseDto;
 import com.gameshop.web.dto.CommentSaveRequestDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -128,6 +127,8 @@ class CommentServiceTest {
         //given
         commentService.save(requestDto1);
         commentService.save(requestDto2);
+        Long user1_id = userRepository.save(user).getId();
+        Long user2_id = userRepository.save(admin).getId();
         //다른게시글 + 댓글
         qnas = Qnas.builder()
                 .author("테스트유저")
@@ -136,21 +137,27 @@ class CommentServiceTest {
                 .title("테스트제목")
                 .build();
         Long qnas2_id = qnasRepository.save(qnas).getId();
+        log.info("댓글불러오기 user");
         requestDto3 = CommentSaveRequestDto.builder()
                 .qnas_id(qnas2_id)
-                .user_id(1L)
+                .user_id(user1_id)
                 .content("답변")
                 .build();
+        log.info("댓글불러오기 save");
         commentService.save(requestDto3);
+        log.info("댓글불러오기 when");
         //when
         List<CommentResponseDto> commentList1 = commentService.findAllQnas(qnas_id);
         List<CommentResponseDto> commentList2 = commentService.findAllQnas(qnas2_id);
+        log.info("댓글불러오기 then");
         //then
         assertThat(commentList1.size()).isEqualTo(2);        //게시글1에는 댓글2개
         assertThat(commentList2.size()).isEqualTo(1);        //게시글2에는 댓글1개
         assertThat(commentList1.get(0).getComment_id()).isEqualTo(1);
         assertThat(commentList1.get(0).getEmail()).isEqualTo("bbb@naver.com");
+        log.info("댓글불러오기 1");
         assertThat(commentList1.get(0).getRole()).isEqualTo(Role.USER);
+        log.info("댓글불러오기 2");
         assertThat(commentList2.get(0).getName()).isEqualTo("테스트유저1");
 
         for(CommentResponseDto dto : commentList1) {
