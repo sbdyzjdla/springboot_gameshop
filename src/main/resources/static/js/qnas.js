@@ -178,7 +178,7 @@ var qnas = {
                                 +        '<p class=\"comment\">'
                                 +         success[i].content
                                 +        '</p>'
-                                +        '<div class=\"d-flex justify-content-between\">'
+                                +        '<div class=\"d-flex justify-content\">'
                                 +            '<div class=\"d-flex align-items-center\">'
                                 +                '<h5>'
                                 +                    '<a href=\"#\">'+ success[i].name +'</a>'
@@ -193,6 +193,16 @@ var qnas = {
                                 +               '<input type=\"hidden\" value=\"' + success[i].comment_id + '\" />'
                                 +            '</div>'
                                 +        '</div>'
+                                +'<aside class=\"single_sidebar_widget newsletter_widget md-12\" style=\"display:none\">'
+                             +     '<h4 class=\"widget_title\">댓글수정</h4>'
+                             +     '<form action=\"#\">'
+                             +        '<div class=\"form-group\">'
+                             +           '<textarea class=\"form-control w-100\" name=\"comment\" id=\"comment'+ success[i].comment_id +'\" cols=\"50\" rows=\"2\" placeholder=\"댓글을 작성하세요\" style=\"margin-top: 0px; margin-bottom: 0px; height: 93px;\"></textarea>'
+                             +        '</div>'
+                             +     '</form>'
+                             +      '<a href=\"#\" class=\"genric-btn info\" onclick=\"qnas.commentUpdate('+ success[i].comment_id +', event)\">수정</a>'
+                             +      '<a href=\"#\" class=\"genric-btn danger\">닫기</a>'
+                             +  '</aside>'
                                 +    '</div>'
                             +    '</div>'
                             +   '</div>'
@@ -205,21 +215,31 @@ var qnas = {
                 $('.del-btn'+document.querySelector('#userId').value).append(
                     '<a href=\"#\" class=\"del-reply text-uppercase\">삭제</a>'
                     );
-
+                $('.aaa').append(
+                                    '<aside class=\"single_sidebar_widget newsletter_widget md-12\">'
+                                    +     '<h4 class=\"widget_title\">댓글수정</h4>'
+                                    +     '<form action=\"#\">'
+                                    +        '<div class=\"form-group\">'
+                                    +           '<textarea class=\"form-control w-100\" name=\"comment\" id=\"comment\" cols=\"50\" rows=\"2\" placeholder=\"댓글을 작성하세요\" style=\"margin-top: 0px; margin-bottom: 0px; height: 93px;\"></textarea>'
+                                    +        '</div>'
+                                    +        '<button class=\"button rounded-0 primary-bg text-white w-100 btn_1\" type=\"submit\">수정</button>'
+                                    +     '</form>'
+                                    +  '</aside>'
+                                    );
             }).fail(function(error) {
                 alert(JSON.stringify(error));
             });
         },
 
-         commentUpdate : function(e) {
+         commentUpdate : function(comment_id,e) {
             e.preventDefault();
             var Data = {
-                'qnas_id' : document.querySelector('#id').value,
-                'user_id' : document.querySelector('#userId').value,
-                'content' : document.querySelector('#comment').value
+                'id' : comment_id,
+                'content' : document.querySelector('#comment'+comment_id).value
             }
+            console.log(Data);
             $.ajax({
-                type: 'POST',
+                type: 'PUT',
                 url : '/comment',
                 data: JSON.stringify(Data),
                 processData: false,
@@ -233,7 +253,13 @@ var qnas = {
 
         commentUpdateView : function(id, e) {
             e.preventDefault();
-            alert('update');
+            var classN = document.getElementsByClassName('.single_sidebar_widget newsletter_widget md-12');
+            for(var i=0; i<classN.length; ++i) {
+                classN[i].style.display = 'none';
+            }
+            aaa = e.target.parentNode.parentNode;
+            aaa.nextSibling.style.display = 'block';
+            console.log(e.target.parentNode.parentNode)
         },
 
         commentDel : function(id, e) {
@@ -254,5 +280,5 @@ var qnas = {
             },
 
 }
-
+var aaa;
 qnas.init();

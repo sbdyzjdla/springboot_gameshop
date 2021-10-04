@@ -211,3 +211,7 @@ aside.single_sidebar_widget.newsletter_widget {
     padding: 10px 10px 10px 10px;
     margin: 19px 10px 10px 58px;
 }
+
+textarea#comment {
+    resize: none;
+}
