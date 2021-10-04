@@ -241,9 +241,7 @@ var qnas = {
             $.ajax({
                 type: 'PUT',
                 url : '/comment',
-                data: JSON.stringify(Data),
-                processData: false,
-                contentType: 'application/json; charset=utf-8',
+                data : Data,
             }).done(function() {
                 qnas.commentView();
             }).fail(function(error) {
