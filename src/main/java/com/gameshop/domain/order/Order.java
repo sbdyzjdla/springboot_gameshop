@@ -1,5 +1,6 @@
 package com.gameshop.domain.order;
 
+import com.gameshop.domain.BaseTimeEntity;
 import com.gameshop.domain.cart.Cart;
 import com.gameshop.domain.cart.CartProducts;
 import com.gameshop.domain.order.delivery.Delivery;
@@ -18,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "ORDER_TABLE")
-public class Order {
+public class Order extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +37,7 @@ public class Order {
 
     private Long user_id;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "order")
     private List<CartProducts> orderProducts = new ArrayList<>();
 
     public void addOrderProducts(CartProducts paramCartProd) {

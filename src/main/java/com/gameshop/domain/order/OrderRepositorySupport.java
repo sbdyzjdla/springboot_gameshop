@@ -1,5 +1,6 @@
 package com.gameshop.domain.order;
 
+import com.gameshop.domain.order.dto.OrderConfirmListResponse;
 import com.gameshop.domain.order.dto.OrderConfirmResponseDto;
 import com.gameshop.domain.order.dto.OrderListResponse;
 import com.querydsl.core.types.Projections;
@@ -11,6 +12,8 @@ import java.util.List;
 
 import static com.gameshop.domain.order.QOrder.order;
 import static com.gameshop.domain.order.delivery.QDelivery.delivery;
+import static com.gameshop.domain.cart.QCartProducts.cartProducts;
+import static com.gameshop.domain.products.QProducts.products;
 
 @Repository
 public class OrderRepositorySupport extends QuerydslRepositorySupport {
@@ -68,5 +71,22 @@ public class OrderRepositorySupport extends QuerydslRepositorySupport {
                 .where(order.id.eq(id))
                 .fetchOne();
 
+    }
+
+    public List<OrderConfirmListResponse> order_confirmList(Long id) {
+        return queryFactory.select(Projections.fields(OrderConfirmListResponse.class,
+                cartProducts.order.id.as("order_id"),
+                cartProducts.order.order_price.as("order_price"),
+                cartProducts.order.modifiedDate.as("date_time"),
+                cartProducts.order.orderStatus.as("order_status"),
+                cartProducts.p_price.as("p_price"),
+                products.p_name.as("p_name"),
+                products.img_num.as("img_num")
+        ))
+            .from(cartProducts)
+                .join(products)
+                .on(cartProducts.products.id.eq(products.id))
+                .where(cartProducts.order.id.eq(id))
+                .fetch();
     }
 }

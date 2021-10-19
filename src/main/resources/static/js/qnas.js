@@ -161,8 +161,10 @@ var qnas = {
                 contentType: 'application/json; charset=utf-8',
             }).done(function(success) {
                 $('#comments-area').children().remove();
-                console.log(success);
-                $('#comment_size2').val('aa');
+                $('#comments-area').append('<h4 id=\"comment_size2\">1개의 댓글</h4>');
+                var comment_cnt = Object.keys(success).length;
+                $('#comment_size1').text(comment_cnt+'개의 댓글');
+                $('#comment_size2').text(comment_cnt+'개의 댓글');
                 for(var i in success) {
                     if(success[i].role == 'ADMIN') {
                         success[i].name = '관리자';
@@ -201,7 +203,7 @@ var qnas = {
                              +        '</div>'
                              +     '</form>'
                              +      '<a href=\"#\" class=\"genric-btn info\" onclick=\"qnas.commentUpdate('+ success[i].comment_id +', event)\">수정</a>'
-                             +      '<a href=\"#\" class=\"genric-btn danger\">닫기</a>'
+                             +      '<a href=\"#\" class=\"genric-btn danger\" onclick=\"qnas.commentUpdateViewCancel(event)\">닫기</a>'
                              +  '</aside>'
                                 +    '</div>'
                             +    '</div>'
@@ -215,17 +217,7 @@ var qnas = {
                 $('.del-btn'+document.querySelector('#userId').value).append(
                     '<a href=\"#\" class=\"del-reply text-uppercase\">삭제</a>'
                     );
-                $('.aaa').append(
-                                    '<aside class=\"single_sidebar_widget newsletter_widget md-12\">'
-                                    +     '<h4 class=\"widget_title\">댓글수정</h4>'
-                                    +     '<form action=\"#\">'
-                                    +        '<div class=\"form-group\">'
-                                    +           '<textarea class=\"form-control w-100\" name=\"comment\" id=\"comment\" cols=\"50\" rows=\"2\" placeholder=\"댓글을 작성하세요\" style=\"margin-top: 0px; margin-bottom: 0px; height: 93px;\"></textarea>'
-                                    +        '</div>'
-                                    +        '<button class=\"button rounded-0 primary-bg text-white w-100 btn_1\" type=\"submit\">수정</button>'
-                                    +     '</form>'
-                                    +  '</aside>'
-                                    );
+
             }).fail(function(error) {
                 alert(JSON.stringify(error));
             });
@@ -241,7 +233,8 @@ var qnas = {
             $.ajax({
                 type: 'PUT',
                 url : '/comment',
-                data : Data,
+                data: Data,
+                contentType : 'application/x-www-form-urlencoded; charset=utf-8 ',
             }).done(function() {
                 qnas.commentView();
             }).fail(function(error) {
@@ -255,9 +248,14 @@ var qnas = {
             for(var i=0; i<classN.length; ++i) {
                 classN[i].style.display = 'none';
             }
-            aaa = e.target.parentNode.parentNode;
-            aaa.nextSibling.style.display = 'block';
-            console.log(e.target.parentNode.parentNode)
+            updateView = e.target.parentNode.parentNode;
+            updateView.nextSibling.style.display = 'block';
+        },
+
+        commentUpdateViewCancel : function(e) {
+            e.preventDefault();
+            updateView = e.target.parentNode;
+            updateView.style.display = 'none';
         },
 
         commentDel : function(id, e) {

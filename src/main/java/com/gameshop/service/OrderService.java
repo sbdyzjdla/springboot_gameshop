@@ -5,6 +5,7 @@ import com.gameshop.domain.order.*;
 import com.gameshop.domain.order.delivery.Delivery;
 import com.gameshop.domain.order.delivery.DeliveryRepository;
 import com.gameshop.domain.order.delivery.DeliveryStatus;
+import com.gameshop.domain.order.dto.OrderConfirmListResponse;
 import com.gameshop.domain.order.dto.OrderConfirmResponseDto;
 import com.gameshop.domain.order.dto.OrderListResponse;
 import lombok.RequiredArgsConstructor;
@@ -74,4 +75,8 @@ public class OrderService {
         return orderRepositorySupport.order_confirm(id);
     }
 
+    @Transactional
+    public List<OrderConfirmListResponse> order_confirmList(Long id) {
+        return orderRepositorySupport.order_confirmList(id);
+    }
 }

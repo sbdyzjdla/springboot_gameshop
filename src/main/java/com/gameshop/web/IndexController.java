@@ -7,6 +7,7 @@ import com.gameshop.domain.cart.CartProducts;
 import com.gameshop.domain.cart.dto.CartListResponseDto;
 import com.gameshop.domain.cart.dto.CartProdListResDto;
 import com.gameshop.domain.order.Order;
+import com.gameshop.domain.order.dto.OrderConfirmListResponse;
 import com.gameshop.domain.order.dto.OrderConfirmResponseDto;
 import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
 import com.gameshop.domain.products.dto.ProductsOrderResponseDto;
@@ -16,6 +17,7 @@ import com.gameshop.service.*;
 import com.gameshop.web.dto.CommentResponseDto;
 import com.gameshop.web.dto.QnasResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
@@ -317,37 +320,48 @@ public class IndexController {
         return "order";
     }
 
-    @GetMapping("/order/confirm/{id}")
-    public String orderConfirm(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+    @GetMapping("/order/confirm")
+    public String orderConfirm(Model model, @LoginUser SessionUser user) {
         if(user != null) {
             List<SessionUser> userInfo = new ArrayList<>();
             userInfo.add(user);
-            model.addAttribute("userInfo", userInfo);
-            if (user.getRole().equals("ROLE_ADMIN")) {
-                model.addAttribute("admin", "admin");
-            }
-        }
-        OrderConfirmResponseDto responseDto = orderService.order_confirm(id);
-        if(responseDto.getUser_id() != user.getId()) {
-            return HttpStatus.BAD_REQUEST.toString();     //BAD_REQUEST 400에러
-        }
-        model.addAttribute("order_confirm", responseDto);
-        return "order_confirm";
-    }
-
-    @GetMapping("/admin")
-    public String admin_page(Model model, @LoginUser SessionUser user) {
-        if(user != null) {
-            List<SessionUser> userInfo = new ArrayList<>();
-            userInfo.add(user);
-
             model.addAttribute("userInfo" , userInfo);
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
-                //return "admin";
             }
         }
-        return "admin";
+        List<OrderConfirmListResponse> orderList = orderService.order_confirmList(user.getId());
+        //log.info("날짜아아아 : {}",orderList.get(0).getDate());
+        model.addAttribute("orderList", orderList);
+//        if(user != null) {
+//            List<SessionUser> userInfo = new ArrayList<>();
+//            userInfo.add(user);
+//            model.addAttribute("userInfo", userInfo);
+//            if (user.getRole().equals("ROLE_ADMIN")) {
+//                model.addAttribute("admin", "admin");
+//            }
+//        }
+//        OrderConfirmResponseDto responseDto = orderService.order_confirm(id);
+//        if(responseDto.getUser_id() != user.getId()) {
+//            return HttpStatus.BAD_REQUEST.toString();     //BAD_REQUEST 400에러
+//        }
+//        model.addAttribute("order_confirm", responseDto);
+//        return "order_confirm";
+//    }
+//
+//    @GetMapping("/admin")
+//    public String admin_page(Model model, @LoginUser SessionUser user) {
+//        if(user != null) {
+//            List<SessionUser> userInfo = new ArrayList<>();
+//            userInfo.add(user);
+//
+//            model.addAttribute("userInfo" , userInfo);
+//            if(user.getRole().equals("ROLE_ADMIN")) {
+//                model.addAttribute("admin", "admin");
+//                //return "admin";
+//            }
+//        }
+        return "order_confirm";
     }
 
     @GetMapping("/about")
