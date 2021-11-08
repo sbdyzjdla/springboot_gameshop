@@ -17,45 +17,45 @@
 <!--================Cart Area =================-->
 <section class="cart_area section_padding">
     <div class="container">
-    <div class="cart_inner">
-        <h3 class="text-heading">주문상품</h3>
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">상품명</th>
-                <th scope="col">가격</th>
-                <th scope="col">수량</th>
-                <th scope="col">합계</th>
-            </tr>
-            </thead>
-            <tbody id="orderBody">
-            {{#orderList}}
-                <tr name="orderList">
-                    <td>
-                        <div class="media">
-                            <div class="d-flex">
-                                <img src="/display/{{img_num}}" alt="" />
-                            </div>
-                            <div class="media-body">
-                                <p>{{p_name}}</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>{{p_price}}원</h5>
-                    </td>
-                    <td>
-                        <h5>{{quantity}}</h5>
-                    </td>
-                    <td>
-                        <h5>{{order_price}}원</h5>
-                    </td>
+        <div class="cart_inner">
+            <h3 class="text-heading">주문상품</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">상품명</th>
+                    <th scope="col">가격</th>
+                    <th scope="col">수량</th>
+                    <th scope="col">합계</th>
                 </tr>
-            {{/orderList}}
-            </tbody>
-        </table>
-
+                </thead>
+                <tbody id="orderBody">
+                {{#orderList}}
+                    <tr name="orderList">
+                        <td>
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img src="/display/{{img_num}}" alt="" />
+                                </div>
+                                <div class="media-body">
+                                    <p>{{p_name}}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <h5>{{p_price}}원</h5>
+                        </td>
+                        <td>
+                            <h5>{{quantity}}</h5>
+                        </td>
+                        <td>
+                            <h5>{{order_price}}원</h5>
+                        </td>
+                    </tr>
+                {{/orderList}}
+                </tbody>
+            </table>
+    </div>
 </section>
 <!--================End Cart Area =================-->
 {{>layout/footer}}
