@@ -1,10 +1,11 @@
-ZIPREPO=/home/ec2-user/app/jenkins
+ZIPREPO=/home/ec2-user/app/jenkins/build/libs
 REPOSITORY=/home/ec2-user/app/step2
 PROJECT_NAME=springboot_gameshop
 
 echo "> Build 파일 복사"
 
-cp $ZIPREPO/zip/*.jar $REPOSITORY/
+#cp $ZIPREPO/zip/*.jar $REPOSITORY/
+cp $ZIPREPO/*.jar $REPOSITORY/
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
