@@ -3,10 +3,7 @@ package com.gameshop.web;
 import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
 import com.gameshop.domain.cart.CartProducts;
-import com.gameshop.domain.order.Address;
-import com.gameshop.domain.order.Order;
-import com.gameshop.domain.order.OrderStatus;
-import com.gameshop.domain.order.Recipient;
+import com.gameshop.domain.order.*;
 import com.gameshop.domain.order.delivery.Delivery;
 import com.gameshop.domain.order.delivery.DeliveryResponseDto;
 import com.gameshop.domain.order.delivery.DeliverySaveDto;
@@ -37,11 +34,21 @@ public class OrderApiController {
         if(order.getOrder_price() == amount) {
             System.out.println("검증결과 주문 금액과 같습니다");
 
-            //상품 수량변경
+            //상품 수량변경 및 주문상세 등록
             List<CartProducts> cartProductsList = cartService.findByOrderId(order.getId());
             for(CartProducts cartProducts : cartProductsList) {
                 productsService.updateQuantity(cartProducts.getProducts().getId(), cartProducts.getQuantity());
+                OrderDetail orderDetail = OrderDetail.builder()
+                        .products(cartProducts.getProducts())
+                        .order(order)
+                        .quantity(cartProducts.getQuantity())
+                        .build();
+                orderDetail.setOrderPrice(cartProducts.getProducts());
+                orderService.OrderDetailSave(orderDetail);
             }
+
+            //주문상세 등록
+
 
             //배송지, 주문자정보 등록
             Address address = new Address(requestDto.getPostcode(), requestDto.getAddress(), requestDto.getDetailAddress(),

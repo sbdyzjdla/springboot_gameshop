@@ -8,6 +8,7 @@ import com.gameshop.domain.order.delivery.DeliveryStatus;
 import com.gameshop.domain.order.dto.OrderConfirmListResponse;
 import com.gameshop.domain.order.dto.OrderConfirmResponseDto;
 import com.gameshop.domain.order.dto.OrderListResponse;
+import com.gameshop.domain.products.consoles.dto.ConsolesSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final OrderRepositorySupport orderRepositorySupport;
     private final DeliveryRepository deliveryRepository;
+    private final OrderDetailRepository orderDetailRepository;
 
     @Transactional
     public Order order_ready(Long user_id) {
@@ -78,5 +80,10 @@ public class OrderService {
     @Transactional
     public List<OrderConfirmListResponse> order_confirmList(Long id) {
         return orderRepositorySupport.order_confirmList(id);
+    }
+
+    @Transactional
+    public Long OrderDetailSave(OrderDetail entity) {
+        return orderDetailRepository.save(entity).getId();
     }
 }

@@ -96,8 +96,8 @@
                             <option value="010">018</option>
                             <option value="019">019</option>
                         </select>-
-                        <input type="text" class="d_form_phone" id="phone_second" name="phone_second" placeholder="">-
-                        <input type="text" class="d_form_phone" id="phone_third"  name="phone_third" placeholder="">
+                        <input type="text" class="d_form_phone" id="phone_second" name="phone_second" maxlength="4" placeholder="">-
+                        <input type="text" class="d_form_phone" id="phone_third"  name="phone_third" maxlength="4" placeholder="">
                     </div>
                 </form>
                 <div class="section-top-border">
@@ -195,7 +195,7 @@ function payment(e){
         alert(msg);
     });
 }
-var aaa;
+
 function orderpaid() {
     var form = $('#orderForm');
     var formData = new FormData(form[0]);
@@ -216,7 +216,6 @@ function orderpaid() {
         document.querySelector('#order_success').style.display='block';
         document.querySelector('#order_info_input').style.display='none';
         document.querySelector('#order_info_after').style.display='block';
-        aaa = data;
         //location.href="/order/confirm/" + data;
     }).fail(function(error) {
         alert(JSON.stringify(error));

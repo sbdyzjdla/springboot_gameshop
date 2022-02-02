@@ -7,8 +7,10 @@ import com.gameshop.domain.cart.CartProducts;
 import com.gameshop.domain.cart.dto.CartListResponseDto;
 import com.gameshop.domain.cart.dto.CartProdListResDto;
 import com.gameshop.domain.order.Order;
+import com.gameshop.domain.order.OrderDetail;
 import com.gameshop.domain.order.dto.OrderConfirmListResponse;
 import com.gameshop.domain.order.dto.OrderConfirmResponseDto;
+import com.gameshop.domain.products.Products;
 import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
 import com.gameshop.domain.products.dto.ProductsOrderResponseDto;
 import com.gameshop.domain.products.dto.ProductsResponseDto;
@@ -282,11 +284,14 @@ public class IndexController {
             order = orderService.order_ready(user.getId());
         }
 
+        OrderDetail orderDetail;
+        //주문상세 추가, 주문가격
         for(String list_id : list_checked) {
             Long cartProduct_id = Long.parseLong(list_id);
             CartProdListResDto cartProducts = cartService.CartProdFindById(cartProduct_id);
             cartList.add(cartProducts);
             CartProducts orderProduct = cartService.cartProdEntityFindById(cartProduct_id);
+            //orderProduct.getProducts().getId()
             orderProduct.setOrder(null);
             order.addOrderProducts(orderProduct);
         }

@@ -30,7 +30,7 @@ public class QnasService {
     public Long save(QnasSaveRequestDto requestDto) {
         return qnasRepository.save(requestDto.toEntity()).getId();
     }
-
+    
     @Transactional
     public Long update(Long id, QnasUpdateRequestDto requestDto) {
 
