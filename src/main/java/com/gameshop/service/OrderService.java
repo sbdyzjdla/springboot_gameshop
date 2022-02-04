@@ -77,13 +77,20 @@ public class OrderService {
         return orderRepositorySupport.order_confirm(id);
     }
 
-    @Transactional
-    public List<OrderConfirmListResponse> order_confirmList(Long id) {
-        return orderRepositorySupport.order_confirmList(id);
-    }
+//    @Transactional
+//    public List<OrderConfirmListResponse> order_confirmList(Long id) {
+//        return orderRepositorySupport.order_confirmList(id);
+//    }
 
     @Transactional
     public Long OrderDetailSave(OrderDetail entity) {
         return orderDetailRepository.save(entity).getId();
+    }
+
+    @Transactional
+    public List<OrderConfirmListResponse> orderList(Long user_id) {
+        return orderRepositorySupport.orderList(user_id).stream()
+                .map(OrderConfirmListResponse::new)
+                .collect(Collectors.toList());
     }
 }

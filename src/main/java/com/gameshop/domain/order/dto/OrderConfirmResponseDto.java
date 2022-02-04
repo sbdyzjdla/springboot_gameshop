@@ -1,5 +1,6 @@
 package com.gameshop.domain.order.dto;
 
+import com.gameshop.domain.qnas.Qnas;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +17,9 @@ public class OrderConfirmResponseDto {
     private String postcode;
     private String delivery_status;
     private String order_name;
+    private Long img_num;
     private String phone_first;
     private String phone_second;
     private String phone_third;
+
 }

@@ -1,5 +1,7 @@
 package com.gameshop.domain.order.dto;
 
+import com.gameshop.domain.order.Order;
+import com.gameshop.domain.order.OrderDetail;
 import com.gameshop.domain.order.OrderStatus;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,15 +16,31 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 public class OrderConfirmListResponse {
 
-    private Long order_id;
-    private OrderStatus order_status;
+    private Long id;
+    private String order_status;
+    private Long order_img;
+    private String order_name;
     private int order_price;
-    private int p_price;
-    private int quantity;
-    private Long img_num;
-    private String p_name;
-    private LocalDateTime date_time;
-//    private String date = date_time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    private String modified_date;
 
-    //String formatDate = findAll.get(0).getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public OrderConfirmListResponse(Order entity) {
+        this.id = entity.getId();
+        this.order_status = enumToValue(entity.getOrderStatus());
+        this.order_img = entity.getOrder_img();
+        this.order_name = entity.getOrder_name();
+        this.order_price = entity.getOrder_price();
+        this.modified_date = entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    public static String enumToValue(OrderStatus orderStatus) {
+        String status = "";
+        if(orderStatus.toString() == "ORDER") {
+            status = "주문";
+        } else if(orderStatus.toString() == "READY") {
+            status = "준비";
+        } else if(orderStatus.toString() == "CANCEL") {
+            status = "취소";
+        }
+        return status;
+    }
 }

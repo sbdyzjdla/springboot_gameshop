@@ -14,6 +14,7 @@ import static com.gameshop.domain.order.QOrder.order;
 import static com.gameshop.domain.order.delivery.QDelivery.delivery;
 import static com.gameshop.domain.cart.QCartProducts.cartProducts;
 import static com.gameshop.domain.products.QProducts.products;
+import static com.gameshop.domain.order.QOrderDetail.orderDetail;
 
 @Repository
 public class OrderRepositorySupport extends QuerydslRepositorySupport {
@@ -75,18 +76,22 @@ public class OrderRepositorySupport extends QuerydslRepositorySupport {
 
     public List<OrderConfirmListResponse> order_confirmList(Long id) {
         return queryFactory.select(Projections.fields(OrderConfirmListResponse.class,
-                cartProducts.order.id.as("order_id"),
-                cartProducts.order.order_price.as("order_price"),
-                cartProducts.order.modifiedDate.as("date_time"),
-                cartProducts.order.orderStatus.as("order_status"),
-                cartProducts.p_price.as("p_price"),
-                products.p_name.as("p_name"),
-                products.img_num.as("img_num")
+                order.id.as("order_id"),
+                order.order_price.as("order_price"),
+                order.modifiedDate.as("date_time"),
+                order.orderStatus.as("order_status"),
+                orderDetail.as("orderDetail")
         ))
-            .from(cartProducts)
-                .join(products)
-                .on(cartProducts.products.id.eq(products.id))
-                .where(cartProducts.order.id.eq(id))
+            .from(order)
+                .join(orderDetail)
+                .on(order.id.eq(orderDetail.order.id))
+                .where(order.user_id.eq(id))
+                .fetch();
+    }
+
+    public List<Order> orderList(Long user_id) {
+        return queryFactory.selectFrom(order)
+                .where(order.user_id.eq(user_id))
                 .fetch();
     }
 }

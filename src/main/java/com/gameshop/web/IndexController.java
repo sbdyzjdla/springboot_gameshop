@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -335,25 +336,13 @@ public class IndexController {
                 model.addAttribute("admin", "admin");
             }
         }
-        List<OrderConfirmListResponse> orderList = orderService.order_confirmList(user.getId());
-        //log.info("날짜아아아 : {}",orderList.get(0).getDate());
+        //List<OrderDe>
+        List<OrderConfirmListResponse> orderList = orderService.orderList(user.getId());
         model.addAttribute("orderList", orderList);
-//        if(user != null) {
-//            List<SessionUser> userInfo = new ArrayList<>();
-//            userInfo.add(user);
-//            model.addAttribute("userInfo", userInfo);
-//            if (user.getRole().equals("ROLE_ADMIN")) {
-//                model.addAttribute("admin", "admin");
-//            }
-//        }
-//        OrderConfirmResponseDto responseDto = orderService.order_confirm(id);
-//        if(responseDto.getUser_id() != user.getId()) {
-//            return HttpStatus.BAD_REQUEST.toString();     //BAD_REQUEST 400에러
-//        }
-//        model.addAttribute("order_confirm", responseDto);
-//        return "order_confirm";
-//    }
-//
+
+        return "order_confirm";
+    }
+
 //    @GetMapping("/admin")
 //    public String admin_page(Model model, @LoginUser SessionUser user) {
 //        if(user != null) {
@@ -366,8 +355,7 @@ public class IndexController {
 //                //return "admin";
 //            }
 //        }
-        return "order_confirm";
-    }
+
 
     @GetMapping("/about")
         public String about(Model model, @LoginUser SessionUser user) {
@@ -383,5 +371,26 @@ public class IndexController {
             }
             return "about";
     }
+
+//    @GetMapping("/order/orderList")
+//    public String orderList(Model model, @LoginUser SessionUser user) {
+//
+//        if(user != null) {
+//            List<SessionUser> userInfo = new ArrayList<>();
+//            userInfo.add(user);
+//
+//            model.addAttribute("userInfo" , userInfo);
+//            if(user.getRole().equals("ROLE_ADMIN")) {
+//                model.addAttribute("admin", "admin");
+//                //return "admin";
+//            }
+//        }
+//
+////        if(title.length > 15)
+////        {
+////            <%=title.substring(0,15)+"..."%>
+////        }
+//        return "order_confirm";
+//    }
 
 }
