@@ -343,6 +343,23 @@ public class IndexController {
         return "order_confirm";
     }
 
+    @GetMapping("/order/confirm/detail/{id}")
+    public String orderConfirmDetail(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
+            model.addAttribute("userInfo" , userInfo);
+            if(user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+            }
+        }
+        //List<OrderDe>
+        List<OrderConfirmListResponse> orderList = orderService.orderList(user.getId());
+        model.addAttribute("orderList", orderList);
+
+        return "order_confirm_detail";
+    }
+
 //    @GetMapping("/admin")
 //    public String admin_page(Model model, @LoginUser SessionUser user) {
 //        if(user != null) {

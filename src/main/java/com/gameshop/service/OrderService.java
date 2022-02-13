@@ -77,11 +77,6 @@ public class OrderService {
         return orderRepositorySupport.order_confirm(id);
     }
 
-//    @Transactional
-//    public List<OrderConfirmListResponse> order_confirmList(Long id) {
-//        return orderRepositorySupport.order_confirmList(id);
-//    }
-
     @Transactional
     public Long OrderDetailSave(OrderDetail entity) {
         return orderDetailRepository.save(entity).getId();
@@ -92,5 +87,10 @@ public class OrderService {
         return orderRepositorySupport.orderList(user_id).stream()
                 .map(OrderConfirmListResponse::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<OrderConfirmResponseDto> orderConfirmDetail(Long id) {
+        return orderRepositorySupport.orderDetailList(id);
     }
 }
