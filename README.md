@@ -15,12 +15,13 @@
 **AWS**
 * EC2
 * RDS
+* S3
 
 **CI**
-* Travis CI
+* Jenkins
 
 **API Service**
-* Oauth2(Google) Login
+* Oauth2(Google, Naver, KaKao) Login (배포시에는 카카오만 동작)
 * 카카오 우편번호 서비스
 * 아임포트 결제 API 
 
