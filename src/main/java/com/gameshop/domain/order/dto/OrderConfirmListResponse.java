@@ -19,7 +19,7 @@ public class OrderConfirmListResponse {
     private Long id;
     private String order_status;
     private Long order_img;
-    private String order_name;
+    private String order_title;
     private int order_price;
     private String modified_date;
 
@@ -27,7 +27,7 @@ public class OrderConfirmListResponse {
         this.id = entity.getId();
         this.order_status = enumToValue(entity.getOrderStatus());
         this.order_img = entity.getOrder_img();
-        this.order_name = entity.getOrder_name();
+        this.order_title = entity.getOrder_title();
         this.order_price = entity.getOrder_price();
         this.modified_date = entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }

@@ -10,6 +10,7 @@ import com.gameshop.domain.order.Order;
 import com.gameshop.domain.order.OrderDetail;
 import com.gameshop.domain.order.dto.OrderConfirmListResponse;
 import com.gameshop.domain.order.dto.OrderConfirmResponseDto;
+import com.gameshop.domain.order.dto.OrderDetailResponseDto;
 import com.gameshop.domain.products.Products;
 import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
 import com.gameshop.domain.products.dto.ProductsOrderResponseDto;
@@ -336,7 +337,6 @@ public class IndexController {
                 model.addAttribute("admin", "admin");
             }
         }
-        //List<OrderDe>
         List<OrderConfirmListResponse> orderList = orderService.orderList(user.getId());
         model.addAttribute("orderList", orderList);
 
@@ -353,12 +353,14 @@ public class IndexController {
                 model.addAttribute("admin", "admin");
             }
         }
-        //List<OrderDe>
-        List<OrderConfirmListResponse> orderList = orderService.orderList(user.getId());
-        model.addAttribute("orderList", orderList);
+        OrderConfirmResponseDto order_confirm = orderService.order_confirm(id);
+        List<OrderDetailResponseDto> orderDetailList = orderService.orderDetailProductList(id);
+        model.addAttribute("order_confirm", order_confirm);
+        model.addAttribute("orderDetailList", orderDetailList);
 
         return "order_confirm_detail";
     }
+
 
 //    @GetMapping("/admin")
 //    public String admin_page(Model model, @LoginUser SessionUser user) {
@@ -388,26 +390,5 @@ public class IndexController {
             }
             return "about";
     }
-
-//    @GetMapping("/order/orderList")
-//    public String orderList(Model model, @LoginUser SessionUser user) {
-//
-//        if(user != null) {
-//            List<SessionUser> userInfo = new ArrayList<>();
-//            userInfo.add(user);
-//
-//            model.addAttribute("userInfo" , userInfo);
-//            if(user.getRole().equals("ROLE_ADMIN")) {
-//                model.addAttribute("admin", "admin");
-//                //return "admin";
-//            }
-//        }
-//
-////        if(title.length > 15)
-////        {
-////            <%=title.substring(0,15)+"..."%>
-////        }
-//        return "order_confirm";
-//    }
 
 }

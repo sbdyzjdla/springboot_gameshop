@@ -7,6 +7,7 @@ import com.gameshop.domain.order.delivery.DeliveryRepository;
 import com.gameshop.domain.order.delivery.DeliveryStatus;
 import com.gameshop.domain.order.dto.OrderConfirmListResponse;
 import com.gameshop.domain.order.dto.OrderConfirmResponseDto;
+import com.gameshop.domain.order.dto.OrderDetailResponseDto;
 import com.gameshop.domain.order.dto.OrderListResponse;
 import com.gameshop.domain.products.consoles.dto.ConsolesSaveRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -74,7 +76,10 @@ public class OrderService {
 
     @Transactional
     public OrderConfirmResponseDto order_confirm(Long id) {
-        return orderRepositorySupport.order_confirm(id);
+        OrderConfirmResponseDto dto = orderRepositorySupport.order_confirm(id);
+        dto.setDelivery_status(OrderConfirmResponseDto.enumToValue(dto.getDeliveryStatus()));
+        dto.setOrder_date(dto.getModified_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        return dto;
     }
 
     @Transactional
@@ -90,7 +95,7 @@ public class OrderService {
     }
 
     @Transactional
-    public List<OrderConfirmResponseDto> orderConfirmDetail(Long id) {
-        return orderRepositorySupport.orderDetailList(id);
+    public List<OrderDetailResponseDto> orderDetailProductList(Long order_id) {
+        return orderRepositorySupport.orderDetailProductList(order_id);
     }
 }

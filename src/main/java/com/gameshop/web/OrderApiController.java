@@ -7,6 +7,8 @@ import com.gameshop.domain.order.*;
 import com.gameshop.domain.order.delivery.Delivery;
 import com.gameshop.domain.order.delivery.DeliveryResponseDto;
 import com.gameshop.domain.order.delivery.DeliverySaveDto;
+import com.gameshop.domain.order.dto.OrderConfirmResponseDto;
+import com.gameshop.domain.order.dto.OrderDetailResponseDto;
 import com.gameshop.service.CartService;
 import com.gameshop.service.OrderService;
 import com.gameshop.service.ProductsService;
@@ -29,7 +31,7 @@ public class OrderApiController {
     private final ProductsService productsService;
 
     @PostMapping("/order/delivery/save")
-    public DeliveryResponseDto delivery_save(@ModelAttribute DeliverySaveDto requestDto, @RequestParam int amount,
+    public OrderConfirmResponseDto delivery_save(@ModelAttribute DeliverySaveDto requestDto, @RequestParam int amount,
                                       @LoginUser SessionUser user, Model model) {
         ModelAndView mv = new ModelAndView("jsonView");
         Order order = orderService.find_order_ready(user.getId());
@@ -38,7 +40,7 @@ public class OrderApiController {
 
             //상품 수량변경 및 주문상세 등록
             List<CartProducts> cartProductsList = cartService.findByOrderId(order.getId());
-            String orderName = "";
+            String orderTitle = "";
             int idx = 0;
             for(CartProducts cartProducts : cartProductsList) {
                 productsService.updateQuantity(cartProducts.getProducts().getId(), cartProducts.getQuantity());
@@ -52,22 +54,18 @@ public class OrderApiController {
                 if(idx == 0) {
                     order.setOrder_img(cartProducts.getProducts().getImg_num());
                 }
-                log.info("에러부분 : ");
                 if(idx == cartProductsList.size()-1) {
-                    orderName += cartProducts.getProducts().getP_name();
+                    orderTitle += cartProducts.getProducts().getP_name();
                 } else {
-                    orderName += (cartProducts.getProducts().getP_name()+ ",");
+                    orderTitle += (cartProducts.getProducts().getP_name()+ ",");
                 }
-                log.info("에러부분2 : ");
                 idx++;
             }
 
-            log.info("상품명 : {}", orderName);
-            if(orderName.length() > 30) {
-                orderName = orderName.substring(0,30)+ "...";
+            if(orderTitle.length() > 30) {
+                orderTitle = orderTitle.substring(0,30)+ "...";
             }
-            log.info("상품명 : {}", orderName);
-            order.setOrder_name(orderName);
+            order.setOrder_title(orderTitle);
 
             //배송지, 주문자정보 등록
             Address address = new Address(requestDto.getPostcode(), requestDto.getAddress(), requestDto.getDetailAddress(),
@@ -79,20 +77,23 @@ public class OrderApiController {
             order.setDelivery(delivery);
             order.setOrderStatus(OrderStatus.ORDER);
 
-            DeliveryResponseDto responseDto = DeliveryResponseDto.builder()
-                    .postcode(delivery.getAddress().getPostcode())
-                    .address(delivery.getAddress().getAddress())
-                    .detailAddress(delivery.getAddress().getDetailAddress())
-                    .extraAddress(delivery.getAddress().getExtraAddress())
-                    .order_id(delivery.getOrder().getId())
-                    .order_name(delivery.getRecipient().getOrder_name())
-                    .phone_first(delivery.getRecipient().getPhone_first())
-                    .phone_second(delivery.getRecipient().getPhone_second())
-                    .phone_third(delivery.getRecipient().getPhone_third())
-                    .delivery_status(delivery.getDeliveryStatus().toString())
-                    .build();
-            mv.addObject("delivery", responseDto);
-            return responseDto;
+//            DeliveryResponseDto responseDto = DeliveryResponseDto.builder()
+//                    .postcode(delivery.getAddress().getPostcode())
+//                    .address(delivery.getAddress().getAddress())
+//                    .detailAddress(delivery.getAddress().getDetailAddress())
+//                    .extraAddress(delivery.getAddress().getExtraAddress())
+//                    .order_id(delivery.getOrder().getId())
+//                    .order_name(delivery.getRecipient().getOrder_name())
+//                    .phone_first(delivery.getRecipient().getPhone_first())
+//                    .phone_second(delivery.getRecipient().getPhone_second())
+//                    .phone_third(delivery.getRecipient().getPhone_third())
+//                    .delivery_status(delivery.getDeliveryStatus().toString())
+//                    .build();
+//            mv.addObject("delivery", responseDto);
+
+            OrderConfirmResponseDto order_confirm = orderService.order_confirm(order.getId());
+            model.addAttribute("order_confirm", order_confirm);
+            return order_confirm;
         } else {
             System.out.println("검증결과 주문 금액과 다릅니다.");
             return null;

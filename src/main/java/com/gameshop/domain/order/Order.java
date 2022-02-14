@@ -40,7 +40,7 @@ public class Order extends BaseTimeEntity {
     @OneToMany(mappedBy = "order")
     private List<CartProducts> orderProducts = new ArrayList<>();
 
-    private String order_name;
+    private String order_title;
     private Long order_img;
 
     public void addOrderProducts(CartProducts paramCartProd) {
