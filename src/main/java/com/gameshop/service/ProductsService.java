@@ -51,4 +51,10 @@ public class ProductsService {
         entity.removeStock(quantity);
     }
 
+    @Transactional
+    public Long products_del(Long id) {
+        productsRepository.deleteById(id);
+        return id;
+    }
+
 }

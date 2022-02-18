@@ -30,9 +30,9 @@ var product = {
             for(var i in product_list.content) {
                  $('#product_list').append('<div class=\"col-lg-4 col-sm-4\">'
                      + '<div class=\"single_product_item text-center\" onclick=\"product.view(' + product_list.content[i].id + ');\">'
-                     +       '<img src=\"/display/'+product_list.content[i].img_num+'\" alt=\"#\" class=\"img-fluid-list\">'
-                     +       '<h3> ' + product_list.content[i].p_name + ' </h3>'
-                     +       '<p>' + product_list.content[i].p_price + '원</p>'
+                     +       '<img src=\"/display/'+product_list.content[i].img_num+'\" alt=\"#\" class=\"img-fluid-list\" style=\"cursor:pointer\">'
+                     +       '<h3 style=\"cursor:pointer\"> ' + product_list.content[i].p_name + ' </h3>'
+                     +       '<p style=\"cursor:pointer\">' + product_list.content[i].p_price + '원</p>'
                      +       '</div>'
                      +  '</div>');
             }
@@ -61,9 +61,9 @@ var product = {
             for(var i in product_list.content) {
                  $('#product_list').append('<div class=\"col-lg-4 col-sm-4\">'
                      + '<div class=\"single_product_item text-center\" onclick=\"product.view(' + product_list.content[i].id + ');\">'
-                     +       '<img src=\"/display/'+product_list.content[i].img_num+'\" alt=\"#\" class=\"img-fluid-list\">'
-                     +       '<h3> ' + product_list.content[i].p_name + ' </h3>'
-                     +       '<p>' + product_list.content[i].p_price + '원</p>'
+                     +       '<img src=\"/display/'+product_list.content[i].img_num+'\" alt=\"#\" class=\"img-fluid-list\" style=\"cursor:pointer\">'
+                     +       '<h3 style=\"cursor:pointer\"> ' + product_list.content[i].p_name + ' </h3>'
+                     +       '<p style=\"cursor:pointer\">' + product_list.content[i].p_price + '원</p>'
                      +       '</div>'
                      +  '</div>');
             }
@@ -92,9 +92,9 @@ var product = {
             for(var i in product_list.content) {
                  $('#product_list').append('<div class=\"col-lg-4 col-sm-4\">'
                      + '<div class=\"single_product_item text-center\" onclick=\"product.view(' + product_list.content[i].id + ');\">'
-                     +       '<img src=\"/display/'+product_list.content[i].img_num+'\" alt=\"#\" class=\"img-fluid-list\">'
-                     +       '<h3> ' + product_list.content[i].p_name + ' </h3>'
-                     +       '<p>' + product_list.content[i].p_price + '원</p>'
+                     +       '<img src=\"/display/'+product_list.content[i].img_num+'\" alt=\"#\" class=\"img-fluid-list\" style=\"cursor:pointer\">'
+                     +       '<h3 style=\"cursor:pointer\"> ' + product_list.content[i].p_name + ' </h3>'
+                     +       '<p style=\"cursor:pointer\">' + product_list.content[i].p_price + '원</p>'
                      +       '</div>'
                      +  '</div>');
             }
@@ -123,9 +123,9 @@ var product = {
             for(var i in product_list.content) {
                  $('#product_list').append('<div class=\"col-lg-4 col-sm-4\">'
                      + '<div class=\"single_product_item text-center\" onclick=\"product.view(' + product_list.content[i].id + ');\">'
-                     +       '<img src=\"/display/'+product_list.content[i].img_num+'\" alt=\"#\" class=\"img-fluid-list\">'
-                     +       '<h3> ' + product_list.content[i].p_name + ' </h3>'
-                     +       '<p>' + product_list.content[i].p_price + '원</p>'
+                     +       '<img src=\"/display/'+product_list.content[i].img_num+'\" alt=\"#\" class=\"img-fluid-list\" style=\"cursor:pointer\">'
+                     +       '<h3 style=\"cursor:pointer\"> ' + product_list.content[i].p_name + ' </h3>'
+                     +       '<p style=\"cursor:pointer\">' + product_list.content[i].p_price + '원</p>'
                      +       '</div>'
                      +  '</div>');
             }

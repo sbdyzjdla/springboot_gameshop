@@ -17,6 +17,11 @@ var admin = {
         $('#console_update').on('click', function() {
             _this.console_update();
         })
+
+        $('#console_delete').on('click', function() {
+                    _this.console_delete();
+        })
+
     },
 
      console_manage : function() {
@@ -77,6 +82,24 @@ var admin = {
                   });
               },
 
+    console_delete : function() {
+      if(confirm("상품을 삭제하시겠습니까?") == true) {
+          var form = $('#console_update_form');
+          var formData = new FormData(form[0]);
+          var id = $('#admin_id').val();
+          $.ajax({
+              type: 'DELETE',
+              url : '/admin/products/del/' + id,
+          }).done(function() {
+              alert('삭제되었습니다');
+              document.querySelector('#console_update_cancel').click();
+              admin.list();
+          }).fail(function(error) {
+              alert(JSON.stringify(error));
+          });
+      }
+    },
+
      list : function() {
 
              $.ajax({
@@ -115,7 +138,7 @@ var admin = {
                         var consoleData = success;
                         //$('#up_manufact_nm').val(consoleData.manufact);
                         $('#up_manufact_nm').val(consoleData.manufact).prop("selected", true)
-                        $('#up_manufact_nm_sel').text(consoleData.manufact)
+                        document.querySelector('#up_manufact_nm_sel').textContent = consoleData.manufact;
                         $('#_up_edition_nm').val(consoleData.p_name);
                         $('#up_p_price').val(consoleData.p_price);
                         $('#up_quantity').val(consoleData.quantity);

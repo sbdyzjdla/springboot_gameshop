@@ -28,12 +28,12 @@
         </thead>
         <tbody id="qnasTable">
         {{#qnasList}}
-            <tr onclick="qnas.viewInit({{id}})">
+            <tr onclick="qnas.viewInit({{id}})" style="cursor:pointer">
                 <td>{{id}}</th>
                 <td>{{reply_state}}</td>
                 <td>{{title}}</td>
                 <td>{{author}}</td>
-                <td>{{createdDate}}</td>
+                <td>{{modifiedDate}}</td>
             </tr>
         {{/qnasList}}
         </tbody>

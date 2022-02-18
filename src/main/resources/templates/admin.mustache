@@ -184,7 +184,26 @@
                 <form id="console_insert_form" method = "POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">제조사</label>
-                        <input type="text" class="form-control" id="recipient-name" name="manufact">
+                        <div class="input-group-icon mt-10">
+                            <div class="icon"><i class="fa fa-building" aria-hidden="true"></i></div>
+                            <div class="form-select" id="default-select">
+                                <select style="display: none;" id="in_manufact_nm" name="manufact">
+                                    <option value="">선택</option>
+                                    <option value="닌텐도">닌텐도</option>
+                                    <option value="소니">소니</option>
+                                    <option value="마이크로소프트">마이크로소프트</option>
+                                </select>
+                                <div class="nice-select" tabindex="0">
+                                    <span class="current" id="in_manufact_nm_sel">선택</span>
+                                    <ul class="list">
+                                        <li data-value="선택" class="option selected focus">선택</li>
+                                        <li data-value="닌텐도" class="option">닌텐도</li>
+                                        <li data-value="소니" class="option">소니</li>
+                                        <li data-value="마이크로소프트" class="option">마이크로소프트</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">제품명</label>
@@ -192,11 +211,11 @@
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">가격</label>
-                        <input type="text" class="form-control" name="p_price">
+                        <input type="number" class="form-control" name="p_price">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">수량</label>
-                        <input type="text" class="form-control" name="quantity">
+                        <input type="number" class="form-control" name="quantity">
                     </div>
                     <div class="form-group">
                         <input type = "file" name = "consoles_img"
@@ -208,7 +227,7 @@
             <div class="modal-footer">
                 <div class="form-group mt-3">
                     <a href="#" class="genric-btn info radius" id="console_insert">등록</a>
-                    <a href="#" class="genric-btn danger radius" id="console_insert_cancel" data-dismiss="modal">취소</a>
+                    <a href="#" class="genric-btn primary radius" id="console_insert_cancel" data-dismiss="modal">목록</a>
                 </div>
             </div>
         </div>
@@ -239,6 +258,112 @@
                                 <div class="nice-select" tabindex="0">
                                     <span class="current" id="up_manufact_nm_sel">선택</span>
                                     <ul class="list">
+                                        <li data-value="" class="option selected focus">선택</li>
+                                        <li data-value="닌텐도" class="option">닌텐도</li>
+                                        <li data-value="소니" class="option">소니</li>
+                                        <li data-value="마이크로소프트" class="option">마이크로소프트</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">제품명</label>
+                        <input type="text" class="form-control" id="_up_edition_nm" name="p_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">가격</label>
+                        <input type="number" class="form-control" id="up_p_price" name="p_price">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">수량</label>
+                        <input type="number" class="form-control" id="up_quantity" name="quantity">
+                    </div>
+                    <div class="form-group">
+                        <input type = "file" name = "consoles_img"
+                               accept = "image/*" onchange="setThumbnail(event);" />
+                        <div id="consoles_up_image_container" class="col-md-3"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group mt-3">
+                    <a href="#" class="genric-btn info radius" id="console_update">수정</a>
+                    <a href="#" class="genric-btn danger radius" id="console_delete" data-dismiss="modal">삭제</a>
+                    <a href="#" class="genric-btn primary radius" id="console_update_cancel" data-dismiss="modal">목록</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //콘솔기종 수정 모달 -->
+
+<!-- 상품 등록 모달 -->
+<div class="modal fade" id="title_insert_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">콘솔기종 등록</h4>
+            </div>
+            <div class="modal-body">
+                <form id="console_insert_form" method = "POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">제조사</label>
+                        <input type="text" class="form-control" id="recipient-name" name="manufact">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">제품명</label>
+                        <input type="text" class="form-control" name="p_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">가격</label>
+                        <input type="number" class="form-control" name="p_price">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">수량</label>
+                        <input type="number" class="form-control" name="quantity">
+                    </div>
+                    <div class="form-group">
+                        <input type = "file" name = "consoles_img"
+                               accept = "image/*" onchange="setThumbnail(event);" />
+                        <div id="consoles_image_container" class="col-md-3"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group mt-3">
+                    <a href="#" class="genric-btn info radius" id="title_insert">등록</a>
+                    <a href="#" class="genric-btn danger radius" id="title_insert_cancel" data-dismiss="modal">취소</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //상품 등록 모달 -->
+
+<!-- 상품 수정 모달 -->
+<div class="modal fade" id="title_update_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">콘솔기종 수정</h4>
+            </div>
+            <div class="modal-body">
+                <form id="console_update_form" method = "POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">제조사</label>
+                        <div class="input-group-icon mt-10">
+                            <div class="icon"><i class="fa fa-building" aria-hidden="true"></i></div>
+                            <div class="form-select" id="default-select">
+                                <select style="display: none;" id="up_manufact_nm_title" name="manufact">
+                                    <option value="선택">선택</option>
+                                    <option value="닌텐도">닌텐도</option>
+                                    <option value="소니">소니</option>
+                                    <option value="마이크로소프트">마이크로소프트</option>
+                                </select>
+                                <div class="nice-select" tabindex="0">
+                                    <span class="current" id="up_manufact_nm_title_sel">선택</span>
+                                    <ul class="list">
                                         <li data-value="선택" class="option selected focus">선택</li>
                                         <li data-value="닌텐도" class="option">닌텐도</li>
                                         <li data-value="소니" class="option">소니</li>
@@ -254,11 +379,11 @@
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">가격</label>
-                        <input type="text" class="form-control" id="up_p_price" name="p_price">
+                        <input type="number" class="form-control" id="up_p_price" name="p_price">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">수량</label>
-                        <input type="text" class="form-control" id="up_quantity" name="quantity">
+                        <input type="number" class="form-control" id="up_quantity" name="quantity">
                     </div>
                     <div class="form-group">
                         <input type = "file" name = "consoles_img"
@@ -269,15 +394,16 @@
             </div>
             <div class="modal-footer">
                 <div class="form-group mt-3">
-                    <a href="#" class="genric-btn info radius" id="console_update">수정</a>
-                    <a href="#" class="genric-btn danger radius" id="console_update_cancel" data-dismiss="modal">취소</a>
+                    <a href="#" class="genric-btn info radius" id="title_update">수정</a>
+                    <a href="#" class="genric-btn danger radius" id="title_update_cancel" data-dismiss="modal">취소</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <input type="hidden" id="admin_id"/>
-<!-- //콘솔기종 수정 모달 -->
+<!-- //상품 수정 모달 -->
+
 
 <!-- jquery plugins here-->
 <script src="/js/jquery-1.12.1.min.js"></script>

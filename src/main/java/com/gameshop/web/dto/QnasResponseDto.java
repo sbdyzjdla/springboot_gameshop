@@ -4,6 +4,7 @@ import com.gameshop.domain.qnas.Qnas;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 public class QnasResponseDto {
@@ -14,8 +15,8 @@ public class QnasResponseDto {
     private String content;
     private String reply_state;
     private Long img_num;
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
+    private String createdDate;
+    private String modifiedDate;
 
     public QnasResponseDto(Qnas entity) {
         this.id = entity.getId();
@@ -24,7 +25,7 @@ public class QnasResponseDto {
         this.content = entity.getContent();
         this.reply_state = entity.getReply_state();
         this.img_num = entity.getImg_num();
-        this.createdDate = entity.getCreatedDate();
-        this.modifiedDate = entity.getModifiedDate();
+        this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.modifiedDate = entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }

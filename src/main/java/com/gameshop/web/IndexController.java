@@ -18,6 +18,7 @@ import com.gameshop.domain.products.dto.ProductsResponseDto;
 import com.gameshop.domain.qnas.Qnas;
 import com.gameshop.service.*;
 import com.gameshop.web.dto.CommentResponseDto;
+import com.gameshop.web.dto.QnasListResponseDto;
 import com.gameshop.web.dto.QnasResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -107,7 +109,10 @@ public class IndexController {
         boolean hasLast = qnasList.isLast();
         boolean hasFirst = qnasList.isFirst();
 
-        model.addAttribute("qnasList", qnasList.getContent());
+        List<QnasResponseDto> dto = qnasList.getContent().stream()
+                .map(QnasResponseDto::new)
+                .collect(Collectors.toList());
+        model.addAttribute("qnasList", dto);
         if(hasPrev) {
             model.addAttribute("prev", qnasList.getPageable().getPageNumber());
         }
@@ -360,35 +365,18 @@ public class IndexController {
 
         return "order_confirm_detail";
     }
+    @GetMapping("/admin")
+    public String admin_page(Model model, @LoginUser SessionUser user) {
+        if (user != null) {
+            List<SessionUser> userInfo = new ArrayList<>();
+            userInfo.add(user);
 
-
-//    @GetMapping("/admin")
-//    public String admin_page(Model model, @LoginUser SessionUser user) {
-//        if(user != null) {
-//            List<SessionUser> userInfo = new ArrayList<>();
-//            userInfo.add(user);
-//
-//            model.addAttribute("userInfo" , userInfo);
-//            if(user.getRole().equals("ROLE_ADMIN")) {
-//                model.addAttribute("admin", "admin");
-//                //return "admin";
-//            }
-//        }
-
-
-    @GetMapping("/about")
-        public String about(Model model, @LoginUser SessionUser user) {
-            if(user != null) {
-                List<SessionUser> userInfo = new ArrayList<>();
-                userInfo.add(user);
-
-                model.addAttribute("userInfo" , userInfo);
-                if(user.getRole().equals("ROLE_ADMIN")) {
-                    model.addAttribute("admin", "admin");
-                    //return "admin";
-                }
+            model.addAttribute("userInfo", userInfo);
+            if (user.getRole().equals("ROLE_ADMIN")) {
+                model.addAttribute("admin", "admin");
+                return "admin";
             }
-            return "about";
+        }
+        return null;
     }
-
 }

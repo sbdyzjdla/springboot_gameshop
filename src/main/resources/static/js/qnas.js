@@ -95,7 +95,7 @@ var qnas = {
         $('#qnasTable').children().remove();
         var qnaslist = success;
             for(var i in qnaslist) {
-                $('#qnasTable').append('<tr onclick=\"qnas.viewInit(' + qnaslist[i].id + ');\">'
+                $('#qnasTable').append('<tr onclick=\"qnas.viewInit(' + qnaslist[i].id + ');\" style=\"cursor:pointer\">'
                 + '<th scope=\"row\">'+ qnaslist[i].id +'</th>'
                 + '<td>'+ qnaslist[i].reply_state +'</td>'
                 + '<td>'+ qnaslist[i].title +'</td>'
