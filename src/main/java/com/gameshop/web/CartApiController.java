@@ -40,15 +40,6 @@ public class CartApiController {
         return cartService.update(id, quantity);
     }
 
-//    @DeleteMapping("/cart/del/")
-//    public Long del(HttpServletRequest request) {
-//        String[] del_list = request.getParameterValues("list_checked[]");
-//        for(String num : del_list) {
-//            cartService.del(Long.parseLong(num));
-//        }
-//        return 1L;
-//    }
-
     @DeleteMapping("/cart/del/")
     public Long del(HttpServletRequest request) {
         String[] del_list = request.getParameterValues("list_checked[]");

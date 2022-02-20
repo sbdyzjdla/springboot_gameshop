@@ -26,7 +26,7 @@ public class Titles extends Products {
         this.setQuantity(quantity);
     }
 
-    public void update(String manufact, String p_name, int p_price, int quantity) {
+    public void update(String console, String manufact, String p_name, int p_price, int quantity) {
         this.setConsole(console);
         this.setManufact(manufact);
         this.setP_name(p_name);

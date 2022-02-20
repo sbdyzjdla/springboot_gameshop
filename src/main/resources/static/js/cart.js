@@ -139,24 +139,21 @@ var cart = {
                         return;
                     }
 
-                    //ajax
-                    //var Data = { "list_checked" : list_checked};
-
                     $('#list_checked_id').val(list_checked);
-                    console.log($('#list_checked_id').val());
                     $("#cart_order").submit();
             } else {false}
             //location.href='/cart';
         },
 
-        order_one : function() {
-                    if (confirm("선택하신 상품을 주문 하시겠습니까??") == true)
-                        {
-                            //ajax
-                            var id = $('#id').val();
-                            var quantity = $('#p_quantity').val();
-                            location.href='/order/one/'+id+'/'+quantity;
-                    } else {false}
-                },
+    order_one : function(id) {
+                if (confirm("선택하신 상품을 주문 하시겠습니까??") == true)
+                {
+                    var list_checked = [];
+                    list_checked.push(id);
+                    $('#list_checked_id').val(list_checked);
+                    console.log($('#list_checked_id').val());
+                    $("#cart_order").submit();
+            } else {false}
+        },
 }
 cart.init();

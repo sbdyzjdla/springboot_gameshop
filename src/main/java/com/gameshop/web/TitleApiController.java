@@ -1,5 +1,6 @@
 package com.gameshop.web;
 
+import com.gameshop.domain.products.consoles.dto.ConsolesListResponseDto;
 import com.gameshop.domain.products.titles.dto.TitlesListResponseDto;
 import com.gameshop.domain.products.titles.dto.TitlesResponseDto;
 import com.gameshop.domain.products.titles.dto.TitlesSaveRequestDto;
@@ -41,6 +42,9 @@ public class TitleApiController {
 
         return titleService.update(id, requestDto);
     }
+
+    @GetMapping("/admin/titles/titleList")
+    public List<TitlesListResponseDto> findAllDesc() { return titleService.findAllDesc(); }
 
     @GetMapping(value = {"/api/v1/titles/nsSoftList/" , "/api/v1/titles/nsSoftList/{p_num}"})
     public Page<TitlesListResponseDto> findAllNint(@PathVariable(required = false) Integer p_num) {

@@ -47,7 +47,7 @@ public class TitleService {
         Titles consoles = titleRepositroy.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다. id=" + id));
 
-        consoles.update(requestDto.getManufact(), requestDto.getP_name(), requestDto.getP_price(), requestDto.getQuantity());
+        consoles.update(requestDto.getConsole(), requestDto.getManufact(), requestDto.getP_name(), requestDto.getP_price(), requestDto.getQuantity());
         return id;
     }
 
@@ -56,6 +56,13 @@ public class TitleService {
                 .orElseThrow(() -> new
                         IllegalArgumentException("해당 게시글이 없습니다. id" + id));
         return entity.getImg_num();
+    }
+
+    @Transactional
+    public List<TitlesListResponseDto> findAllDesc() {
+        return titleRepositroy.findAllDesc().stream()
+                .map(TitlesListResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     @Transactional

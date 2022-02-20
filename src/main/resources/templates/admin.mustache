@@ -68,17 +68,12 @@
                         <ul class="list cat-list">
                             <li>
                                 <a href="#" class="d-flex" id="console_manage_bt">
-                                    <p>콘솔기종</p>
+                                    <p>콘솔관리</p>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="d-flex">
-                                    <p>카테고리관리</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex" id="product_manage_bt">
-                                    <p>상품관리</p>
+                                <a href="#" class="d-flex" id="title_manage_bt">
+                                    <p>게임타이틀 관리</p>
                                 </a>
                             </li>
                         </ul>
@@ -90,7 +85,7 @@
 
             <div class="col-lg-8 mb-5 mb-lg-0" id="console_manage" >
                 <div class="section-top-border">
-                    <h3 class="mb-30">콘솔기종 관리</h3>
+                    <h3 class="mb-30">콘솔관리</h3>
                     <div class="product_list">
                         <div class="row" id="conList">
 
@@ -105,7 +100,7 @@
             <!-- 콘솔기종 등록 start -->
             <div class="col-lg-8 mb-5 mb-lg-0" id="console" style="display: none;">
                 <div class="section-top-border">
-                    <h3 class="mb-30">콘솔기종 등록</h3>
+                    <h3 class="mb-30">콘솔등록</h3>
                     <form class="form-contact comment_form" action="#" id="commentForm" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-12">
@@ -136,20 +131,17 @@
             </div>
             <!-- 콘솔기종 등록 end -->
 
-            <!-- 상품등록 start -->
-            <div class="col-lg-8 mb-5 mb-lg-0" id="product_manage" style="display: none;">
-                <p class="col-lg-4">콘솔기종</p>
-                <div class="blog_left_sidebar">
-                    <div class="single-element-widget mt-30">
-                        <div class="default-select" id="default-select_2">
-                            <select style="display: none;">
-                                <option value=" 1">English</option>
-                                <option value="1">Spanish</option>
-                                <option value="1">Arabic</option>
-                                <option value="1">Portuguise</option>
-                                <option value="1">Bengali</option>
-                            </select><div class="nice-select" tabindex="0"><span class="current">English</span><ul class="list"><li data-value=" 1" class="option selected">English</li><li data-value="1" class="option">Spanish</li><li data-value="1" class="option focus">Arabic</li><li data-value="1" class="option">Portuguise</li><li data-value="1" class="option">Bengali</li></ul></div>
+            <!-- 게임타이틀 관리 start -->
+            <div class="col-lg-8 mb-5 mb-lg-0" id="title_manage" style="display: none;">
+                <div class="section-top-border">
+                    <h3 class="mb-30">게임타이틀 관리</h3>
+                    <div class="product_list">
+                        <div class="row" id="titleList">
+
                         </div>
+                    </div>
+                    <div class="mr-5 float-left">
+                        <a href="#" class="genric-btn primary radius" data-toggle="modal" data-target="#title_insert_modal">등록</a>
                     </div>
                 </div>
             </div>
@@ -219,7 +211,7 @@
                     </div>
                     <div class="form-group">
                         <input type = "file" name = "consoles_img"
-                               accept = "image/*" onchange="setThumbnail(event);" />
+                               accept = "image/*" onchange="setThumbnail(event, 'consoles_image_container');" />
                         <div id="consoles_image_container" class="col-md-3"></div>
                     </div>
                 </form>
@@ -281,7 +273,7 @@
                     </div>
                     <div class="form-group">
                         <input type = "file" name = "consoles_img"
-                               accept = "image/*" onchange="setThumbnail(event);" />
+                               accept = "image/*" onchange="setThumbnail(event, 'consoles_up_image_container');" />
                         <div id="consoles_up_image_container" class="col-md-3"></div>
                     </div>
                 </form>
@@ -298,15 +290,36 @@
 </div>
 <!-- //콘솔기종 수정 모달 -->
 
-<!-- 상품 등록 모달 -->
+<!-- 게임타이틀 등록 모달 -->
 <div class="modal fade" id="title_insert_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">콘솔기종 등록</h4>
+                <h4 class="modal-title" id="myModalLabel">게임타이틀 등록</h4>
             </div>
             <div class="modal-body">
-                <form id="console_insert_form" method = "POST" enctype="multipart/form-data">
+                <form id="title_insert_form" method = "POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">콘솔기종</label>
+                        <div class="input-group-icon mt-10">
+                            <div class="icon"><i class="fa fa-building" aria-hidden="true"></i></div>
+                            <div class="form-select" id="default-select">
+                                <select style="display: none;" id="in_console_nm" name="console">
+                                    <option value="">선택</option>
+                                    <option value="닌텐도스위치">닌텐도스위치</option>
+                                    <option value="PS5">PS5</option>
+                                </select>
+                                <div class="nice-select" tabindex="0">
+                                    <span class="current" id="in_console_nm_sel">선택</span>
+                                    <ul class="list">
+                                        <li data-value="선택" class="option selected focus">선택</li>
+                                        <li data-value="닌텐도스위치" class="option">닌텐도스위치</li>
+                                        <li data-value="PS5" class="option">PS5</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">제조사</label>
                         <input type="text" class="form-control" id="recipient-name" name="manufact">
@@ -324,85 +337,88 @@
                         <input type="number" class="form-control" name="quantity">
                     </div>
                     <div class="form-group">
-                        <input type = "file" name = "consoles_img"
-                               accept = "image/*" onchange="setThumbnail(event);" />
-                        <div id="consoles_image_container" class="col-md-3"></div>
+                        <input type = "file" name = "products_img"
+                               accept = "image/*" onchange="setThumbnail(event, 'title_image_container');" />
+                        <div id="title_image_container" class="col-md-3"></div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <div class="form-group mt-3">
                     <a href="#" class="genric-btn info radius" id="title_insert">등록</a>
-                    <a href="#" class="genric-btn danger radius" id="title_insert_cancel" data-dismiss="modal">취소</a>
+                    <a href="#" class="genric-btn primary radius" id="title_insert_cancel" data-dismiss="modal">목록</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- //상품 등록 모달 -->
+<!-- //게임타이틀 등록 모달 -->
 
-<!-- 상품 수정 모달 -->
+<!-- 게임타이틀 수정 모달 -->
 <div class="modal fade" id="title_update_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">콘솔기종 수정</h4>
+                <h4 class="modal-title" id="myModalLabel">게임타이틀 수정</h4>
             </div>
             <div class="modal-body">
-                <form id="console_update_form" method = "POST" enctype="multipart/form-data">
+                <form id="title_update_form" method = "POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="recipient-name" class="control-label">제조사</label>
+                        <label for="recipient-name" class="control-label">콘솔기종</label>
                         <div class="input-group-icon mt-10">
                             <div class="icon"><i class="fa fa-building" aria-hidden="true"></i></div>
                             <div class="form-select" id="default-select">
-                                <select style="display: none;" id="up_manufact_nm_title" name="manufact">
-                                    <option value="선택">선택</option>
-                                    <option value="닌텐도">닌텐도</option>
-                                    <option value="소니">소니</option>
-                                    <option value="마이크로소프트">마이크로소프트</option>
+                                <select style="display: none;" id="up_console_nm" name="console">
+                                    <option value="">선택</option>
+                                    <option value="닌텐도스위치">닌텐도스위치</option>
+                                    <option value="PS5">PS5</option>
                                 </select>
                                 <div class="nice-select" tabindex="0">
-                                    <span class="current" id="up_manufact_nm_title_sel">선택</span>
+                                    <span class="current" id="up_console_nm_sel">선택</span>
                                     <ul class="list">
                                         <li data-value="선택" class="option selected focus">선택</li>
-                                        <li data-value="닌텐도" class="option">닌텐도</li>
-                                        <li data-value="소니" class="option">소니</li>
-                                        <li data-value="마이크로소프트" class="option">마이크로소프트</li>
+                                        <li data-value="닌텐도스위치" class="option">닌텐도스위치</li>
+                                        <li data-value="PS5" class="option">PS5</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="recipient-name" class="control-label">제조사</label>
+                        <input type="text" class="form-control" id="t_up_manufact_nm" name="manufact">
+                    </div>
+                    <div class="form-group">
                         <label for="recipient-name" class="control-label">제품명</label>
-                        <input type="text" class="form-control" id="_up_edition_nm" name="p_name">
+                        <input type="text" class="form-control" id="t_up_edition_nm" name="p_name">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">가격</label>
-                        <input type="number" class="form-control" id="up_p_price" name="p_price">
+                        <input type="number" class="form-control" id="t_up_p_price" name="p_price">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">수량</label>
-                        <input type="number" class="form-control" id="up_quantity" name="quantity">
+                        <input type="number" class="form-control" id="t_up_quantity" name="quantity">
                     </div>
                     <div class="form-group">
-                        <input type = "file" name = "consoles_img"
-                               accept = "image/*" onchange="setThumbnail(event);" />
-                        <div id="consoles_up_image_container" class="col-md-3"></div>
+                        <input type = "file" name = "products_img"
+                               accept = "image/*" onchange="setThumbnail(event, 'title_up_image_container');" />
+                        <div id="title_up_image_container" class="col-md-3"></div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <div class="form-group mt-3">
                     <a href="#" class="genric-btn info radius" id="title_update">수정</a>
-                    <a href="#" class="genric-btn danger radius" id="title_update_cancel" data-dismiss="modal">취소</a>
+                    <a href="#" class="genric-btn danger radius" id="title_delete" data-dismiss="modal">삭제</a>
+                    <a href="#" class="genric-btn primary radius" id="title_update_cancel" data-dismiss="modal">목록</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <input type="hidden" id="admin_id"/>
-<!-- //상품 수정 모달 -->
+<!-- //게임타이틀 수정 모달 -->
 
 
 <!-- jquery plugins here-->
@@ -442,18 +458,19 @@ $('#social_login').on('click', function() {
 $(function () {
     $('[data-toggle="popover"]').popover()
     })
-
-function setThumbnail(event) {
+var aa;
+function setThumbnail(event, id) {
+    $('#'+id).empty();
     var reader = new FileReader();
     reader.onload = function(event) {
         var img = document.createElement("img");
         img.setAttribute("src", event.target.result);
-        document.querySelector("div#consoles_image_container").appendChild(img); };
+        document.querySelector("div#"+id).appendChild(img); };
         reader.readAsDataURL(event.target.files[0]);
     }
 
     $(document).ready(function() {
-    	admin.list();
+    	admin.console_list();
     });
 </script>
 </body>
