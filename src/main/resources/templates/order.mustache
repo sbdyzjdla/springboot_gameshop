@@ -100,10 +100,10 @@
                         </div>
                     </form>
                     <div class="section-top-border">
-                        <h3 class="text-heading">결제수단</h3>
+                        <h3 class="text-heading">결제</h3>
                     </div>
                     <div class="checkout_btn_inner float-left">
-                        <!-- a class="btn_1 checkout_btn_1" href='javascript:void(0)' onclick="payment(event);">결제하기</a-->
+                        <a class="btn_1 checkout_btn_1" href='javascript:void(0)' onclick="payment(event);">결제하기</a>
                         <a class="btn_1 checkout_btn_1" href='javascript:void(0)' onclick="orderpaid();">결제하기</a>
                     </div>
                 </div>
@@ -181,6 +181,7 @@ function payment(e){
                 type : "POST",
             }).done(function(data) {
                 console.log(data);
+
             });
             */
                 var msg = '결제가 완료되었습니다.';
@@ -188,6 +189,7 @@ function payment(e){
                 msg += '상점 거래ID : ' + rsp.merchant_uid;
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
+                orderpaid();
         } else {
             var msg = '결제에 실패하였습니다.';
             msg += '에러내용 : ' + rsp.error_msg;
