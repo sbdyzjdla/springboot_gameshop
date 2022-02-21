@@ -18,11 +18,11 @@ public class OrderDetail {
     @Column(name = "ORDER_DETAIL_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID")
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCTS_ID")
     private Products products;
 

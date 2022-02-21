@@ -17,14 +17,14 @@ public class Comment extends BaseTimeEntity {
     @Column(name = "COMMENTS_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
 
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "QNAS_ID")
     private Qnas qnas;
 
