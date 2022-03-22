@@ -1,1 +1,0 @@
-insert into qnas (author, content, reply_state, title) values( 'author', 'content', 'reply_state', 'title');
