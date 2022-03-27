@@ -1,4 +1,4 @@
-package com.gameshop.web.dto;
+package com.gameshop.domain.qnas.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

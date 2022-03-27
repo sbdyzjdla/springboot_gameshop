@@ -1,4 +1,4 @@
-package com.gameshop.web.dto;
+package com.gameshop.domain.files.dto;
 
 import lombok.Builder;
 import lombok.Getter;

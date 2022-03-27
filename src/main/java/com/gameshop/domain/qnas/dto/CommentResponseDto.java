@@ -1,4 +1,4 @@
-package com.gameshop.web.dto;
+package com.gameshop.domain.qnas.dto;
 
 import com.gameshop.domain.user.Role;
 import lombok.Getter;
