@@ -2,40 +2,35 @@ package com.gameshop.web;
 
 import com.gameshop.config.auth.LoginUser;
 import com.gameshop.config.auth.dto.SessionUser;
-import com.gameshop.domain.cart.Cart;
 import com.gameshop.domain.cart.CartProducts;
-import com.gameshop.domain.cart.dto.CartListResponseDto;
 import com.gameshop.domain.cart.dto.CartProdListResDto;
 import com.gameshop.domain.order.Order;
 import com.gameshop.domain.order.OrderDetail;
 import com.gameshop.domain.order.dto.OrderConfirmListResponse;
 import com.gameshop.domain.order.dto.OrderConfirmResponseDto;
 import com.gameshop.domain.order.dto.OrderDetailResponseDto;
-import com.gameshop.domain.products.Products;
-import com.gameshop.domain.products.consoles.dto.ConsolesResponseDto;
 import com.gameshop.domain.products.dto.ProductsOrderResponseDto;
 import com.gameshop.domain.products.dto.ProductsResponseDto;
 import com.gameshop.domain.qnas.Qnas;
 import com.gameshop.service.*;
-import com.gameshop.web.dto.CommentResponseDto;
-import com.gameshop.web.dto.QnasListResponseDto;
-import com.gameshop.web.dto.QnasResponseDto;
+import com.gameshop.domain.qnas.dto.CommentResponseDto;
+import com.gameshop.domain.qnas.dto.QnasResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
+
+/**
+ *  IndexController - view를 리턴하는 컨트롤러
+ */
 
 @Slf4j
 @RequiredArgsConstructor
@@ -43,13 +38,17 @@ import java.util.stream.Collectors;
 public class IndexController {
 
     private final QnasService qnasService;
-    private final FilesService filesService;
-    private final ConsolesService consolesService;
     private final ProductsService productsService;
     private final CartService cartService;
     private final OrderService orderService;
     private final CommentService commentService;
 
+    /**
+     * 메인페이지 로딩
+     * @param model
+     * @param user
+     * @return view
+     */
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
 
@@ -59,27 +58,19 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
-                //return "admin";
             }
         }
         return "index";
     }
 
-//    @GetMapping("/board")
-//    public String board(Model model, @LoginUser SessionUser user){
-//        if(user != null) {
-//            List<SessionUser> userInfo = new ArrayList<>();
-//            userInfo.add(user);
-//
-//            model.addAttribute("userInfo" , userInfo);
-//            if(user.getRole().equals("ROLE_ADMIN")) {
-//                model.addAttribute("admin", "admin");
-//                //return "admin";
-//            }
-//        }
-//        return "board";
-//    }
-
+    /**
+     * 게시판 - 게시글 조회 페이지 로딩
+     * @param model
+     * @param user
+     * @param p_num
+     * @param search
+     * @return
+     */
     @GetMapping(value = {"/board/{p_num}", "/board/{p_num}/{search}"})
     public String board(Model model, @LoginUser SessionUser user, @PathVariable(required = false) Integer p_num
                 , @PathVariable(required = false) String search){
@@ -90,7 +81,6 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
-                //return "admin";
             }
         }
         if(p_num.equals(null)) {
@@ -130,6 +120,12 @@ public class IndexController {
         return "board";
     }
 
+    /**
+     * 게시판 - 게시글 작성 페이지 로딩
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/board/write_board")
     public String write_board(Model model, @LoginUser SessionUser user){
         if(user != null) {
@@ -140,6 +136,13 @@ public class IndexController {
         return "write_board";
     }
 
+    /**
+     * 게시판 - 게시판 상세조회 페이지 로딩
+     * @param id
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/board/view_board/{id}")
     public String view_board(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -149,7 +152,6 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
-                //return "admin";
             }
         }
         List<CommentResponseDto> comment = new ArrayList<>();
@@ -159,6 +161,13 @@ public class IndexController {
         return "view_board";
     }
 
+    /**
+     * 게시판 - 게시판 수정페이지 로딩
+     * @param id
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/board/update_board/{id}")
     public String update_board(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -168,7 +177,6 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
-                //return "admin";
             }
         }
         QnasResponseDto dto = qnasService.findById(id);
@@ -176,6 +184,12 @@ public class IndexController {
         return "update_board";
     }
 
+    /**
+     * 상품 - 닌텐도 하드웨어 페이지 로딩
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/products/hardware-nintendo")
     public String hardware_nintendo(Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -191,6 +205,12 @@ public class IndexController {
         return "hardware-nintendo";
     }
 
+    /**
+     * 상품 - 플스5 하드웨어 페이지 로딩
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/products/hardware-ps5")
     public String hardware_ps5(Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -200,12 +220,17 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
-                //return "admin";
             }
         }
         return "hardware-ps5";
     }
 
+    /**
+     * 상품 - 닌텐도 소프트웨어 페이지 로딩
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/products/software-switch")
     public String software_switch(Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -215,11 +240,17 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
-                //return "admin";
             }
         }
         return "software-switch";
     }
+
+    /**
+     * 상품 - 플스5 소프트웨어 페이지 로딩
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/products/software-ps5")
     public String software_ps5(Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -229,11 +260,18 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
-                //return "admin";
             }
         }
         return "software-ps5";
     }
+
+    /**
+     * 상품 - 상세보기 페이지 로딩
+     * @param id
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/products/view/{id}")
     public String view_products(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -243,15 +281,19 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
-                //return "admin";
             }
         }
-        //ConsolesResponseDto dto = consolesService.findById(id);
         ProductsResponseDto dto = productsService.findById(id);
         model.addAttribute("dto", dto);
         return "view_products";
     }
 
+    /**
+     * 장바구니 - 장바구니 페이지 로딩
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/cart")
     public String cart(Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -261,7 +303,6 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
-                //return "admin";
             }
         }
         List<CartProdListResDto> cartList = cartService.findAllCartUser(user);
@@ -269,6 +310,13 @@ public class IndexController {
         return "cart";
     }
 
+    /**
+     * 주문 - 주문 페이지 로딩 (장바구니에서 진행)
+     * @param model
+     * @param user
+     * @param list_checked
+     * @return
+     */
     @GetMapping("/order")
     public String order(Model model, @LoginUser SessionUser user, @RequestParam(value = "list_checked")List<String> list_checked) {
         if(user != null) {
@@ -298,7 +346,6 @@ public class IndexController {
             CartProdListResDto cartProducts = cartService.CartProdFindById(cartProduct_id);
             cartList.add(cartProducts);
             CartProducts orderProduct = cartService.cartProdEntityFindById(cartProduct_id);
-            //orderProduct.getProducts().getId()
             orderProduct.setOrder(null);
             order.addOrderProducts(orderProduct);
         }
@@ -307,14 +354,19 @@ public class IndexController {
             total_price += cart.getOrder_price();
             order.setOrder_price(total_price);
         }
-        System.out.println("전체가격 !!!" + total_price);
-
         model.addAttribute("orderList", cartList);
-
 
         return "order";
     }
 
+    /**
+     * 주문 - 주문 페이지 로딩 (상품상세보기에서 한가지의 상품주문)
+     * @param model
+     * @param user
+     * @param id
+     * @param quantity
+     * @return
+     */
     @GetMapping("/order/one/{id}/{quantity}")
     public String order(Model model, @LoginUser SessionUser user, @PathVariable Long id, @PathVariable int quantity) {
         if(user != null) {
@@ -323,7 +375,6 @@ public class IndexController {
             model.addAttribute("userInfo" , userInfo);
             if(user.getRole().equals("ROLE_ADMIN")) {
                 model.addAttribute("admin", "admin");
-                //return "admin";
             }
         }
         ProductsOrderResponseDto dto = productsService.findByIdOrder(id, quantity);
@@ -332,6 +383,12 @@ public class IndexController {
         return "order";
     }
 
+    /**
+     * 주문확인 - 주문 리스트 페이지 로딩
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/order/confirm")
     public String orderConfirm(Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -348,6 +405,13 @@ public class IndexController {
         return "order_confirm";
     }
 
+    /**
+     * 주문확인 - 주문리스트중 상세 주문내역 페이지 로딩
+     * @param id
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/order/confirm/detail/{id}")
     public String orderConfirmDetail(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -365,6 +429,13 @@ public class IndexController {
 
         return "order_confirm_detail";
     }
+
+    /**
+     * 관리자페이지 - 관리자페이지 로딩(기능 미완성)
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/admin")
     public String admin_page(Model model, @LoginUser SessionUser user) {
         if (user != null) {

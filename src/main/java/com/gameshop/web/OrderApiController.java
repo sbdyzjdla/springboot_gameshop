@@ -21,6 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * OrderApiController - 주문관리 컨트롤러
+ */
+
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -30,6 +34,14 @@ public class OrderApiController {
     private final CartService cartService;
     private final ProductsService productsService;
 
+    /**
+     * 주문관리 -
+     * @param requestDto
+     * @param amount
+     * @param user
+     * @param model
+     * @return
+     */
     @PostMapping("/order/delivery/save")
     public OrderConfirmResponseDto delivery_save(@ModelAttribute DeliverySaveDto requestDto, @RequestParam int amount,
                                       @LoginUser SessionUser user, Model model) {
@@ -62,6 +74,7 @@ public class OrderApiController {
                 idx++;
             }
 
+            // 주문제목이 길어지면 ...로 마무리
             if(orderTitle.length() > 30) {
                 orderTitle = orderTitle.substring(0,30)+ "...";
             }
@@ -76,20 +89,6 @@ public class OrderApiController {
             Delivery delivery = orderService.delivery_save(order, address, recipient);
             order.setDelivery(delivery);
             order.setOrderStatus(OrderStatus.ORDER);
-
-//            DeliveryResponseDto responseDto = DeliveryResponseDto.builder()
-//                    .postcode(delivery.getAddress().getPostcode())
-//                    .address(delivery.getAddress().getAddress())
-//                    .detailAddress(delivery.getAddress().getDetailAddress())
-//                    .extraAddress(delivery.getAddress().getExtraAddress())
-//                    .order_id(delivery.getOrder().getId())
-//                    .order_name(delivery.getRecipient().getOrder_name())
-//                    .phone_first(delivery.getRecipient().getPhone_first())
-//                    .phone_second(delivery.getRecipient().getPhone_second())
-//                    .phone_third(delivery.getRecipient().getPhone_third())
-//                    .delivery_status(delivery.getDeliveryStatus().toString())
-//                    .build();
-//            mv.addObject("delivery", responseDto);
 
             OrderConfirmResponseDto order_confirm = orderService.order_confirm(order.getId());
             model.addAttribute("order_confirm", order_confirm);

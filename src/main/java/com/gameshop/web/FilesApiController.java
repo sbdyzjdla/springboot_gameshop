@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * FilesApiController - 첨부파일관리 컨트롤러
+ */
+
 @RequiredArgsConstructor
 @RestController
 public class FilesApiController {

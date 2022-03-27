@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * ConsolesApiController - 콘솔기기(하드웨어) 컨트롤러
+ */
+
 @RequiredArgsConstructor
 @RestController
 public class ConsolesApiController {
@@ -19,6 +23,11 @@ public class ConsolesApiController {
     private final ConsolesService consolesService;
     private final FilesService filesService;
 
+    /**
+     * 관리자페이지 - 콘솔기기 저장
+     * @param requestDto
+     * @return
+     */
     @PostMapping("/admin/consoles/save")
     public Long save(@ModelAttribute ConsolesSaveRequestDto requestDto) {
         if(requestDto.getConsoles_img() != null && !requestDto.getConsoles_img().isEmpty()) {
@@ -28,14 +37,29 @@ public class ConsolesApiController {
         return consolesService.save(requestDto);
     }
 
+    /**
+     * 관리자페이지 - 콘솔기기 리스트 조회
+     * @return
+     */
     @GetMapping("/admin/consoles/consoleList")
     public List<ConsolesListResponseDto> findAllDesc() { return consolesService.findAllDesc(); }
 
+    /**
+     * 관리자페이지 - 콘솔기기 상세조회
+     * @param id
+     * @return
+     */
     @GetMapping("/admin/consoles/view/{id}")
     public ConsolesResponseDto findById(@PathVariable Long id) {
         return consolesService.findById(id);
     }
 
+    /**
+     * 관리자페이지 - 콘솔기기 수정
+     * @param id
+     * @param requestDto
+     * @return
+     */
     @PutMapping("/admin/consoles/update/{id}")
     public Long update(@PathVariable Long id, @ModelAttribute ConsolesUpdateRequestDto requestDto) {
         if(!requestDto.getConsoles_img().isEmpty()) {
@@ -46,6 +70,11 @@ public class ConsolesApiController {
         return consolesService.update(id, requestDto);
     }
 
+    /**
+     * 상품_콘솔 - 닌텐도 기기 조회
+     * @param p_num
+     * @return
+     */
     @GetMapping(value = {"/api/v1/consoles/nintendoCList/{p_num}", "/api/v1/consoles/nintendoCList/" } )
     public Page<ConsolesListResponseDto> findAllNint(@PathVariable(required = false) Integer p_num) {
         if(p_num == null) {
@@ -54,6 +83,11 @@ public class ConsolesApiController {
         return consolesService.findAllNint(p_num);
     }
 
+    /**
+     * 상품_콘솔 - 플스5 기기 조회
+     * @param p_num
+     * @return
+     */
     @GetMapping(value = {"/api/v1/consoles/ps5CList/{p_num}", "/api/v1/consoles/ps5CList/"})
     public Page<ConsolesListResponseDto> findAllPs5(@PathVariable(required = false) Integer p_num) {
         if(p_num == null) {
