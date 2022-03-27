@@ -15,8 +15,6 @@ public class ProductsOrderResponseDto {
     private int quantity;
     private Long img_num;
     private int total_price;
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
 
     public ProductsOrderResponseDto(Products entity) {
         this.id = entity.getId();

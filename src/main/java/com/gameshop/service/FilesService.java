@@ -2,10 +2,8 @@ package com.gameshop.service;
 
 import com.gameshop.domain.files.Files;
 import com.gameshop.domain.files.FilesRepository;
-import com.gameshop.web.dto.FilesResponseDto;
-import com.gameshop.web.dto.FilesSaveRequestDto;
+import com.gameshop.domain.files.dto.FilesSaveRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.h2.util.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -17,12 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
+
+/**
+ * FilesService - 첨부파일 관리 서비스
+ */
 
 @RequiredArgsConstructor
 @Service
@@ -30,16 +30,20 @@ public class FilesService {
 
     private final FilesRepository filesRepository;
 
-    // 로컬
-    //private String baseDir = "/Users/yoonsung/web/save_img/";
-    // 윈도우
-    // private String baseDir = "C:\\쇼핑몰이미지\\";
-    // 서버
+    /**
+     * 로컬(맥) : private String baseDir = "/Users/yoonsung/web/save_img/"
+     * 로컬(윈도우) : private String baseDir = "C:\\쇼핑몰이미지\\"
+     */
+
     @Value("${filepath}")
     private String baseDir;
 
-
-
+    /**
+     * 첨부파일 관리 - 첨부파일 저장
+     * @param file
+     * @param owner
+     * @return
+     */
     @Transactional
     public Long save(MultipartFile file, String owner) {
 
@@ -59,6 +63,12 @@ public class FilesService {
         return null;
     }
 
+    /**
+     * 첨부파일 - 첨부파일 수정
+     * @param file
+     * @param id
+     * @return
+     */
     @Transactional
     public Long update(MultipartFile file, Long id) {
 
@@ -85,6 +95,11 @@ public class FilesService {
 
     }
 
+    /**
+     * 첨부파일 - 첨부파일 이미지 조회
+     * @param id
+     * @return
+     */
     public ResponseEntity<Resource> findById(Long id) {
         Files files = filesRepository.findById(id)
                 .orElseThrow(() -> new
@@ -104,10 +119,13 @@ public class FilesService {
             e.printStackTrace();
         }
 
-
         return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
     }
 
+    /**
+     * 첨부파일 - 첨부파일 삭제
+     * @param id
+     */
     @Transactional
     public void delete(Long id) {
 
