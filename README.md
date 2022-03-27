@@ -16,6 +16,7 @@
 * EC2
 * RDS
 * S3
+* CodeDeploy
 
 **CI**
 * Jenkins
