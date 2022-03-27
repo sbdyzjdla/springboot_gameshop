@@ -26,7 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                         "/api/v1/titles/ps5SoftList/**",
                                         "/display/**",
                                         "/cart/**",
-                                        "/about/**").permitAll()
+                                        "/about/**",
+                                        "/swagger-ui.html/**" ,"/swagger-resources/**"  ,"/webjars/**", "/v2/api-docs/**").permitAll()
                         .antMatchers("/api/v1/qnas/**", "/veirfyIamport/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                         .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
                         .anyRequest().authenticated()

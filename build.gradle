@@ -49,6 +49,9 @@ dependencies {
 
 	implementation group: 'com.github.iamport', name: 'iamport-rest-client-java', version: '0.2.15'
 
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')
 	testCompileOnly 'org.projectlombok:lombok:1.18.12' // 테스트 의존성 추가
