@@ -30,4 +30,5 @@
 * jQuery
 * Mustache
 
-
+# :link: API 문서
+* [springbootShop API 문서](https://github.com/sbdyzjdla/springboot_gameshop/issues/2)
